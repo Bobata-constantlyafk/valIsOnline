@@ -1,0 +1,288 @@
+@import "tailwindcss";
+@import "./styles/fonts.css";
+
+/* ---------------------------------------------------------------------
+   Palette. Green leads because it is Val's colour; the pink/lilac/sky
+   trio sits under it. The acid lime is deliberately never used on cream
+   — it only ever appears on the forest ground, where it clears contrast.
+
+   Type scale. Every step is a clamp() interpolating between a 375px
+   phone and a 1280px desktop, and the clamp ceiling is exactly the
+   Tailwind default — so the desktop design is untouched and the phone
+   shrinks smoothly with no breakpoint jump. This is the ONE sizing
+   technique on the site: no `text-sm sm:text-base` pairs anywhere.
+   ------------------------------------------------------------------- */
+@theme {
+  --color-lime: #7cff3d;
+  --color-grass: #2fd46a;
+  --color-moss: #0e4a31;
+  --color-forest: #06301f;
+
+  --color-bubblegum: #ff6fb5;
+  --color-blush: #ffd3e8;
+  --color-lilac: #c9a7ff;
+  --color-sky: #9be7ff;
+
+  --color-cream: #fff6e3;
+  --color-ink: #16281f;
+  --color-ink-soft: #4a5f54;
+
+  --font-display: "Unbounded", "Trebuchet MS", system-ui, sans-serif;
+  --font-pixel: "Pixelify Sans", "Courier New", monospace;
+  --font-body: "Onest", "Segoe UI", system-ui, sans-serif;
+
+  --text-xs: clamp(0.6875rem, 0.662rem + 0.11vw, 0.75rem);
+  --text-sm: clamp(0.8125rem, 0.787rem + 0.11vw, 0.875rem);
+  --text-base: clamp(0.875rem, 0.823rem + 0.22vw, 1rem);
+  --text-lg: clamp(0.9375rem, 0.86rem + 0.33vw, 1.125rem);
+  --text-xl: clamp(1rem, 0.896rem + 0.44vw, 1.25rem);
+  --text-2xl: clamp(1.15rem, 1.005rem + 0.62vw, 1.5rem);
+  --text-3xl: clamp(1.35rem, 1.132rem + 0.93vw, 1.875rem);
+  --text-4xl: clamp(1.5rem, 1.189rem + 1.33vw, 2.25rem);
+  --text-5xl: clamp(1.75rem, 1.232rem + 2.21vw, 3rem);
+  --text-6xl: clamp(2rem, 1.275rem + 3.09vw, 3.75rem);
+}
+
+/* Fluid spacing, same method as the type scale: one value per role,
+   clamped between phone and desktop, applied through a utility class so
+   a change lands in one place instead of on forty elements. */
+:root {
+  --pad-page-x: clamp(0.875rem, 0.616rem + 1.1vw, 1.5rem);
+  --pad-section-y: clamp(1.75rem, 1.232rem + 2.21vw, 3rem);
+  --pad-hero-y: clamp(1.5rem, 0.464rem + 4.42vw, 4rem);
+  --pad-panel: clamp(1rem, 0.482rem + 2.21vw, 2rem);
+  --pad-card: clamp(0.75rem, 0.492rem + 1.1vw, 1rem);
+  --gap-grid: clamp(0.875rem, 0.616rem + 1.1vw, 1.5rem);
+  --collage-offset: clamp(0rem, -1.5rem + 6.4vw, 1.75rem);
+}
+
+/* ---------------------------------------------------------------------
+   THE HARD RULE: nothing on this site is rounded. Every corner is a
+   corner. It is enforced here rather than by discipline, so a stray
+   `rounded-lg` in future markup cannot quietly break the identity.
+   ------------------------------------------------------------------- */
+*,
+*::before,
+*::after {
+  border-radius: 0 !important;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  background-color: var(--color-cream);
+  color: var(--color-ink);
+  font-family: var(--font-body);
+  /* Faint lilac grid — the tiled-background instinct of the era, dialled
+     down far enough that long Bulgarian paragraphs stay readable on it. */
+  background-image:
+    linear-gradient(rgba(201, 167, 255, 0.16) 1px, transparent 1px),
+    linear-gradient(90deg, rgba(201, 167, 255, 0.16) 1px, transparent 1px);
+  background-size: 28px 28px;
+}
+
+/* ---------------------------------------------------------------------
+   Layout utilities
+   ------------------------------------------------------------------- */
+
+.u-page {
+  width: 100%;
+  max-width: 64rem;
+  margin-inline: auto;
+  padding-inline: var(--pad-page-x);
+}
+
+.u-page-narrow {
+  width: 100%;
+  max-width: 48rem;
+  margin-inline: auto;
+  padding-inline: var(--pad-page-x);
+}
+
+.u-section-y {
+  padding-block: var(--pad-section-y);
+}
+
+.u-panel {
+  padding: var(--pad-panel);
+}
+
+.u-card-p {
+  padding: var(--pad-card);
+}
+
+/* Broken collage grid: tiles in the second and third column hang lower,
+   the way a Y2K page pasted things down. --collage-offset clamps to 0rem
+   below ~400px, so the same class stacks to one clean column on a phone
+   with no per-page fixing and no second variant to keep in sync. */
+.u-collage {
+  display: grid;
+  gap: var(--gap-grid);
+  grid-template-columns: 1fr;
+}
+@media (min-width: 40rem) {
+  .u-collage {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+  .u-collage > *:nth-child(2n) {
+    margin-top: var(--collage-offset);
+  }
+}
+@media (min-width: 64rem) {
+  .u-collage {
+    grid-template-columns: repeat(3, minmax(0, 1fr));
+  }
+  .u-collage > *:nth-child(2n) {
+    margin-top: 0;
+  }
+  .u-collage > *:nth-child(3n + 2) {
+    margin-top: var(--collage-offset);
+  }
+  .u-collage > *:nth-child(3n) {
+    margin-top: calc(var(--collage-offset) * 2);
+  }
+}
+
+/* ---------------------------------------------------------------------
+   Y2K chrome kit
+   ------------------------------------------------------------------- */
+
+/* Raised plastic panel: light from the top-left, hard drop shadow. */
+.y2k-bevel {
+  border: 2px solid var(--color-ink);
+  box-shadow:
+    inset 2px 2px 0 rgba(255, 255, 255, 0.9),
+    inset -2px -2px 0 rgba(0, 0, 0, 0.22),
+    4px 4px 0 var(--color-ink);
+}
+
+/* The same panel, pressed in. Swap on :active so buttons feel physical. */
+.y2k-bevel-in {
+  border: 2px solid var(--color-ink);
+  box-shadow:
+    inset -2px -2px 0 rgba(255, 255, 255, 0.7),
+    inset 2px 2px 0 rgba(0, 0, 0, 0.28),
+    1px 1px 0 var(--color-ink);
+}
+
+.y2k-press {
+  transition:
+    transform 90ms ease,
+    box-shadow 90ms ease;
+}
+.y2k-press:active {
+  transform: translate(3px, 3px);
+  box-shadow:
+    inset -2px -2px 0 rgba(255, 255, 255, 0.7),
+    inset 2px 2px 0 rgba(0, 0, 0, 0.28),
+    1px 1px 0 var(--color-ink);
+}
+
+/* Brushed-metal fill for buttons and title bars. */
+.y2k-chrome {
+  background: linear-gradient(
+    180deg,
+    #ffffff 0%,
+    #ececf6 38%,
+    #a9a9c4 52%,
+    #f4f4fb 68%,
+    #ffffff 100%
+  );
+}
+
+/* Sticker: thick outline, hard offset shadow, no soft blur anywhere. */
+.y2k-sticker {
+  border: 3px solid var(--color-ink);
+  box-shadow: 5px 5px 0 var(--color-ink);
+}
+
+/* Holographic wordmark. Falls back to solid lime if background-clip:text
+   is unsupported, so the name is never invisible. */
+.y2k-glitter {
+  color: var(--color-lime);
+  background-image: linear-gradient(
+    100deg,
+    #7cff3d 0%,
+    #9be7ff 22%,
+    #ff6fb5 45%,
+    #c9a7ff 68%,
+    #7cff3d 100%
+  );
+  background-size: 320% 100%;
+  -webkit-background-clip: text;
+  background-clip: text;
+  animation: y2k-sheen 9s linear infinite;
+}
+@supports (-webkit-background-clip: text) or (background-clip: text) {
+  .y2k-glitter {
+    color: transparent;
+  }
+}
+
+@keyframes y2k-sheen {
+  to {
+    background-position: 320% 0;
+  }
+}
+
+@keyframes y2k-blink {
+  0%,
+  49% {
+    opacity: 1;
+  }
+  50%,
+  100% {
+    opacity: 0.25;
+  }
+}
+.y2k-blink {
+  animation: y2k-blink 1.1s steps(1, end) infinite;
+}
+
+@keyframes y2k-drift {
+  from {
+    background-position: 0 0;
+  }
+  to {
+    background-position: 0 -600px;
+  }
+}
+
+@keyframes y2k-ticker {
+  from {
+    transform: translateX(0);
+  }
+  to {
+    transform: translateX(-50%);
+  }
+}
+
+/* Focus ring that survives on both the cream ground and the forest hero. */
+:where(a, button, [tabindex]):focus-visible {
+  outline: 3px solid var(--color-bubblegum);
+  outline-offset: 3px;
+}
+
+/* ---------------------------------------------------------------------
+   Reduced motion. Every animation on this site is decoration; none of it
+   carries meaning. One global block freezes all of it — no component
+   ships its own media query, so there is nothing to forget.
+   ------------------------------------------------------------------- */
+@media (prefers-reduced-motion: reduce) {
+  html {
+    scroll-behavior: auto;
+  }
+  *,
+  *::before,
+  *::after {
+    animation-duration: 0.001ms !important;
+    animation-iteration-count: 1 !important;
+    transition-duration: 0.001ms !important;
+    scroll-behavior: auto !important;
+  }
+  .y2k-glitter {
+    background-position: 40% 0;
+  }
+}

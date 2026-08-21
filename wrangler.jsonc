@@ -1,0 +1,16 @@
+{
+  "$schema": "node_modules/wrangler/config-schema.json",
+  "name": "val-isonline",
+  "compatibility_date": "2026-08-01",
+
+  // Static only. There is no `main` and no Worker script: every route is
+  // prerendered to HTML at build time and served straight from the edge.
+  // Contact is two outbound links (LinkedIn, email), so nothing here needs
+  // a database, a bucket, or a request handler.
+  "assets": {
+    "directory": "./build/client",
+    "not_found_handling": "404-page"
+  },
+
+  "observability": { "enabled": true }
+}
