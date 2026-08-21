@@ -63,8 +63,10 @@ across sessions. Mark items `[x]` when done; keep the notes.
 ## Next
 
 ### Ship it
-- [ ] **G1. Git repo.** `git init`, first commit, push to GitHub. Bobata
-      creates the remote and authenticates — `gh auth login` is interactive.
+- [x] **G1. Git repo.** Pushed to
+      https://github.com/Bobata-constantlyafk/valIsOnline on `main`.
+      Committed as Boyan Dechev <boyan.dechev@everymatrix.com>, matching the
+      bobata-isonline repo; say the word to switch it to a personal address.
 - [ ] **G2. Cloudflare Pages/Workers Git integration.** Connect the GitHub
       repo so every push to `main` builds and deploys on its own. Build
       command `npm run build`, output `build/client`. After this, Bobata can
