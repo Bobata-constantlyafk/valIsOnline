@@ -185,19 +185,6 @@ export const ARTICLES: Article[] = [
     featured: true,
   },
   {
-    slug: "svobodata-na-slovoto",
-    title: { bg: "Свободата на словото", en: "Freedom of speech" },
-    preview: {
-      bg: "България се изкачи с 21 места в индекса за свобода на словото и това е постижение. Оттам нататък обаче идва по-трудният въпрос — докъде свободата ни е свобода и откъде започва свободията.",
-      en: "Bulgaria climbed twenty-one places in the press freedom index, and that is an achievement. What comes after it is the harder question: where our freedom is still freedom, and where it turns into licence.",
-    },
-    outlet: "spisanievip",
-    date: "2022-08-01",
-    url: "https://spisanievip.com/svobodata-na-slovoto/",
-    tags: ["society", "language", "books"],
-    featured: true,
-  },
-  {
     slug: "10-interesni-fakta-za-latinska-amerika",
     title: {
       bg: "10 интересни факта за Латинска Америка",

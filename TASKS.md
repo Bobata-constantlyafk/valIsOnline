@@ -125,6 +125,14 @@ across sessions. Mark items `[x]` when done; keep the notes.
   `app/data/about.ts` saying exactly where each fact came from.
 - Does Val want the full-length portrait used anywhere (`public/val-full.jpg`)?
 
+### Do not undo
+- **„Свободата на словото" (Списание VIP, 2022) is deliberately off the site.**
+  Val's call. It is her political piece — press-freedom index, hate speech, a
+  hard paragraph about Bulgaria. Two quotes from it were pulled first, then the
+  listing itself. It is real, byline-verified work, so a future pass scraping
+  spisanievip.com WILL find it again: leave it out. Same for the two quotes
+  („Нормата ни интегрира…" and „…не са свобода, а свободия").
+
 ### Settled
 - **Seven languages** is current. Her 2022 bio said five; that bio is four
   years old and is quoted on the site as a 2022 document, not as today's fact.
