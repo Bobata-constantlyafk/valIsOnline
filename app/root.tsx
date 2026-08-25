@@ -12,6 +12,11 @@ import "./app.css";
 import { localeFromPath } from "./lib/locale";
 
 export const links: Route.LinksFunction = () => [
+  // SVG for anything modern, ICO because browsers probe /favicon.ico anyway,
+  // PNG for an iOS home-screen tile.
+  { rel: "icon", href: "/favicon.svg", type: "image/svg+xml" },
+  { rel: "icon", href: "/favicon.ico", sizes: "32x32" },
+  { rel: "apple-touch-icon", href: "/icon-180.png" },
   // Only the two faces that paint above the fold get preloaded; the rest
   // arrive with the stylesheet. Both alphabets are preloaded because the
   // hero renders her name in whichever one the current language uses.

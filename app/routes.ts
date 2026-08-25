@@ -22,5 +22,11 @@ const mount = (lang: "bg" | "en") =>
   });
 
 export default [
-  layout("components/layout/SiteLayout.tsx", [...mount("bg"), ...mount("en")]),
+  layout("components/layout/SiteLayout.tsx", [
+    ...mount("bg"),
+    ...mount("en"),
+    // Single page for both languages: Cloudflare serves it for any unmatched
+    // URL, which may carry no language prefix at all.
+    route("404", "routes/notFound.tsx", { id: "not-found" }),
+  ]),
 ] satisfies RouteConfig;

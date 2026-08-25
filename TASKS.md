@@ -67,11 +67,10 @@ across sessions. Mark items `[x]` when done; keep the notes.
       https://github.com/Bobata-constantlyafk/valIsOnline on `main`.
       Committed as Boyan Dechev <boyan.dechev@everymatrix.com>, matching the
       bobata-isonline repo; say the word to switch it to a personal address.
-- [ ] **G2. Cloudflare Pages/Workers Git integration.** Connect the GitHub
-      repo so every push to `main` builds and deploys on its own. Build
-      command `npm run build`, output `build/client`. After this, Bobata can
-      send instructions from a phone and the agent pushes; no local deploy
-      step, no `wrangler` token on anyone's laptop.
+- [x] **G2. Cloudflare Git integration connected** by Bobata. Every push to
+      `main` builds and deploys. Note: `npm run build` now also runs
+      `scripts/postbuild.mjs`, which copies the prerendered 404 into place —
+      Cloudflare runs the same script, so nothing extra is needed there.
 - [ ] **G3. Branch + PR flow** so changes are reviewable from a phone before
       they go live, with a preview URL per branch.
 - [ ] 7.6 First deploy on the free `*.workers.dev` subdomain
@@ -93,8 +92,15 @@ across sessions. Mark items `[x]` when done; keep the notes.
 - [ ] 2.5 Sparkle / star cursor
 - [ ] 4.6 Spine widths scaled by real book thickness
 - [ ] 4.7 "translated from" badge on the spine itself, not only in the detail
-- [ ] 7.2 Favicon and a 404 page, both Y2K-styled
-- [ ] 7.3 Contrast audit — every colour pair, both grounds
+- [x] 7.2 Favicon (svg + ico + 180px apple icon, square lime V on forest) and
+      a bilingual 404 page, copied to `build/client/404.html` by
+      `scripts/postbuild.mjs` for Cloudflare's `not_found_handling`.
+- [x] 7.3 Contrast audit — 0 failures on all 7 pages, both languages. Tightest
+      pair in use is ink-soft on blush at 5.15:1. Fixed: language codes were
+      bubblegum on cream (2.39) and are now ink-on-bubblegum chips (6.04); the
+      decorative quote mark was lilac on cream (1.87), now ink-soft.
+      The rule is recorded at the top of `app/app.css`: lime, bubblegum,
+      lilac and sky are FILL colours, never text colours on cream.
 - [ ] 7.4 Cross-browser check (Safari especially: `background-clip: text`)
 
 ### Content

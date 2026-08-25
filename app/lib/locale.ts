@@ -17,11 +17,13 @@ export type PageKey = keyof typeof PATHS;
 export const PAGE_KEYS = Object.keys(PATHS) as PageKey[];
 
 /** Flat list of every prerenderable URL — react-router.config.ts reads this
- *  so a new page can never be added to PATHS and forgotten at build time. */
-export const ALL_PATHS: string[] = PAGE_KEYS.flatMap((k) => [
-  PATHS[k].bg,
-  PATHS[k].en,
-]);
+ *  so a new page can never be added to PATHS and forgotten at build time.
+ *  /404 is appended here but deliberately kept out of PATHS, so it is built
+ *  and never shows up in the navigation or the language toggle. */
+export const ALL_PATHS: string[] = [
+  ...PAGE_KEYS.flatMap((k) => [PATHS[k].bg, PATHS[k].en]),
+  "/404",
+];
 
 export function localeFromPath(pathname: string): Locale {
   return pathname === "/en" || pathname.startsWith("/en/") ? "en" : "bg";

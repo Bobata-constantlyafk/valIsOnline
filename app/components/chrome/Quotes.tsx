@@ -41,7 +41,7 @@ export function Quotes() {
           <li key={q.id}>
             <blockquote className="y2k-bevel u-card-p flex h-full flex-col bg-cream">
               <p className="text-pretty leading-relaxed">
-                <span aria-hidden className="font-display text-lilac">
+                <span aria-hidden className="font-display text-ink-soft">
                   “
                 </span>
                 {locale === "bg" ? q.bg : q.en}

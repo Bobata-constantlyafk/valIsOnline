@@ -45,7 +45,7 @@ export default function About() {
                       key={l.code}
                       className="y2k-bevel flex items-baseline gap-2 bg-cream px-3 py-1.5"
                     >
-                      <span className="font-pixel text-lg text-bubblegum">
+                      <span className="font-pixel y2k-bevel bg-bubblegum px-1.5 text-base text-ink">
                         {l.code}
                       </span>
                       <span className="font-semibold">

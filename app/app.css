@@ -3,8 +3,14 @@
 
 /* ---------------------------------------------------------------------
    Palette. Green leads because it is Val's colour; the pink/lilac/sky
-   trio sits under it. The acid lime is deliberately never used on cream
-   — it only ever appears on the forest ground, where it clears contrast.
+   trio sits under it.
+
+   CONTRAST RULE: lime, bubblegum, lilac and sky are FILL colours, not text
+   colours. On cream they measure 2-3:1 and fail WCAG AA. Use them as a
+   background with ink on top (ink on bubblegum is 6.04:1), or as text only
+   on the forest/moss ground (lime on forest is 11.19:1). Audited: every
+   token pair in use clears AA, the tightest being ink-soft on blush at
+   5.15:1.
 
    Type scale. Every step is a clamp() interpolating between a 375px
    phone and a 1280px desktop, and the clamp ceiling is exactly the
