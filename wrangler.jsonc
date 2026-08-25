@@ -1,16 +1,19 @@
 {
   "$schema": "node_modules/wrangler/config-schema.json",
-  "name": "val-isonline",
-  "compatibility_date": "2026-08-01",
 
-  // Static only. There is no `main` and no Worker script: every route is
-  // prerendered to HTML at build time and served straight from the edge.
-  // Contact is two outbound links (LinkedIn, email), so nothing here needs
-  // a database, a bucket, or a request handler.
-  "assets": {
-    "directory": "./build/client",
-    "not_found_handling": "404-page"
-  },
-
-  "observability": { "enabled": true }
+  // This deploys as a Cloudflare PAGES project, not a Worker. The name must
+  // match the Pages project (valisonline.pages.dev) or `wrangler pages
+  // deploy` targets the wrong project.
+  //
+  // Pages reads exactly one key from here — pages_build_output_dir — and it
+  // must match the "Build output directory" set in the dashboard. Workers-only
+  // keys (main, assets, observability) are NOT valid here: their presence is
+  // what made Cloudflare log "does not appear to be valid" and skip this file.
+  //
+  // The 404 page needs no configuration: Pages serves 404.html from the root
+  // of the output directory for any unmatched path, and scripts/postbuild.mjs
+  // puts it there.
+  "name": "valisonline",
+  "pages_build_output_dir": "./build/client",
+  "compatibility_date": "2026-08-01"
 }

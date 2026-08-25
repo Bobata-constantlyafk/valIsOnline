@@ -33,32 +33,36 @@ Node 22 (`.nvmrc`).
 
 ## Deploying
 
-This is a **Worker with static assets**, not a Pages project — Cloudflare's
-dashboard now creates Workers by default, and `wrangler.jsonc` here has no
-`main`, only `assets`, which is a valid assets-only Worker (`wrangler deploy
---dry-run` confirms it).
+Live at **https://valisonline.pages.dev**.
 
-Connected to GitHub through **Workers Builds**, so every push to `main` builds
-and deploys. Settings:
+This is a **Cloudflare Pages** project connected to GitHub, so every push to
+`main` builds and deploys. Dashboard settings:
 
 | dashboard field | value |
 | --- | --- |
-| Worker name | `val-isonline` — **must match `name` in `wrangler.jsonc` or the build fails** |
-| Git branch | `main` |
+| Project name | `valisonline` |
+| Production branch | `main` |
+| Framework preset | React (Vite) |
 | Build command | `npm run build` |
-| Deploy command | `npx wrangler deploy` (the default — leave it) |
-| Non-production branch deploy command | `npx wrangler versions upload` (the default) |
+| Build output directory | `build/client` — **not `dist`** |
 | Root directory | blank |
-| Build variables | none needed |
+| Environment variables | none needed |
 
-There is no "build output directory" field — that is a Pages concept. Workers
-reads the output path from `assets.directory` in `wrangler.jsonc`.
+`build/client` is the one field that is easy to get wrong: the framework
+preset fills in `dist`, but React Router writes to `build/client`, and the
+build fails at the very last step with `Output directory "dist" not found`.
 
-Node version comes from `.nvmrc` (22), which the build image reads on its own;
-the image would otherwise default to 24.
+`wrangler.jsonc` carries only what Pages reads — `name`,
+`pages_build_output_dir` and `compatibility_date`. Workers-only keys (`main`,
+`assets`, `observability`) are invalid in a Pages config: Cloudflare logs
+"does not appear to be valid" and silently skips the whole file.
 
-Do not set the deploy command to `npm run deploy` — that script builds again
-before deploying, so the build would run twice.
+The 404 page needs no configuration. Pages serves `404.html` from the root of
+the output directory for any unmatched path, and `scripts/postbuild.mjs` puts
+it there after every build — including Cloudflare's.
+
+Node version comes from `.nvmrc` (22); the build image would otherwise pick a
+newer default.
 
 ## How it is built
 

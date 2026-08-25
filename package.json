@@ -5,8 +5,8 @@
   "scripts": {
     "dev": "react-router dev",
     "build": "react-router build && node scripts/postbuild.mjs",
-    "preview": "wrangler dev",
-    "deploy": "npm run build && wrangler deploy",
+    "preview": "npm run build && wrangler pages dev",
+    "deploy": "npm run build && wrangler pages deploy",
     "typecheck": "react-router typegen && tsc"
   },
   "dependencies": {

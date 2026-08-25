@@ -67,15 +67,20 @@ across sessions. Mark items `[x]` when done; keep the notes.
       https://github.com/Bobata-constantlyafk/valIsOnline on `main`.
       Committed as Boyan Dechev <boyan.dechev@everymatrix.com>, matching the
       bobata-isonline repo; say the word to switch it to a personal address.
-- [x] **G2. Cloudflare Git integration connected** by Bobata. Every push to
-      `main` builds and deploys. Note: `npm run build` now also runs
-      `scripts/postbuild.mjs`, which copies the prerendered 404 into place —
-      Cloudflare runs the same script, so nothing extra is needed there.
-- [ ] **G3. Branch + PR flow** so changes are reviewable from a phone before
-      they go live, with a preview URL per branch.
-- [ ] 7.6 First deploy on the free `*.workers.dev` subdomain
+- [x] **G2. Cloudflare Pages, connected to GitHub.** Every push to `main`
+      builds and deploys. It is a PAGES project, not a Worker — `wrangler.jsonc`
+      was rewritten to match. Build output directory is `build/client`; the
+      React (Vite) preset's default of `dist` fails the build.
+- [ ] **G3. Branch + PR flow.** Pages already builds a preview deployment for
+      every non-production branch, so this is just: work on a branch, open a
+      PR, review the preview URL from the phone, merge to go live.
+- [x] 7.6 Deployed: **https://valisonline.pages.dev** — verified live: all 10
+      pages 200 with correct per-language titles, 404 returns a real 404 with
+      the styled page, every font subset and image 200, no console errors,
+      no horizontal overflow, language toggle lands on the matching page.
 - [ ] 7.7 Buy `val-is-online.io` (check availability; `.io` runs ~$35–60/yr),
-      point DNS at the Worker, wire the certificate, redirect from workers.dev
+      add it as a custom domain on the Pages project, wire DNS and the
+      certificate, redirect from valisonline.pages.dev
 - [ ] 7.1b `hreflang` alternates — needs the real origin, so it waits for 7.7
 
 ### Mobile
