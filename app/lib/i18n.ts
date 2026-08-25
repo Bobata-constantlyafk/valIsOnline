@@ -69,10 +69,10 @@ const DICT = {
   seeAll: { bg: "всички статии", en: "all writing" },
 
   aboutTitle: { bg: "За мен", en: "About" },
-  quotesTitle: { bg: "Със свои думи", en: "In her own words" },
+  quotesTitle: { bg: "Цитати", en: "Quotes" },
   quotesNote: {
-    bg: "Изреченията по-долу са цитирани дословно от публикувани неин текст. Нищо в тази секция не е преразказано.",
-    en: "The lines below are quoted verbatim from work she published. Nothing in this section is paraphrased.",
+    bg: "Изреченията по-долу са цитирани дословно от публикувани неин текст.",
+    en: "The lines below are quoted verbatim from work she published.",
   },
   translatedQuote: {
     bg: "преведено",
