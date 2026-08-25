@@ -31,6 +31,35 @@ npm run deploy     # build + wrangler deploy
 
 Node 22 (`.nvmrc`).
 
+## Deploying
+
+This is a **Worker with static assets**, not a Pages project — Cloudflare's
+dashboard now creates Workers by default, and `wrangler.jsonc` here has no
+`main`, only `assets`, which is a valid assets-only Worker (`wrangler deploy
+--dry-run` confirms it).
+
+Connected to GitHub through **Workers Builds**, so every push to `main` builds
+and deploys. Settings:
+
+| dashboard field | value |
+| --- | --- |
+| Worker name | `val-isonline` — **must match `name` in `wrangler.jsonc` or the build fails** |
+| Git branch | `main` |
+| Build command | `npm run build` |
+| Deploy command | `npx wrangler deploy` (the default — leave it) |
+| Non-production branch deploy command | `npx wrangler versions upload` (the default) |
+| Root directory | blank |
+| Build variables | none needed |
+
+There is no "build output directory" field — that is a Pages concept. Workers
+reads the output path from `assets.directory` in `wrangler.jsonc`.
+
+Node version comes from `.nvmrc` (22), which the build image reads on its own;
+the image would otherwise default to 24.
+
+Do not set the deploy command to `npm run deploy` — that script builds again
+before deploying, so the build would run twice.
+
 ## How it is built
 
 React Router 8 on React 19, Tailwind 4, Vite 8, deployed to a Cloudflare
