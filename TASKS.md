@@ -158,14 +158,14 @@ across sessions. Mark items `[x]` when done; keep the notes.
   would put it. Three sections end in `[to be continued]` and are hers to
   finish; the rest carry `// SOURCE:` notes in `app/data/about.ts` saying
   exactly where each fact came from.
-- **Two near-duplicate articles.** "Седем причини да губим мотивация"
-  (Списание VIP, 2022) and "10 причини да губим мотивация и как да си я
-  върнем" (10te.bg, 2025) are the same piece reworked for a second outlet —
-  they even open with nearly the same sentence. Both are currently listed.
-  Keep both, or drop one?
 
 
 ### Do not undo
+- **The 10te.bg motivation listicle (2025) is deliberately off the site.** It
+  is the same article as "Седем причини да губим мотивация" (Списание VIP,
+  2022) reworked for a second outlet — near-identical opening sentence, same
+  reasons. The 2022 original stays; the rework does not. A future scrape of
+  10te.bg will find it again: leave it out.
 - **„Свободата на словото" (Списание VIP, 2022) is deliberately off the site.**
   Val's call. It is her political piece — press-freedom index, hate speech, a
   hard paragraph about Bulgaria. Two quotes from it were pulled first, then the

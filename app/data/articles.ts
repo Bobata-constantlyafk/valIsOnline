@@ -480,21 +480,6 @@ export const ARTICLES: Article[] = [
     tags: ["travel", "nature", "science"],
   },
   {
-    slug: "10-prichini-da-gubim-motivaciya",
-    title: {
-      bg: "10 причини да губим мотивация и как да си я върнем",
-      en: "10 reasons we lose motivation, and how to get it back",
-    },
-    preview: {
-      bg: "Забравената награда, целта, поставена за утре вместо за година, и задачите, струпани в последния момент. Десет причини да губим мотивация, всяка със своя изход.",
-      en: "The forgotten reward, the goal set for tomorrow instead of for a year, and the tasks piled into the last moment. Ten reasons we lose motivation, each with its way out.",
-    },
-    outlet: "10te",
-    date: "2025-09-25",
-    url: "https://www.10te.bg/zhivotat/10-prichini-da-gubim-motivaciya-i-kak-da-si-ya-varnem/",
-    tags: ["society"],
-  },
-  {
     slug: "10-te-nay-prikazni-mesta-v-sveta",
     title: {
       bg: "10-те най-приказни места в света",
