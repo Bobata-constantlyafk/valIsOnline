@@ -103,7 +103,14 @@ across sessions. Mark items `[x]` when done; keep the notes.
 
 ### Polish
 - [ ] 2.4 Pick ONE signature hero motion and commit to it
-- [ ] 2.5 Sparkle / star cursor
+- [x] 2.5 Sparkle cursor — `app/components/chrome/SparkleCursor.tsx`. It does
+      NOT replace the system arrow on purpose: a portfolio where the cursor is
+      a picture is one where people misjudge what is clickable. Mouse only
+      (`hover: hover` + `pointer: fine`), off entirely under
+      prefers-reduced-motion, capped at 24 live sparkles, and each one is
+      removed by whichever fires first — the animation or a timer. The timer
+      is load-bearing: a hidden tab freezes the document timeline, so
+      `onfinish` never arrives.
 - [ ] 4.6 Spine widths scaled by real book thickness
 - [ ] 4.7 "translated from" badge on the spine itself, not only in the detail
 - [x] 7.2 Favicon (svg + ico + 180px apple icon, square lime V on forest) and
@@ -123,7 +130,9 @@ across sessions. Mark items `[x]` when done; keep the notes.
       Коджаманова; every byline was checked at the source)
 - [x] Quotes section — verbatim lines from her published work, attributed and
       linked, in `app/data/quotes.ts`. Never mixed with composed prose.
-- [ ] 3.5 Previews for the remaining ~25 articles (the 10te and VIP ones)
+- [x] 3.5 Previews written for the remaining 25 articles — all 35 now have
+      one. Every article was fetched and read first; the numbers and names in
+      each preview come out of the piece itself, never out of its title.
 - [ ] 4.8 Real cover images for the seven books
 - [x] Email corrected to `valentina.istatkova@gmail.com`
 - [x] Goodreads book links — the first set of ids was constructed rather than
@@ -141,9 +150,15 @@ across sessions. Mark items `[x]` when done; keep the notes.
 ## Open questions
 
 - Val should read the About page and rewrite anything that is not how she
-  would put it. The composed sections are marked with `// SOURCE:` notes in
-  `app/data/about.ts` saying exactly where each fact came from.
-- Does Val want the full-length portrait used anywhere (`public/val-full.jpg`)?
+  would put it. Three sections end in `[to be continued]` and are hers to
+  finish; the rest carry `// SOURCE:` notes in `app/data/about.ts` saying
+  exactly where each fact came from.
+- **Two near-duplicate articles.** "Седем причини да губим мотивация"
+  (Списание VIP, 2022) and "10 причини да губим мотивация и как да си я
+  върнем" (10te.bg, 2025) are the same piece reworked for a second outlet —
+  they even open with nearly the same sentence. Both are currently listed.
+  Keep both, or drop one?
+
 
 ### Do not undo
 - **„Свободата на словото" (Списание VIP, 2022) is deliberately off the site.**

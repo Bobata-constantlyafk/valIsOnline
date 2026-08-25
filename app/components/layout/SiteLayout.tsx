@@ -1,4 +1,5 @@
 import { Outlet } from "react-router";
+import { SparkleCursor } from "~/components/chrome/SparkleCursor";
 import { Footer } from "./Footer";
 import { TopNav } from "./TopNav";
 
@@ -16,6 +17,7 @@ export default function SiteLayout() {
         <Outlet />
       </main>
       <Footer />
+      <SparkleCursor />
     </div>
   );
 }

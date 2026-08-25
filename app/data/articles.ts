@@ -206,6 +206,10 @@ export const ARTICLES: Article[] = [
       bg: "Интересни факти за годишния метеорен поток „Персеиди“",
       en: "Facts about the annual Perseid meteor shower",
     },
+    preview: {
+      bg: "Ядрото на кометата Суифт-Тътъл е около 26 километра — колкото онова, което свърши с динозаврите. Всеки август минаваме през праха ѝ с по 60 километра в секунда и наричаме това красиво.",
+      en: "The nucleus of comet Swift-Tuttle is about twenty-six kilometres across, roughly the size of the one that finished the dinosaurs. Every August we pass through its dust at sixty kilometres a second and call it beautiful.",
+    },
     outlet: "spisanievip",
     date: "2022-08-12",
     url: "https://spisanievip.com/perseidi-interesni-fakti/",
@@ -216,6 +220,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Малка безплатна Хогуортс библиотека",
       en: "A small free Hogwarts library",
+    },
+    preview: {
+      bg: "Шариса Бейтс от Минесота построи безплатна библиотека във формата на Хогуортс в годината, в която ѝ откриха агресивен рак на гърдата. Тази година празнува три години чиста, а свекър ѝ вече мери мястото за хижата на Хагрид.",
+      en: "Charissa Bates from Minnesota built a free little library shaped like Hogwarts in the year she was diagnosed with aggressive breast cancer. This year she marks three years clear, and her father-in-law is already measuring the spot for Hagrid's hut.",
     },
     outlet: "spisanievip",
     date: "2022-08-06",
@@ -228,6 +236,10 @@ export const ARTICLES: Article[] = [
       bg: "Сърфът и климатичните промени",
       en: "Surfing and climate change",
     },
+    preview: {
+      bg: "През декември 2021 г. супертайфун изтри Cloud-9 в Сиаргао — вълната, заради която хората прелитат половината свят. До 2100 г. половината пясъчни плажове на планетата може да ги няма, а сърфът още се чуди дали да плати повече за по-чисти дъски.",
+      en: "In December 2021 a super typhoon erased Cloud-9 in Siargao, the wave people fly half the world for. By 2100 half the planet's sandy beaches may be gone, and surfing is still deciding whether to pay more for cleaner boards.",
+    },
     outlet: "spisanievip",
     date: "2022-08-30",
     url: "https://spisanievip.com/klmatichnite-promeni-i-sarfiraneto/",
@@ -238,6 +250,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Най-високата сърфирана вълна",
       en: "The highest wave ever surfed",
+    },
+    preview: {
+      bg: "Назаре е било рибарско село с опасно море, докато Гарет Макнамара не подкара 78 фута от него през 2011 г. Днес рекордите се решават с 3D модели и геометрична корекция на снимки, защото окото вече не стига.",
+      en: "Nazaré was a fishing village with a dangerous sea until Garrett McNamara rode seventy-eight feet of it in 2011. Records are now settled with 3D models and geometric correction of photographs, because the eye is no longer enough.",
     },
     outlet: "spisanievip",
     date: "2022-08-24",
@@ -250,6 +266,10 @@ export const ARTICLES: Article[] = [
       bg: "Как „Yes Theory“ променя начина, по който мислим за страха",
       en: "How Yes Theory changes the way we think about fear",
     },
+    preview: {
+      bg: "Четирима непознати се засичат в Монреал през 2015 г. и си дават 30 предизвикателства за 30 дни. Днес каналът им има 7,63 милиона абонати, а идеята зад него е проста: дискомфортът е цената на всичко, което си струва.",
+      en: "Four strangers met in Montreal in 2015 and set themselves thirty challenges in thirty days. Their channel now has 7.63 million subscribers, and the idea behind it is simple: discomfort is the price of anything worth having.",
+    },
     outlet: "spisanievip",
     date: "2022-07-29",
     url: "https://spisanievip.com/yes-theory/",
@@ -260,6 +280,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Странното изкуство и дискурсът на Маурицио Кателан",
       en: "The strange art and discourse of Maurizio Cattelan",
+    },
+    preview: {
+      bg: "Трима колекционери платиха 120 000 евро за банан, залепен с тиксо за стена. Никой не получи оригиналния банан — дадоха им друг, който изгни и беше изхвърлен, което е може би най-точното изказване за пазара на изкуство досега.",
+      en: "Three collectors paid a hundred and twenty thousand euros for a banana taped to a wall. None of them received the original banana — each was handed a different one, which rotted and was thrown out, possibly the most accurate statement anyone has made about the art market.",
     },
     outlet: "spisanievip",
     date: "2022-07-26",
@@ -272,6 +296,10 @@ export const ARTICLES: Article[] = [
       bg: "Сан Марино и позабравеното изкуство на статуите",
       en: "San Marino and the half-forgotten art of statues",
     },
+    preview: {
+      bg: "Сан Марино има собствена Статуя на свободата — подарък от берлинска графиня през 1876 г. Между паметниците ѝ стои и един за Беслан, което е доста памет за държава с размерите на голям квартал.",
+      en: "San Marino has a Statue of Liberty of its own, a gift from a Berlin countess in 1876. Among its monuments there is also one for Beslan — a great deal of remembering for a country the size of a large neighbourhood.",
+    },
     outlet: "spisanievip",
     date: "2022-07-18",
     url: "https://spisanievip.com/san-marino-pozabravenoto-izkustvo-na-statuite/",
@@ -280,6 +308,10 @@ export const ARTICLES: Article[] = [
   {
     slug: "art-the-city-v-rimini",
     title: { bg: "Art & the City в Римини", en: "Art & the City in Rimini" },
+    preview: {
+      bg: "Трябва ли графитът да се мери с модерното изкуство? В Борго Сан Джулиано, до моста на Тиберий, целият квартал е изрисуван с кадри от Фелини — и въпросът някак си отговаря сам.",
+      en: "Should graffiti be measured against modern art? In Borgo San Giuliano, beside the bridge of Tiberius, the whole quarter is painted with scenes out of Fellini — and the question rather answers itself.",
+    },
     outlet: "spisanievip",
     date: "2022-07-13",
     url: "https://spisanievip.com/art-the-city-v-rimini/",
@@ -291,6 +323,10 @@ export const ARTICLES: Article[] = [
       bg: "Лятно кино, усмивки и гражданска отговорност",
       en: "Summer cinema, smiles and civic responsibility",
     },
+    preview: {
+      bg: "Безплатно лятно кино в парк „Гео Милев“: седем филма за една вечер. Сред тях е и „Wind2Win“ — 300 километра уиндсърф покрай брега, изкарани заради пластмасата във водата.",
+      en: "Free open-air cinema in Geo Milev park: seven films in one evening. One of them, Wind2Win, follows a three-hundred-kilometre windsurf along the coast, done for the sake of the plastic in the water.",
+    },
     outlet: "spisanievip",
     date: "2022-07-08",
     url: "https://spisanievip.com/lyatno-kino-sofia/",
@@ -299,6 +335,10 @@ export const ARTICLES: Article[] = [
   {
     slug: "isic-priklyucheniya",
     title: { bg: "ISIC приключения", en: "ISIC adventures" },
+    preview: {
+      bg: "Има карта, която пуска студенти в музеи в над 125 държави и на 1500 места само у нас. Разбрах за нея след Атина, тоест точно в момента, в който вече не помага.",
+      en: "There is a card that gets students into museums in more than a hundred and twenty-five countries, and into fifteen hundred places in Bulgaria alone. I found out about it after Athens — precisely the moment at which it stops helping.",
+    },
     outlet: "spisanievip",
     date: "2022-07-07",
     url: "https://spisanievip.com/isic-priklyucheniya/",
@@ -309,6 +349,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Седем причини да губим мотивация и как да си я върнем",
       en: "Seven reasons we lose motivation, and how to get it back",
+    },
+    preview: {
+      bg: "Забравяме наградата, поставяме си нереалистични цели, после се отказваме и наричаме това липса на воля. Седем причини да губим мотивация — и нито една от тях не е, че сме мързеливи.",
+      en: "We forget the reward, set ourselves impossible goals, then give up and call it a lack of willpower. Seven reasons we lose motivation — and not one of them is laziness.",
     },
     outlet: "spisanievip",
     date: "2022-07-02",
@@ -321,6 +365,10 @@ export const ARTICLES: Article[] = [
       bg: "10 причини да посетиш Италия",
       en: "10 reasons to visit Italy",
     },
+    preview: {
+      bg: "Рим носи 2800 години история, Чинкуе Терре е пет села, вързани с пътеки и влак, а Сицилия побира гръцки храмове, нормански църкви и Етна на един остров. Десет причини, ако изобщо ви трябват причини.",
+      en: "Rome carries two thousand eight hundred years of history, Cinque Terre is five villages tied together by footpaths and a train, and Sicily fits Greek temples, Norman churches and Etna onto a single island. Ten reasons, if you need reasons at all.",
+    },
     outlet: "10te",
     date: "2026-08-19",
     url: "https://www.10te.bg/lyubopitno/10-prichini-da-posetish-italiya/",
@@ -331,6 +379,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 причини да преминем Камино де Сантяго",
       en: "10 reasons to walk the Camino de Santiago",
+    },
+    preview: {
+      bg: "Седем маршрута, по 20–30 хиляди крачки на ден и още два-три дни, ако продължиш до Финистере. Хората тръгват по религиозни причини, по спортни или по никакви, които могат да обяснят — и това май е най-хубавото.",
+      en: "Seven routes, twenty to thirty thousand steps a day, and another two or three days if you carry on to Finisterre. People set out for religious reasons, for athletic ones, or for none they can explain — which is probably the best part.",
     },
     outlet: "10te",
     date: "2026-07-26",
@@ -343,6 +395,10 @@ export const ARTICLES: Article[] = [
       bg: "10 места, на които да отидеш, ако си в Севиля",
       en: "10 places to go if you are in Seville",
     },
+    preview: {
+      bg: "Севиля пуска нещо върху посетителите си, което после трудно те напуска. Пласа де Еспаня, Санта Крус, Златната кула — десет места, заради които се връщаш.",
+      en: "Seville casts something over its visitors that does not leave easily afterwards. Plaza de España, Santa Cruz, the Golden Tower — ten places that bring you back.",
+    },
     outlet: "10te",
     date: "2026-07-25",
     url: "https://www.10te.bg/lyubopitno/10-mesta-na-koito-da-otidesh-ako-si-v-sevilya/",
@@ -353,6 +409,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-добри места за гмуркане в Европа",
       en: "The 10 best diving spots in Europe",
+    },
+    preview: {
+      bg: "Силфра в Исландия те пуска да плуваш между две тектонични плочи, Портофино пази средиземноморските си потъвания, а Лофотен предлага арктически студ. Десет места в Европа, за нито едно от които не е нужно да летиш до тропиците.",
+      en: "Silfra in Iceland lets you swim between two tectonic plates, Portofino keeps its Mediterranean wrecks, and Lofoten offers Arctic cold. Ten places in Europe, not one of which requires a flight to the tropics.",
     },
     outlet: "10te",
     date: "2026-07-19",
@@ -365,6 +425,10 @@ export const ARTICLES: Article[] = [
       bg: "10-те най-красиви, но смъртоносни растения",
       en: "The 10 most beautiful, most deadly plants",
     },
+    preview: {
+      bg: "Външният вид заблуждава: момината сълза действа върху сърцето както дигоксинът, а олеандърът е отровен целият, до последния лист. Десет разкошни растения, които са се научили да се защитават.",
+      en: "Looks deceive: lily of the valley acts on the heart the way digoxin does, and every part of an oleander is poisonous, down to the last leaf. Ten gorgeous plants that learned to defend themselves.",
+    },
     outlet: "10te",
     date: "2026-06-30",
     url: "https://www.10te.bg/lyubopitno/10-te-nay-krasivi-no-smartonosni-rasteniya/",
@@ -375,6 +439,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 животни със „свръхестествени сили“",
       en: "10 animals with „supernatural powers“",
+    },
+    preview: {
+      bg: "Медузата Turritopsis натиска бутона за начало и се връща в по-ранна възраст. Октоподът имитатор се преструва на други животни дори когато няма кой да го гони — десет напълно истински суперсили.",
+      en: "The Turritopsis jellyfish presses restart and reverts to an earlier stage of its own life. The mimic octopus impersonates other creatures even when nothing is hunting it — ten entirely real superpowers.",
     },
     outlet: "10te",
     date: "2026-06-15",
@@ -387,6 +455,10 @@ export const ARTICLES: Article[] = [
       bg: "10 препятствия, пред които се изправяме, когато започнем ново начинание",
       en: "10 obstacles we meet when we start something new",
     },
+    preview: {
+      bg: "Монотонията в началото, съмнението, когато резултатът закъснява, и парите, които всяко начало иска. Десет препятствия — изброени, за да се разпознават, а не за да плашат.",
+      en: "The monotony of the early stage, the doubt when results are late, and the money every beginning asks for. Ten obstacles — listed so they can be recognised, not so they can frighten.",
+    },
     outlet: "10te",
     date: "2026-05-27",
     url: "https://www.10te.bg/zhivotat/10-prepyatstviya-pred-koito-se-izpravyame-kogato-zapochnem-novo-nachinanie/",
@@ -397,6 +469,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 истории за Антарктида",
       en: "10 stories about Antarctica",
+    },
+    preview: {
+      bg: "Слънцето изгрява на 21 септември и залязва на 22 март — една година, един ден. От ледника Тейлър тече кървав водопад, а метеоритите там се запазват по-добре, отколкото където и да е другаде.",
+      en: "The sun rises on 21 September and sets on 22 March — one year, one day. A blood-red waterfall runs out of the Taylor Glacier, and meteorites keep better there than anywhere else on earth.",
     },
     outlet: "10te",
     date: "2026-04-18",
@@ -409,6 +485,10 @@ export const ARTICLES: Article[] = [
       bg: "10 причини да губим мотивация и как да си я върнем",
       en: "10 reasons we lose motivation, and how to get it back",
     },
+    preview: {
+      bg: "Забравената награда, целта, поставена за утре вместо за година, и задачите, струпани в последния момент. Десет причини да губим мотивация, всяка със своя изход.",
+      en: "The forgotten reward, the goal set for tomorrow instead of for a year, and the tasks piled into the last moment. Ten reasons we lose motivation, each with its way out.",
+    },
     outlet: "10te",
     date: "2025-09-25",
     url: "https://www.10te.bg/zhivotat/10-prichini-da-gubim-motivaciya-i-kak-da-si-ya-varnem/",
@@ -419,6 +499,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-приказни места в света",
       en: "The 10 most fairy-tale places in the world",
+    },
+    preview: {
+      bg: "Светещи пещери в Нова Зеландия, замък в Бавария, езеро с остров в Словения. Десет места, които звучат като приказка и имат неудобния навик да съществуват.",
+      en: "Glowing caves in New Zealand, a castle in Bavaria, a lake with an island in Slovenia. Ten places that sound like a fairy tale and have the inconvenient habit of existing.",
     },
     outlet: "10te",
     date: "2025-09-20",
@@ -431,6 +515,10 @@ export const ARTICLES: Article[] = [
       bg: "10-те най-забележителни спортни игрища в света",
       en: "The 10 most remarkable sports grounds in the world",
     },
+    preview: {
+      bg: "На езерото Санкт Мориц бягат коне по леда от 1907 г., а Федерер и Агаси играха тенис на 210 метра височина. Десет игрища, избрани заради мястото, а не заради престижа.",
+      en: "Horses have raced on the ice of Lake St Moritz since 1907, and Federer and Agassi played tennis two hundred and ten metres up. Ten grounds chosen for where they are rather than for their prestige.",
+    },
     outlet: "10te",
     date: "2024-08-25",
     url: "https://www.10te.bg/zabavlenie/10-te-nay-zabelezhitelni-sportni-igrishta-v-sveta/",
@@ -441,6 +529,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-големи мистерии в света",
       en: "The 10 greatest mysteries in the world",
+    },
+    preview: {
+      bg: "Подводен монумент край Йонагуни, ръкопис от 1420-те, който още никой не е разчел, и червен дъжд над Керала през 2001 г. Десет неща, чието обяснение все закъснява.",
+      en: "An underwater monument off Yonaguni, a manuscript from the 1420s nobody has yet deciphered, and red rain over Kerala in 2001. Ten things whose explanation keeps running late.",
     },
     outlet: "10te",
     date: "2024-07-22",
@@ -453,6 +545,10 @@ export const ARTICLES: Article[] = [
       bg: "10 изчезнали и застрашаващо изчезващи животни",
       en: "10 extinct and critically endangered animals",
     },
+    preview: {
+      bg: "Стелеровата морска крава е открита през 1741 г. и е изчезнала до 1768 — двайсет и седем години от първата среща до последната. Каспийският тигър е видян за последно през 1970 г., а обявен за изчезнал чак през 2003.",
+      en: "Steller's sea cow was discovered in 1741 and gone by 1768 — twenty-seven years from the first meeting to the last. The Caspian tiger was seen for the last time in 1970 and only declared extinct in 2003.",
+    },
     outlet: "10te",
     date: "2024-02-29",
     url: "https://www.10te.bg/lyubopitno/10-izcheznali-i-zastrashavashto-izchezvashti-zhivotni/",
@@ -463,6 +559,10 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 от най-големите природни бедствия в историята",
       en: "10 of the greatest natural disasters in history",
+    },
+    preview: {
+      bg: "Циклонът Бхола отнася около 500 000 души през 1970 г. За наводненията в Китай през 1931 г. оценките се движат между 150 000 и два милиона — разлика, която сама по себе си казва нещо.",
+      en: "The Bhola cyclone took around five hundred thousand lives in 1970. For the Chinese floods of 1931 the estimates run from a hundred and fifty thousand to two million — a gap that says something on its own.",
     },
     outlet: "10te",
     date: "2024-02-21",

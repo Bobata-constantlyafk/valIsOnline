@@ -73,7 +73,6 @@ export const CONTACT = {
 };
 
 /** Portrait, pre-cropped to head and shoulders at 600x800 so the markup does
- *  not have to fake a crop with transforms. public/val-full.jpg holds the
- *  full-length original if a page ever wants it. The hero still falls back to
- *  a typeset frame if the file goes missing. */
+ *  not have to fake a crop with transforms. The hero falls back to a typeset
+ *  frame if the file ever goes missing. */
 export const PORTRAIT = "/val.jpg";
