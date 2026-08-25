@@ -12,8 +12,10 @@
  *  shown on the page under its own heading, attributed and linked. The two
  *  are never mixed.
  *
- *  Val should read this page and change anything that is not how she would
- *  put it — it is written to be overwritten. */
+ *  "[to be continued]" is a live marker, visible on the published page: it
+ *  means Val has to finish that section herself. Do not write those endings
+ *  for her — the whole point is that they are hers. Delete the marker when
+ *  she has. */
 
 export type AboutSection = {
   id: string;
@@ -29,12 +31,13 @@ export const ABOUT_LEAD = {
 export const ABOUT: AboutSection[] = [
   {
     id: "sofia",
-    // SOURCE: Personal detail from Bobata: born in Sofia, still there. The bench image is composed, not hers.
+    // SOURCE: Personal detail from Bobata: born in Sofia, still there. The
+    // invented bench memory was cut; the rest is hers to write.
     heading: { bg: "София", en: "Sofia" },
     paragraphs: [
       {
-        bg: "Родена съм в София и не съм я напускала задълго. Градът има навика да те връща — тръгваш си убедена, а после се хващаш, че мислиш за конкретна пейка в конкретен парк.",
-        en: "I was born in Sofia and have never left it for long. The city has a habit of pulling you back — you leave quite convinced, and then catch yourself thinking about one particular bench in one particular park.",
+        bg: "Родена съм в София и не съм я напускала задълго. [to be continued]",
+        en: "I was born in Sofia and have never left it for long. [to be continued]",
       },
     ],
   },
@@ -63,8 +66,8 @@ export const ABOUT: AboutSection[] = [
         en: "I am a book editor, and translation runs alongside it — although “alongside” is an inaccurate word for something that takes up this many hours.",
       },
       {
-        bg: "Редакцията е работа, която се забелязва само когато е свършена лошо. Ако съм си свършила своята, читателят няма да се сети за мен нито веднъж; ще си мисли, че книгата винаги е звучала така. Това ми харесва.",
-        en: "Editing is work that only gets noticed when it has been done badly. If I have done mine, the reader will not think of me once — they will assume the book always sounded like this. I like that about it.",
+        bg: "Редакцията е работа, която се забелязва само когато е свършена лошо. Ако съм си свършила своята, читателят няма да се сети за мен нито веднъж; ще си мисли, че книгата винаги е звучала така.",
+        en: "Editing is work that only gets noticed when it has been done badly. If I have done mine, the reader will not think of me once — they will assume the book always sounded like this.",
       },
       {
         bg: "Досега през ръцете ми минаха седем заглавия — пет в превод и две в редакция: неразрешима загадка от 1934 г., климатичен роман, книга за мозъка, наръчник за изтощени родители, две детски книги и една испанска.",
@@ -85,23 +88,25 @@ export const ABOUT: AboutSection[] = [
   },
   {
     id: "mexico",
-    // SOURCE: Mexico ambition from Bobata. The three facts cited are all drawn from her own articles.
+    // SOURCE: Mexico ambition from Bobata; the three facts cited are all drawn
+    // from her own articles. The invented closing feeling was cut.
     heading: { bg: "Мексико", en: "Mexico" },
     paragraphs: [
       {
-        bg: "Още не съм била там. Писала съм за костенурките на Оахака, за потъващото с 25 сантиметра годишно Мексико Сити и за 370-те езика на Латинска Америка — всичко това от разстояние, което ме дразни. Ще стигна дотам.",
-        en: "I have not been yet. I have written about the turtles of Oaxaca, about Mexico City sinking twenty-five centimetres a year, and about the three hundred and seventy languages of Latin America — all of it from a distance that irritates me. I will get there.",
+        bg: "Още не съм била там. Писала съм за костенурките на Оахака, за потъващото с 25 сантиметра годишно Мексико Сити и за 370-те езика на Латинска Америка. [to be continued]",
+        en: "I have not been yet. I have written about the turtles of Oaxaca, about Mexico City sinking twenty-five centimetres a year, and about the three hundred and seventy languages of Latin America. [to be continued]",
       },
     ],
   },
   {
     id: "small",
-    // SOURCE: Lantana and Virgo from Bobata. The observation about lantana changing colour is composed.
+    // SOURCE: Lantana and Virgo from Bobata. The observation about lantana
+    // changing colour is composed, and Bobata chose to keep it.
     heading: { bg: "Дребни неща", en: "Small things" },
     paragraphs: [
       {
-        bg: "Любимото ми цвете е лантаната, която сменя цвета си, докато цъфти — струва ми се честно. Дева съм, което вероятно обяснява редакторската част.",
-        en: "My favourite flower is lantana, which changes colour while it blooms — that strikes me as honest. I am a Virgo, which probably explains the editing.",
+        bg: "Любимото ми цвете е лантаната, която сменя цвета си, докато цъфти — струва ми се честно. Дева съм, което вероятно обяснява редакторската част. [to be continued]",
+        en: "My favourite flower is lantana, which changes colour while it blooms — that strikes me as honest. I am a Virgo, which probably explains the editing. [to be continued]",
       },
     ],
   },
