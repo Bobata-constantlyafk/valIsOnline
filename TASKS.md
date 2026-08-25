@@ -80,9 +80,14 @@ across sessions. Mark items `[x]` when done; keep the notes.
       now builds, typechecks and deploys on its own — no laptop needed. If a
       run ever fails on the wrangler step, check the token permission first:
       it must be Pages Edit, not Workers and not Read.
-- [ ] **G3. Branch + PR flow.** Pages already builds a preview deployment for
-      every non-production branch, so this is just: work on a branch, open a
-      PR, review the preview URL from the phone, merge to go live.
+- [x] **G2c. One deploy path, not two.** Cloudflare's GitHub App recovered on
+      its own and started deploying alongside the Action — two production
+      builds per commit, racing, with the later one winning. Automatic
+      deployments are now disabled on the Cloudflare side; the Action is the
+      only thing that ships. The Git connection stays as a fallback.
+- [ ] **G3. Branch + PR flow.** Work on a branch, open a PR, review, merge.
+      Note: with Cloudflare's automatic deployments off, branch previews are
+      off too — the workflow would need a preview job added to restore them.
 - [x] 7.6 Deployed: **https://valisonline.pages.dev** — verified live: all 10
       pages 200 with correct per-language titles, 404 returns a real 404 with
       the styled page, every font subset and image 200, no console errors,
