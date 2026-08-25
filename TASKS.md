@@ -75,11 +75,11 @@ across sessions. Mark items `[x]` when done; keep the notes.
       Settings > Webhooks list is normal and is NOT the symptom.
       Build output directory is `build/client`; the React (Vite) preset's
       default of `dist` fails the build.
-- [ ] **G2b. Add the two Actions secrets** so the workflow can run:
-      `CLOUDFLARE_API_TOKEN` (Cloudflare Pages: Edit) and
-      `CLOUDFLARE_ACCOUNT_ID`. Bobata creates both in the UIs — never paste
-      either into a chat or a commit. Until then, deploys are manual
-      (`npm run deploy`).
+- [x] **G2b. Actions secrets added.** `CLOUDFLARE_API_TOKEN` (Account >
+      Cloudflare Pages > Edit) and `CLOUDFLARE_ACCOUNT_ID`. Pushing to `main`
+      now builds, typechecks and deploys on its own — no laptop needed. If a
+      run ever fails on the wrangler step, check the token permission first:
+      it must be Pages Edit, not Workers and not Read.
 - [ ] **G3. Branch + PR flow.** Pages already builds a preview deployment for
       every non-production branch, so this is just: work on a branch, open a
       PR, review the preview URL from the phone, merge to go live.
