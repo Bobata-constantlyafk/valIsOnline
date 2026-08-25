@@ -35,8 +35,19 @@ Node 22 (`.nvmrc`).
 
 Live at **https://valisonline.pages.dev**.
 
-This is a **Cloudflare Pages** project connected to GitHub, so every push to
-`main` builds and deploys. Dashboard settings:
+This is a **Cloudflare Pages** project. Cloudflare's own GitHub App stopped
+firing builds for this repo — its settings are correct, but pushes stopped
+producing deployments — so the trigger lives in
+`.github/workflows/deploy.yml` instead. That workflow typechecks, builds and
+uploads to Pages on every push to `main`, and can be re-run by hand from the
+Actions tab.
+
+Note for diagnosing this later: Cloudflare Pages integrates through a GitHub
+**App**, not a repository webhook, so an empty list under the repo's
+Settings > Webhooks is normal and proves nothing. Check
+Settings > Applications > Installed GitHub Apps instead.
+
+Dashboard settings, still correct and still used if the App ever recovers:
 
 | dashboard field | value |
 | --- | --- |
@@ -61,8 +72,12 @@ The 404 page needs no configuration. Pages serves `404.html` from the root of
 the output directory for any unmatched path, and `scripts/postbuild.mjs` puts
 it there after every build — including Cloudflare's.
 
-Node version comes from `.nvmrc` (22); the build image would otherwise pick a
-newer default.
+Node version comes from `.nvmrc` (22) in both Cloudflare's build image and the
+GitHub Actions workflow; each would otherwise pick a newer default.
+
+The workflow needs two repository secrets, created in the Cloudflare and
+GitHub UIs — `CLOUDFLARE_API_TOKEN` (with "Cloudflare Pages: Edit") and
+`CLOUDFLARE_ACCOUNT_ID`. Neither belongs in a commit or a chat.
 
 ## How it is built
 

@@ -67,10 +67,19 @@ across sessions. Mark items `[x]` when done; keep the notes.
       https://github.com/Bobata-constantlyafk/valIsOnline on `main`.
       Committed as Boyan Dechev <boyan.dechev@everymatrix.com>, matching the
       bobata-isonline repo; say the word to switch it to a personal address.
-- [x] **G2. Cloudflare Pages, connected to GitHub.** Every push to `main`
-      builds and deploys. It is a PAGES project, not a Worker — `wrangler.jsonc`
-      was rewritten to match. Build output directory is `build/client`; the
-      React (Vite) preset's default of `dist` fails the build.
+- [x] **G2. Cloudflare Pages deploys on every push to `main`** — but via
+      `.github/workflows/deploy.yml`, not Cloudflare's GitHub App. The App
+      silently stopped triggering builds: settings were correct, commits
+      reached GitHub, and three pushes produced zero deployments. Pages
+      integrates through a GitHub App rather than a repo webhook, so an empty
+      Settings > Webhooks list is normal and is NOT the symptom.
+      Build output directory is `build/client`; the React (Vite) preset's
+      default of `dist` fails the build.
+- [ ] **G2b. Add the two Actions secrets** so the workflow can run:
+      `CLOUDFLARE_API_TOKEN` (Cloudflare Pages: Edit) and
+      `CLOUDFLARE_ACCOUNT_ID`. Bobata creates both in the UIs — never paste
+      either into a chat or a commit. Until then, deploys are manual
+      (`npm run deploy`).
 - [ ] **G3. Branch + PR flow.** Pages already builds a preview deployment for
       every non-production branch, so this is just: work on a branch, open a
       PR, review the preview URL from the phone, merge to go live.

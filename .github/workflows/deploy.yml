@@ -1,0 +1,54 @@
+# Deploys the site on every push to main.
+#
+# Cloudflare's own GitHub App stopped triggering builds for this repo, so the
+# trigger lives here instead. This workflow does not depend on that
+# integration at all: it builds the site and uploads it straight to the Pages
+# project, which means pushing from a phone is enough to ship.
+#
+# Requires two repository secrets (Settings > Secrets and variables > Actions):
+#   CLOUDFLARE_API_TOKEN   - a token with the "Cloudflare Pages: Edit" permission
+#   CLOUDFLARE_ACCOUNT_ID  - the account id from the dashboard URL
+# Create both in the Cloudflare and GitHub UIs. Never paste either into a
+# chat, a commit, or this file.
+
+name: Deploy to Cloudflare Pages
+
+on:
+  push:
+    branches: [main]
+  # Lets you re-run a deploy by hand from the Actions tab if a build is ever
+  # skipped, which is what we lacked when the App trigger died.
+  workflow_dispatch:
+
+concurrency:
+  group: deploy-main
+  cancel-in-progress: true
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+    permissions:
+      contents: read
+      deployments: write
+    steps:
+      - uses: actions/checkout@v4
+
+      - uses: actions/setup-node@v4
+        with:
+          node-version-file: .nvmrc
+          cache: npm
+
+      - run: npm ci
+
+      # Fail here rather than shipping a site that does not typecheck.
+      - run: npm run typecheck
+
+      # Also runs scripts/postbuild.mjs, which puts 404.html at the root of
+      # build/client where Pages looks for it.
+      - run: npm run build
+
+      - uses: cloudflare/wrangler-action@v3
+        with:
+          apiToken: ${{ secrets.CLOUDFLARE_API_TOKEN }}
+          accountId: ${{ secrets.CLOUDFLARE_ACCOUNT_ID }}
+          command: pages deploy --project-name=valisonline --branch=main
