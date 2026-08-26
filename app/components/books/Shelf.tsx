@@ -90,15 +90,18 @@ function Detail({ book }: { book: Book }) {
   return (
     <article className="y2k-sticker u-panel grid gap-5 bg-cream sm:grid-cols-[auto_1fr]">
       {/* No cover art yet, so the cover is typeset from the spine colours —
-          it reads as a deliberate edition, not as a missing image. */}
+          it reads as a deliberate edition, not as a missing image. The floor
+          of the clamp is what a phone gets: the detail panel is one column
+          there, so the cover has the full width to itself and a small one
+          just looked lost. */}
       <div
-        className="y2k-bevel mx-auto flex aspect-[2/3] w-[clamp(9rem,30vw,13rem)] flex-col justify-between p-4 sm:mx-0"
+        className="y2k-bevel mx-auto flex aspect-[2/3] w-[clamp(12rem,40vw,14rem)] flex-col justify-between p-4 sm:mx-0"
         style={{ background: book.spine.bg, color: book.spine.fg }}
       >
-        <span className="font-display text-base font-black leading-tight">
+        <span className="font-display text-lg font-black leading-tight">
           {book.title}
         </span>
-        <span className="font-pixel text-sm opacity-90">
+        <span className="font-pixel text-base opacity-90">
           {book.authorBg ?? book.author}
         </span>
       </div>
