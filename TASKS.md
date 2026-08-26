@@ -15,6 +15,12 @@ across sessions. Mark items `[x]` when done; keep the notes.
   ship their own media query.
 - **Never mix a custom breakpoint with a built-in one on the same element.**
   Use a single combined range variant instead of two competing variants.
+- **A custom class in `app.css` beats a Tailwind utility on the same element**,
+  because those classes are written after the `@import "tailwindcss"` and win
+  on source order. `.u-nav-panel { display: grid }` silently defeated an
+  `sm:hidden` on the same div and left a 2px line under the desktop nav. If a
+  custom class sets a property, set its responsive behaviour in the same CSS
+  rule — never with a utility.
 - **Card grids go through `.u-cards`** — one utility, 1/2/3 columns with
   `grid-auto-rows: 1fr` so every card is the same size. It replaced a
   deliberately staggered "collage" grid: the stagger looked more like 2001 but
@@ -112,6 +118,12 @@ across sessions. Mark items `[x]` when done; keep the notes.
 - [ ] **M1. Full mobile pass on a real phone**, not just a resized viewport:
       tap targets ≥44px, the shelf strip's scroll affordance, sticky-nav
       behaviour with the iOS URL bar, and the ticker's speed at 375px.
+- [x] M-nav. Phone nav is a burger: brand, then the language toggle, then the
+      three lines. Opens a panel that animates 0fr -> 1fr, folds the bars into
+      an X, closes on Escape, on an outside tap, and on navigation. Links are
+      `inert` while collapsed so they cannot be tabbed into. Burger and toggle
+      are both 44px. Verified at 375 (panel 270px, five links) and 1280 (panel
+      display:none, five links back in the bar).
 - [ ] M2. Hero on a small phone (320px) — the portrait and the name compete
       for the same row; check the stack order reads well.
 - [ ] M3. `100dvh` rather than `100vh` anywhere a full-height section appears,

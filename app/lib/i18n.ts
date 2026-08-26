@@ -17,6 +17,8 @@ const DICT = {
   navContact: { bg: "контакти", en: "contact" },
 
   langSwitch: { bg: "EN", en: "БГ" },
+  menuOpen: { bg: "Отвори менюто", en: "Open menu" },
+  menuClose: { bg: "Затвори менюто", en: "Close menu" },
   langSwitchLabel: { bg: "Switch to English", en: "Смени на български" },
 
   heroKicker: { bg: "добре дошли в", en: "welcome to" },

@@ -118,6 +118,30 @@ body {
   padding: var(--pad-card);
 }
 
+/* Collapsible nav panel, phone only. Animating grid-template-rows from 0fr to
+   1fr gives a real height transition without measuring the content or
+   hard-coding a max-height that would clip if the menu ever grows. The child
+   must own the overflow:hidden for the row to actually clamp it.
+
+   The `display: none` above 40rem lives HERE rather than as an `sm:hidden`
+   utility on the element. This class is defined after Tailwind's utilities,
+   so `display: grid` would win the cascade against `sm:hidden` and leave a
+   2px border line under the nav on desktop. Never give this element a display
+   utility — it would silently lose. */
+.u-nav-panel {
+  display: grid;
+  grid-template-rows: 0fr;
+  transition: grid-template-rows 220ms cubic-bezier(0.2, 0, 0.2, 1);
+}
+.u-nav-panel[data-open="true"] {
+  grid-template-rows: 1fr;
+}
+@media (min-width: 40rem) {
+  .u-nav-panel {
+    display: none;
+  }
+}
+
 /* Card grid. Every card is the same size: `grid-auto-rows: 1fr` makes all
    rows equal to the tallest, and the cards stretch to fill their cell, so a
    short preview and a long one produce identical tiles. One column on a
