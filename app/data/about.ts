@@ -21,6 +21,15 @@ export type AboutSection = {
   id: string;
   heading: { bg: string; en: string };
   paragraphs: { bg: string; en: string }[];
+  /** A sentence she actually published, shown under the section as a marked
+   *  quotation. Never mixed into the composed paragraphs above it. `source`
+   *  names where it was printed; there is deliberately no url — see the note
+   *  in TASKS.md about the piece it comes from. */
+  quote?: {
+    bg: string;
+    en: string;
+    source: { bg: string; en: string };
+  };
 };
 
 export const ABOUT_LEAD = {
@@ -115,5 +124,15 @@ export const ABOUT: AboutSection[] = [
         en: "My favourite flower is lantana, which changes colour while it blooms — that strikes me as honest. I am a Virgo, which probably explains the editing. [to be continued]",
       },
     ],
+    // Verbatim, and not a coincidence: four years before anyone asked her for
+    // a favourite film, she reached for the man that film is about.
+    quote: {
+      bg: "Колкото и да ми се иска, например, да избягам нанякъде и да се превърна в следващия Кристофър МакКендълс, осъзнавам, че това е негативна свобода, която не се съобразява с обществото (най-малкото дори не се съобразява с близките ми) и най-вероятно никога няма да я изпитам.",
+      en: "Much as I would like, for instance, to run off somewhere and become the next Christopher McCandless, I recognise that this is a negative freedom — one that does not take society into account (it does not even take my own family into account) — and that I will most likely never experience it.",
+      source: {
+        bg: "„Свободата на словото“, Списание VIP, 2022",
+        en: "“Freedom of speech”, VIP Magazine, 2022",
+      },
+    },
   },
 ];

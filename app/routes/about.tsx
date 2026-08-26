@@ -37,6 +37,21 @@ export default function About() {
               ))}
             </div>
 
+            {section.quote && (
+              <blockquote className="y2k-bevel u-card-p mt-5 bg-blush">
+                <p className="text-pretty leading-relaxed">
+                  <span aria-hidden className="font-display text-ink-soft">
+                    “
+                  </span>
+                  {pick(section.quote, locale)}
+                </p>
+                <footer className="font-pixel mt-3 text-base text-ink-soft">
+                  — {pick(section.quote.source, locale)}
+                  {locale === "en" && <> · {t("translatedQuote")}</>}
+                </footer>
+              </blockquote>
+            )}
+
             {section.id === "languages" && (
               <>
                 <ul className="mt-5 grid gap-2 sm:grid-cols-2">
