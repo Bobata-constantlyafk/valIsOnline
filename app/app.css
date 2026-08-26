@@ -76,6 +76,14 @@ html {
   scroll-behavior: smooth;
 }
 
+/* Pixelify is a pixel face: at small sizes its "f" and "i" run together and
+   "film" reads as "alm". No ligatures, and a little tracking so every glyph
+   keeps its own column. */
+.font-pixel {
+  font-variant-ligatures: none;
+  letter-spacing: 0.04em;
+}
+
 body {
   background-color: var(--color-cream);
   color: var(--color-ink);

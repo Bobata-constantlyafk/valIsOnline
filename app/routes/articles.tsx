@@ -41,7 +41,7 @@ export default function Articles() {
   return (
     <Page>
       <PageHeader title={t("articlesTitle")} lead={t("articlesLead")}>
-        <div className="mt-6 flex flex-col gap-3">
+        <div className="mt-6 flex flex-col gap-4">
         <Row label={t("filterByOutlet")}>
           <Chip active={outlet === null} onClick={() => setOutlet(null)}>
             {t("filterAll")}
@@ -98,12 +98,14 @@ function Row({
   label: string;
   children: React.ReactNode;
 }) {
+  // On a phone the label sits on its own line as a small heading and the
+  // chips align underneath it. From 40rem the label moves back beside them.
   return (
-    <div className="flex flex-wrap items-center gap-2">
-      <span className="font-pixel w-24 shrink-0 text-lg text-ink-soft">
+    <div className="flex flex-col gap-1.5 sm:flex-row sm:items-baseline sm:gap-2">
+      <span className="font-pixel text-2xl text-ink sm:w-24 sm:shrink-0 sm:text-lg sm:text-ink-soft">
         {label}
       </span>
-      {children}
+      <div className="flex flex-wrap gap-2">{children}</div>
     </div>
   );
 }
