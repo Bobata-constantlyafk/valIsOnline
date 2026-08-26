@@ -150,11 +150,11 @@ export function TopNav() {
                 the same "this control is open" gesture in both places. */}
             <span
               aria-hidden
-              className={`text-xs transition-transform duration-200 ${
+              className={`text-xl leading-none transition-transform duration-200 ${
                 langOpen ? "rotate-180" : ""
               }`}
             >
-              ▾
+              ▼
             </span>
           </button>
 
