@@ -80,8 +80,11 @@ export function Hero() {
 
   return (
     <section className="relative overflow-hidden border-b-2 border-ink bg-forest">
-      {/* Star field. Purely decorative; the global reduced-motion block in
-          app.css freezes it, so there is no media query here. */}
+      {/* Star field, deliberately still. The hero used to run four animations
+          at once — glitter sheen, a blinking wordmark, drifting stars and the
+          ticker — which read as busy rather than as 2001. The sheen on her
+          name is the signature and the ticker has to move to be a ticker;
+          these stars just sit there now. */}
       <div
         aria-hidden
         className="pointer-events-none absolute inset-0 opacity-70"
@@ -89,7 +92,6 @@ export function Hero() {
           backgroundImage:
             "radial-gradient(1.5px 1.5px at 20% 30%, #7cff3d 50%, transparent 50%), radial-gradient(1.5px 1.5px at 70% 60%, #9be7ff 50%, transparent 50%), radial-gradient(2px 2px at 45% 80%, #ff6fb5 50%, transparent 50%), radial-gradient(1.5px 1.5px at 88% 18%, #c9a7ff 50%, transparent 50%)",
           backgroundSize: "260px 260px, 200px 200px, 320px 320px, 240px 240px",
-          animation: "y2k-drift 40s linear infinite",
         }}
       />
       <div
@@ -110,7 +112,7 @@ export function Hero() {
             <div className="min-w-0 flex-1 text-center sm:text-left">
               <p className="font-pixel text-lg text-blush">
                 {t("heroKicker")}{" "}
-                <span className="y2k-blink text-lime">valIsOnline</span>
+                <span className="text-lime">valIsOnline</span>
               </p>
 
               <h1 className="font-display y2k-glitter mt-1 text-5xl font-black leading-[1.05] tracking-tight">

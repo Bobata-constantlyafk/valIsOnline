@@ -1,6 +1,6 @@
 import { useId, useState } from "react";
 import type { Book } from "~/data/books";
-import { BOOKS } from "~/data/books";
+import { BOOKS, spineWidth } from "~/data/books";
 import { formatNumber, pick, useT } from "~/lib/i18n";
 import { useLocale } from "~/lib/locale";
 
@@ -34,18 +34,28 @@ export function Shelf() {
                     background: book.spine.bg,
                     color: book.spine.fg,
                     height: `${book.spine.height * 2.1}px`,
+                    // Thickness is the real page count, not decoration.
+                    width: `${spineWidth(book.pages)}px`,
                   }}
                   className={[
-                    "y2k-bevel flex w-11 items-center justify-center px-1 transition-transform duration-150",
+                    "y2k-bevel flex flex-col items-center justify-between gap-1 px-1 pb-1 pt-2 transition-transform duration-150",
                     isOpen ? "-translate-y-4" : "hover:-translate-y-2",
                   ].join(" ")}
                 >
                   {/* Vertical, the way a spine is actually read. */}
                   <span
-                    className="font-display max-h-full overflow-hidden text-xs font-bold leading-tight tracking-tight"
+                    className="font-display min-h-0 flex-1 overflow-hidden text-xs font-bold leading-tight tracking-tight"
                     style={{ writingMode: "vertical-rl", rotate: "180deg" }}
                   >
                     {book.title}
+                  </span>
+                  {/* Source language, printed at the foot of the spine the way
+                      a publisher's colophon sits at the bottom of a real one. */}
+                  <span
+                    aria-hidden
+                    className="font-pixel shrink-0 border border-current px-1 text-[0.6rem] leading-tight"
+                  >
+                    {book.from.toUpperCase()}
                   </span>
                 </button>
               </li>

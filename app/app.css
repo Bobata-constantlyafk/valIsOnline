@@ -271,15 +271,6 @@ body {
   animation: y2k-blink 1.1s steps(1, end) infinite;
 }
 
-@keyframes y2k-drift {
-  from {
-    background-position: 0 0;
-  }
-  to {
-    background-position: 0 -600px;
-  }
-}
-
 @keyframes y2k-ticker {
   from {
     transform: translateX(0);

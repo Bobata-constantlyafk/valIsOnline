@@ -65,7 +65,7 @@ export default function App() {
 export function ErrorBoundary({ error }: Route.ErrorBoundaryProps) {
   const is404 = isRouteErrorResponse(error) && error.status === 404;
   return (
-    <main className="mx-auto flex min-h-screen max-w-2xl flex-col items-center justify-center gap-6 px-6 text-center">
+    <main className="mx-auto flex min-h-dvh max-w-2xl flex-col items-center justify-center gap-6 px-6 text-center">
       <p className="font-pixel text-6xl text-bubblegum">
         {is404 ? "404" : "!!!"}
       </p>

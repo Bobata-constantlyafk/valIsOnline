@@ -95,9 +95,10 @@ across sessions. Mark items `[x]` when done; keep the notes.
       builds per commit, racing, with the later one winning. Automatic
       deployments are now disabled on the Cloudflare side; the Action is the
       only thing that ships. The Git connection stays as a fallback.
-- [ ] **G3. Branch + PR flow.** Work on a branch, open a PR, review, merge.
+- [ ] **G3. Branch + PR flow.** ON HOLD at Bobata's request — pushes to `main`
+      go straight live for now. Work on a branch, open a PR, review, merge.
       Note: with Cloudflare's automatic deployments off, branch previews are
-      off too — the workflow would need a preview job added to restore them.
+      off too, so the workflow would need a preview job to restore them.
 - [x] 7.6 Deployed: **https://valisonline.pages.dev** — verified live: all 10
       pages 200 with correct per-language titles, 404 returns a real 404 with
       the styled page, every font subset and image 200, no console errors,
@@ -124,10 +125,11 @@ across sessions. Mark items `[x]` when done; keep the notes.
       `inert` while collapsed so they cannot be tabbed into. Burger and toggle
       are both 44px. Verified at 375 (panel 270px, five links) and 1280 (panel
       display:none, five links back in the bar).
-- [ ] M2. Hero on a small phone (320px) — the portrait and the name compete
-      for the same row; check the stack order reads well.
-- [ ] M3. `100dvh` rather than `100vh` anywhere a full-height section appears,
-      so mobile browser chrome does not clip it.
+- [x] M2. Hero verified at 320px: panel stacks to a column, portrait 132x177,
+      h1 28px over two lines, seven language badges on two rows, the two CTAs
+      stacked, zero overflow and the page cannot scroll sideways.
+- [x] M3. `min-h-screen` -> `min-h-dvh` in SiteLayout and the root error
+      boundary, the only two full-height containers.
 
 ### Health
 - [ ] **H1. Efficiency pass.** Measure before changing anything: Lighthouse on
@@ -161,7 +163,11 @@ across sessions. Mark items `[x]` when done; keep the notes.
       major jumps on a site that builds fine.
 
 ### Polish
-- [ ] 2.4 Pick ONE signature hero motion and commit to it
+- [x] 2.4 One signature motion. The hero ran four at once — glitter sheen,
+      blinking wordmark, drifting starfield, ticker. Kept the sheen on her
+      name (the signature) and the ticker (a ticker has to move). Dropped the
+      blink and froze the stars; the `y2k-drift` keyframe is deleted. The
+      blink survives on the 404, where it is the only motion on the page.
 - [x] 2.5 Sparkle cursor — `app/components/chrome/SparkleCursor.tsx`. It does
       NOT replace the system arrow on purpose: a portfolio where the cursor is
       a picture is one where people misjudge what is clickable. Mouse only
@@ -170,8 +176,11 @@ across sessions. Mark items `[x]` when done; keep the notes.
       removed by whichever fires first — the animation or a timer. The timer
       is load-bearing: a hidden tab freezes the document timeline, so
       `onfinish` never arrives.
-- [ ] 4.6 Spine widths scaled by real book thickness
-- [ ] 4.7 "translated from" badge on the spine itself, not only in the detail
+- [x] 4.6 Spine widths come from real page counts, read off each Bulgarian
+      edition's Goodreads page: 216-456pp maps to 34-56px via `spineWidth()`.
+      Floor is 34px because a spine is also a touch target.
+- [x] 4.7 Source language printed at the foot of each spine (EN / ES), where
+      a publisher's colophon sits on a real one.
 - [x] 7.2 Favicon (svg + ico + 180px apple icon, square lime V on forest) and
       a bilingual 404 page, copied to `build/client/404.html` by
       `scripts/postbuild.mjs` for Cloudflare's `not_found_handling`.

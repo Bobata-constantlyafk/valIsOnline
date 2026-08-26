@@ -21,6 +21,9 @@ export type Book = {
   rating: number;
   ratingsCount: number;
   goodreads: string;
+  /** Page count of the Bulgarian edition, read off its Goodreads page. The
+   *  shelf derives spine WIDTH from this, so a thin book looks thin. */
+  pages: number;
   /** Spine colour and height. Chosen per book's mood; the shelf reads as a
    *  real shelf only if the spines disagree with each other. */
   spine: { bg: string; fg: string; height: number };
@@ -38,6 +41,18 @@ export type Book = {
 // that page alone. The "unconfirmed" role stays in the type for anything
 // added later whose credit has not been checked; the shelf shows no badge
 // for it rather than guessing.
+/** Spine width in px, interpolated across the real page counts (216-456).
+ *  The floor is 34px rather than something thinner: a spine is a touch
+ *  target, and below about 30px it becomes fiddly to tap on a phone. */
+export function spineWidth(pages: number): number {
+  const MIN_PAGES = 216;
+  const MAX_PAGES = 456;
+  const MIN_PX = 34;
+  const MAX_PX = 56;
+  const t = Math.min(1, Math.max(0, (pages - MIN_PAGES) / (MAX_PAGES - MIN_PAGES)));
+  return Math.round(MIN_PX + t * (MAX_PX - MIN_PX));
+}
+
 export const BOOKS: Book[] = [
   {
     slug: "chelyustta-na-kain",
@@ -51,6 +66,7 @@ export const BOOKS: Book[] = [
     rating: 3.75,
     ratingsCount: 3365,
     goodreads: "https://www.goodreads.com/book/show/240117935",
+    pages: 224,
     spine: { bg: "#16281f", fg: "#7cff3d", height: 100 },
   },
   {
@@ -65,6 +81,7 @@ export const BOOKS: Book[] = [
     rating: 3.91,
     ratingsCount: 2424,
     goodreads: "https://www.goodreads.com/book/show/216268922",
+    pages: 456,
     spine: { bg: "#2fd46a", fg: "#06301f", height: 94 },
   },
   {
@@ -78,6 +95,7 @@ export const BOOKS: Book[] = [
     rating: 3.84,
     ratingsCount: 306,
     goodreads: "https://www.goodreads.com/book/show/205632934",
+    pages: 320,
     spine: { bg: "#9be7ff", fg: "#06301f", height: 88 },
   },
   {
@@ -92,6 +110,7 @@ export const BOOKS: Book[] = [
     rating: 4.06,
     ratingsCount: 16120,
     goodreads: "https://www.goodreads.com/book/show/222811249",
+    pages: 320,
     spine: { bg: "#ff6fb5", fg: "#16281f", height: 97 },
   },
   {
@@ -107,6 +126,7 @@ export const BOOKS: Book[] = [
     rating: 4.25,
     ratingsCount: 2781,
     goodreads: "https://www.goodreads.com/book/show/232536254",
+    pages: 366,
     spine: { bg: "#c9a7ff", fg: "#16281f", height: 103 },
   },
   {
@@ -122,6 +142,7 @@ export const BOOKS: Book[] = [
     rating: 4.5,
     ratingsCount: 157,
     goodreads: "https://www.goodreads.com/book/show/220382041",
+    pages: 336,
     spine: { bg: "#ffd3e8", fg: "#16281f", height: 85 },
   },
   {
@@ -137,6 +158,7 @@ export const BOOKS: Book[] = [
     rating: 4.37,
     ratingsCount: 30,
     goodreads: "https://www.goodreads.com/book/show/243183443",
+    pages: 216,
     spine: { bg: "#0e4a31", fg: "#ffd3e8", height: 79 },
     note: {
       bg: "Прочетох я на испански и я рецензирах за „Литературен вестник“ през 2024 г. После преведох българското издание.",
