@@ -42,13 +42,14 @@ export type Book = {
 // added later whose credit has not been checked; the shelf shows no badge
 // for it rather than guessing.
 /** Spine width in px, interpolated across the real page counts (216-456).
- *  The floor is 34px rather than something thinner: a spine is a touch
- *  target, and below about 30px it becomes fiddly to tap on a phone. */
+ *  Scaled up 1.5x from the first pass, which read as a doll's shelf. Width
+ *  and height are scaled by the same factor, so the proportions of every
+ *  book — and the differences between them — are unchanged. */
 export function spineWidth(pages: number): number {
   const MIN_PAGES = 216;
   const MAX_PAGES = 456;
-  const MIN_PX = 34;
-  const MAX_PX = 56;
+  const MIN_PX = 51; // 34 * 1.5
+  const MAX_PX = 84; // 56 * 1.5
   const t = Math.min(1, Math.max(0, (pages - MIN_PAGES) / (MAX_PAGES - MIN_PAGES)));
   return Math.round(MIN_PX + t * (MAX_PX - MIN_PX));
 }

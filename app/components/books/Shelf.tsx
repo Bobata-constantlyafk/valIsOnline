@@ -33,7 +33,7 @@ export function Shelf() {
                   style={{
                     background: book.spine.bg,
                     color: book.spine.fg,
-                    height: `${book.spine.height * 2.1}px`,
+                    height: `${book.spine.height * 3.15}px`, // 2.1 * 1.5, matching the width scale
                     // Thickness is the real page count, not decoration.
                     width: `${spineWidth(book.pages)}px`,
                   }}
@@ -44,7 +44,7 @@ export function Shelf() {
                 >
                   {/* Vertical, the way a spine is actually read. */}
                   <span
-                    className="font-display min-h-0 flex-1 overflow-hidden text-xs font-bold leading-tight tracking-tight"
+                    className="font-display min-h-0 flex-1 overflow-hidden text-sm font-bold leading-tight tracking-tight"
                     style={{ writingMode: "vertical-rl", rotate: "180deg" }}
                   >
                     {book.title}
@@ -53,7 +53,7 @@ export function Shelf() {
                       a publisher's colophon sits at the bottom of a real one. */}
                   <span
                     aria-hidden
-                    className="font-pixel shrink-0 border border-current px-1 text-[0.6rem] leading-tight"
+                    className="font-pixel shrink-0 border-2 border-current px-1 text-xs leading-tight"
                   >
                     {book.from.toUpperCase()}
                   </span>
@@ -92,10 +92,10 @@ function Detail({ book }: { book: Book }) {
       {/* No cover art yet, so the cover is typeset from the spine colours —
           it reads as a deliberate edition, not as a missing image. */}
       <div
-        className="y2k-bevel mx-auto flex aspect-[2/3] w-[clamp(7rem,22vw,9rem)] flex-col justify-between p-3 sm:mx-0"
+        className="y2k-bevel mx-auto flex aspect-[2/3] w-[clamp(9rem,30vw,13rem)] flex-col justify-between p-4 sm:mx-0"
         style={{ background: book.spine.bg, color: book.spine.fg }}
       >
-        <span className="font-display text-sm font-black leading-tight">
+        <span className="font-display text-base font-black leading-tight">
           {book.title}
         </span>
         <span className="font-pixel text-sm opacity-90">
