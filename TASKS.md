@@ -129,6 +129,37 @@ across sessions. Mark items `[x]` when done; keep the notes.
 - [ ] M3. `100dvh` rather than `100vh` anywhere a full-height section appears,
       so mobile browser chrome does not clip it.
 
+### Health
+- [ ] **H1. Efficiency pass.** Measure before changing anything: Lighthouse on
+      the live site, then real numbers for JS shipped, font bytes actually
+      used per page, and image weight. Current baseline: 1.0MB build,
+      entry.client 184KB and jsx-runtime 84KB uncompressed. The site is fully
+      prerendered, so ask the sharper question — how much of that JS is needed
+      at all, given only the hero, the shelf, the filters and the nav are
+      interactive. Consider whether the whole thing could hydrate as islands
+      rather than a full client bundle.
+- [ ] **H2. Structure / SOLID pass.** Honest review of the code, not a
+      rubber stamp. Known smells to look at: `useT()` returns an overloaded
+      function whose types are fiddly; data files mix schema, content and
+      provenance comments; `ArticleCard` reaches into `OUTLETS` itself instead
+      of being handed what it renders; `TopNav` holds menu state, keyboard
+      handling and layout in one component. Split only where it removes real
+      duplication — this is a small site and premature abstraction would cost
+      more than it saves.
+- [ ] **H3. Vulnerability pass, then fix.** `npm audit --omit=dev` reports 0
+      today, so this is not about the lockfile alone. Check: outbound links
+      all carry `rel="noreferrer"`, nothing renders untrusted HTML, no
+      `dangerouslySetInnerHTML` anywhere, the Actions workflow cannot leak its
+      secrets into logs, the `CLOUDFLARE_API_TOKEN` is scoped to Pages Edit
+      only, and add security headers via `public/_headers`
+      (Content-Security-Policy, X-Content-Type-Options, Referrer-Policy,
+      Permissions-Policy). A static site's real attack surface is the deploy
+      pipeline and the headers, not the runtime.
+- [ ] **H4. Dependency freshness.** Currently behind: wrangler 4.124 -> 4.126,
+      @cloudflare/workers-types, @types/react-dom. Deliberately NOT bumping
+      TypeScript 5.9 -> 7.0 or @types/node 22 -> 26 without a reason; both are
+      major jumps on a site that builds fine.
+
 ### Polish
 - [ ] 2.4 Pick ONE signature hero motion and commit to it
 - [x] 2.5 Sparkle cursor — `app/components/chrome/SparkleCursor.tsx`. It does
