@@ -92,10 +92,17 @@ across sessions. Mark items `[x]` when done; keep the notes.
       pages 200 with correct per-language titles, 404 returns a real 404 with
       the styled page, every font subset and image 200, no console errors,
       no horizontal overflow, language toggle lands on the matching page.
-- [ ] 7.7 Buy `val-is-online.io` (check availability; `.io` runs ~$35–60/yr),
-      add it as a custom domain on the Pages project, wire DNS and the
-      certificate, redirect from valisonline.pages.dev
-- [ ] 7.1b `hreflang` alternates — needs the real origin, so it waits for 7.7
+- [ ] 7.7 Domain is **val-is.online**, bought at Namecheap. In progress:
+      zone added to Cloudflare, two proxied CNAMEs (`@` and `www`) pointing at
+      `valisonline.pages.dev`, nameservers still to move from
+      dns1/dns2.registrar-servers.com. Then Pages > Custom domains, SSL Full
+      (strict), and a 301 from www to the apex.
+      NOTE: `valisonline.pages.dev` can never be switched off, so the
+      duplicate-content fix is canonical tags, not a redirect.
+- [ ] 7.1b Once the domain is Active, all in one push, keyed off a single
+      `SITE_ORIGIN`: `hreflang` alternates (bg / en / x-default), a
+      `<link rel="canonical">` per page, absolute `og:url`, `sitemap.xml` and
+      `robots.txt`.
 
 ### Mobile
 - [ ] **M1. Full mobile pass on a real phone**, not just a resized viewport:

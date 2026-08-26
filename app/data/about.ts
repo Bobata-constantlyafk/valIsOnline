@@ -100,10 +100,16 @@ export const ABOUT: AboutSection[] = [
   },
   {
     id: "small",
-    // SOURCE: Lantana and Virgo from Bobata. The observation about lantana
+    // SOURCE: Into the Wild, lantana and Virgo all from Bobata; the three
+    // reasons she gives for the film are his words, not composed. The
+    // observation about lantana
     // changing colour is composed, and Bobata chose to keep it.
     heading: { bg: "Дребни неща", en: "Small things" },
     paragraphs: [
+      {
+        bg: "Любимият ми филм е „Into the Wild“ — заради живота в съгласие с природата, заради уюта на това да си сам и заради смелостта, която е нужна, за да го направиш.",
+        en: "My favourite film is Into the Wild — for the life lived in tune with nature, for the comfort of being on your own, and for the courage it takes to actually do it.",
+      },
       {
         bg: "Любимото ми цвете е лантаната, която сменя цвета си, докато цъфти — струва ми се честно. Дева съм, което вероятно обяснява редакторската част. [to be continued]",
         en: "My favourite flower is lantana, which changes colour while it blooms — that strikes me as honest. I am a Virgo, which probably explains the editing. [to be continued]",
