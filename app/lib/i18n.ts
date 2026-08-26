@@ -55,6 +55,7 @@ const DICT = {
   fromEn: { bg: "от английски", en: "from English" },
   fromEs: { bg: "от испански", en: "from Spanish" },
   originalTitleLabel: { bg: "в оригинал", en: "original title" },
+  bgEditionLabel: { bg: "българско издание", en: "Bulgarian edition" },
   illustratorLabel: { bg: "илюстрации", en: "illustrations" },
   onGoodreads: { bg: "в Goodreads", en: "on Goodreads" },
   ratingsSuffix: { bg: "оценки", en: "ratings" },

@@ -1,6 +1,6 @@
 import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { Book } from "~/data/books";
-import { BOOKS, spineWidth } from "~/data/books";
+import { BOOKS, displayTitle, spineTitle, spineWidth } from "~/data/books";
 import { formatNumber, pick, useT } from "~/lib/i18n";
 import { useLocale } from "~/lib/locale";
 
@@ -9,6 +9,7 @@ import { useLocale } from "~/lib/locale";
  *  half the visitors. The selected spine lifts and a panel below it opens. */
 export function Shelf() {
   const t = useT();
+  const locale = useLocale();
   const [openSlug, setOpenSlug] = useState<string | null>(BOOKS[0]?.slug ?? null);
   const panelId = useId();
   const open = BOOKS.find((b) => b.slug === openSlug) ?? null;
@@ -117,7 +118,7 @@ export function Shelf() {
                     className="font-display min-h-0 flex-1 overflow-hidden text-sm font-bold leading-tight tracking-tight"
                     style={{ writingMode: "vertical-rl", rotate: "180deg" }}
                   >
-                    {book.title}
+                    {spineTitle(book, locale)}
                   </span>
                   {/* Source language, printed at the foot of the spine the way
                       a publisher's colophon sits at the bottom of a real one. */}
@@ -169,19 +170,19 @@ function Detail({ book }: { book: Book }) {
         style={{ background: book.spine.bg, color: book.spine.fg }}
       >
         <span className="font-display text-lg font-black leading-tight">
-          {book.title}
+          {displayTitle(book, locale)}
         </span>
         <span className="font-pixel text-base opacity-90">
-          {book.authorBg ?? book.author}
+          {locale === "bg" ? (book.authorBg ?? book.author) : book.author}
         </span>
       </div>
 
       <div className="min-w-0">
         <h3 className="font-display text-xl font-black leading-tight text-balance">
-          {book.title}
+          {displayTitle(book, locale)}
         </h3>
         <p className="font-pixel mt-1 text-lg text-ink-soft">
-          {book.authorBg ? `${book.authorBg} · ` : ""}
+          {locale === "bg" && book.authorBg ? `${book.authorBg} · ` : ""}
           {book.author}
         </p>
 
@@ -202,8 +203,12 @@ function Detail({ book }: { book: Book }) {
         </ul>
 
         <dl className="mt-4 grid gap-x-4 gap-y-1 text-base sm:grid-cols-[auto_1fr]">
-          <dt className="font-pixel text-ink-soft">{t("originalTitleLabel")}</dt>
-          <dd className="italic">{book.originalTitle}</dd>
+          <dt className="font-pixel text-ink-soft">
+            {t(locale === "bg" ? "originalTitleLabel" : "bgEditionLabel")}
+          </dt>
+          <dd className="italic">
+            {locale === "bg" ? book.originalTitle : book.title}
+          </dd>
           {book.illustrator && (
             <>
               <dt className="font-pixel text-ink-soft">

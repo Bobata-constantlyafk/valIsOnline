@@ -54,6 +54,26 @@ export function spineWidth(pages: number): number {
   return Math.round(MIN_PX + t * (MAX_PX - MIN_PX));
 }
 
+/** Which title a reader sees. A Bulgarian reader knows the object Val
+ *  actually made — the Bulgarian edition. An English reader knows the book by
+ *  the name it was written under, so showing them only Cyrillic tells them
+ *  nothing. The other title is always still shown in the detail panel. */
+export function displayTitle(book: Book, locale: "bg" | "en"): string {
+  return locale === "bg" ? book.title : book.originalTitle;
+}
+
+/** Short form for the spine, which is a few characters wide. Drops a
+ *  subtitle after a colon and any parenthetical series note, so
+ *  "Brain Power: Everything You Need to Know..." becomes "Brain Power" and
+ *  "The Labyrinth of Lost and Found (The Whisperwicks, #1)" loses the series.
+ *  Bulgarian titles here carry neither, so they pass through untouched. */
+export function spineTitle(book: Book, locale: "bg" | "en"): string {
+  return displayTitle(book, locale)
+    .replace(/\s*\([^)]*\)\s*$/, "")
+    .split(":")[0]
+    .trim();
+}
+
 export const BOOKS: Book[] = [
   {
     slug: "chelyustta-na-kain",
