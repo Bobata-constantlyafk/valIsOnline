@@ -1,4 +1,4 @@
-import { useId, useState } from "react";
+import { useCallback, useEffect, useId, useRef, useState } from "react";
 import type { Book } from "~/data/books";
 import { BOOKS, spineWidth } from "~/data/books";
 import { formatNumber, pick, useT } from "~/lib/i18n";
@@ -13,14 +13,84 @@ export function Shelf() {
   const panelId = useId();
   const open = BOOKS.find((b) => b.slug === openSlug) ?? null;
 
+  // The shelf is wider than a phone, and nothing about a row of spines says
+  // "there are more of these off the edge". These two buttons say it: they
+  // only appear when the strip actually overflows, and each one greys out at
+  // its end, so the control doubles as a position indicator.
+  const stripRef = useRef<HTMLUListElement>(null);
+  const [edges, setEdges] = useState({ left: false, right: false });
+
+  const measure = useCallback(() => {
+    const el = stripRef.current;
+    if (!el) return;
+    const max = el.scrollWidth - el.clientWidth;
+    setEdges({ left: el.scrollLeft > 2, right: el.scrollLeft < max - 2 });
+  }, []);
+
+  useEffect(() => {
+    const el = stripRef.current;
+    if (!el) return;
+    measure();
+    el.addEventListener("scroll", measure, { passive: true });
+    const ro = new ResizeObserver(measure);
+    ro.observe(el);
+    return () => {
+      el.removeEventListener("scroll", measure);
+      ro.disconnect();
+    };
+  }, [measure]);
+
+  const nudge = (dir: -1 | 1) => {
+    const el = stripRef.current;
+    if (!el) return;
+    const reduced = window.matchMedia("(prefers-reduced-motion: reduce)").matches;
+    el.scrollBy({
+      left: dir * Math.round(el.clientWidth * 0.8),
+      behavior: reduced ? "auto" : "smooth",
+    });
+  };
+
+  const scrollable = edges.left || edges.right;
+
   return (
     <div>
-      <p className="font-pixel mb-2 text-lg text-ink-soft">
-        ↓ {t("shelfHint")}
-      </p>
+      <div className="mb-2 flex items-center gap-2">
+        <p className="font-pixel text-lg text-ink-soft">↓ {t("shelfHint")}</p>
+
+        {scrollable && (
+          <div className="ml-auto flex items-center gap-1.5">
+            <span className="font-pixel text-base text-ink-soft">
+              {BOOKS.length} {t("shelfCount")}
+            </span>
+            {([-1, 1] as const).map((dir) => {
+              const enabled = dir === -1 ? edges.left : edges.right;
+              return (
+                <button
+                  key={dir}
+                  type="button"
+                  onClick={() => nudge(dir)}
+                  disabled={!enabled}
+                  aria-label={t(dir === -1 ? "shelfPrev" : "shelfNext")}
+                  className={[
+                    "y2k-bevel font-pixel h-11 w-11 text-lg leading-none",
+                    enabled
+                      ? "y2k-chrome y2k-press text-ink"
+                      : "cursor-default bg-cream text-ink-soft opacity-50",
+                  ].join(" ")}
+                >
+                  {dir === -1 ? "◀" : "▶"}
+                </button>
+              );
+            })}
+          </div>
+        )}
+      </div>
 
       <div className="y2k-bevel bg-moss px-[var(--pad-card)] pb-0 pt-8">
-        <ul className="flex items-end gap-1.5 overflow-x-auto pb-0">
+        <ul
+          ref={stripRef}
+          className="flex items-end gap-1.5 overflow-x-auto pb-0"
+        >
           {BOOKS.map((book) => {
             const isOpen = book.slug === openSlug;
             return (

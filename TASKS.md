@@ -117,7 +117,7 @@ across sessions. Mark items `[x]` when done; keep the notes.
 
 ### Mobile
 - [ ] **M1. Full mobile pass on a real phone**, not just a resized viewport:
-      tap targets ≥44px, the shelf strip's scroll affordance, sticky-nav
+      tap targets ≥44px, sticky-nav
       behaviour with the iOS URL bar, and the ticker's speed at 375px.
 - [x] M-nav. Phone nav is a burger: brand, then the language toggle, then the
       three lines. Opens a panel that animates 0fr -> 1fr, folds the bars into
