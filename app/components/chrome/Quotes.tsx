@@ -20,7 +20,7 @@ export function Quotes() {
 
       <blockquote className="y2k-sticker u-card-p mt-5 bg-blush">
         <p className="text-pretty text-lg leading-relaxed">
-          {pick(SELF_DESCRIPTION, locale)}
+          {pick(SELF_DESCRIPTION.text, locale)}
         </p>
         <footer className="font-pixel mt-3 text-base text-ink-soft">
           —{" "}
@@ -32,7 +32,7 @@ export function Quotes() {
           >
             {pick(SELF_DESCRIPTION.note, locale)} ↗
           </a>
-          {locale === "en" && <> · {t("translatedQuote")}</>}
+          {locale !== "bg" && <> · {t("translatedQuote")}</>}
         </footer>
       </blockquote>
 
@@ -44,7 +44,7 @@ export function Quotes() {
                 <span aria-hidden className="font-display text-ink-soft">
                   “
                 </span>
-                {locale === "bg" ? q.bg : q.en}
+                {pick(q.text, locale)}
               </p>
               <footer className="font-pixel mt-auto pt-3 text-base text-ink-soft">
                 <a
@@ -57,7 +57,7 @@ export function Quotes() {
                 </a>
                 <br />
                 {q.outlet}, {q.year}
-                {locale === "en" && <> · {t("translatedQuote")}</>}
+                {locale !== "bg" && <> · {t("translatedQuote")}</>}
               </footer>
             </blockquote>
           </li>

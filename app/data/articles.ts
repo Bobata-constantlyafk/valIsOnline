@@ -1,3 +1,5 @@
+import { LOCALE_TAG, type L10n, type Locale } from "~/lib/locale";
+
 export type Outlet = "litvestnik" | "spisanievip" | "10te";
 export type Tag =
   | "books"
@@ -10,12 +12,12 @@ export type Tag =
 
 export type Article = {
   slug: string;
-  title: { bg: string; en: string };
+  title: L10n;
   /** The card blurb. For the Литературен вестник reviews this is a sentence
    *  lifted verbatim from the piece itself; elsewhere it is written in her
    *  register from the article's own material. Optional either way — a card
    *  without a preview still renders, showing title, outlet and date. */
-  preview?: { bg: string; en: string };
+  preview?: L10n;
   outlet: Outlet;
   /** ISO date, so sorting never depends on how a locale writes numbers. */
   date: string;
@@ -26,19 +28,37 @@ export type Article = {
 
 export const OUTLETS: Record<
   Outlet,
-  { name: string; note: { bg: string; en: string } }
+  { name: string; note: L10n }
 > = {
   litvestnik: {
     name: "Литературен вестник",
-    note: { bg: "критика", en: "criticism" },
+    note: {
+      bg: "критика",
+      en: "criticism",
+      es: "crítica",
+      it: "critica",
+      fr: "critique",
+    },
   },
   spisanievip: {
     name: "Списание VIP",
-    note: { bg: "дълъг репортаж", en: "long-form" },
+    note: {
+      bg: "дълъг репортаж",
+      en: "long-form",
+      es: "reportaje largo",
+      it: "reportage lungo",
+      fr: "long format",
+    },
   },
   "10te": {
     name: "10te.bg",
-    note: { bg: "списъци", en: "lists" },
+    note: {
+      bg: "списъци",
+      en: "lists",
+      es: "listas",
+      it: "liste",
+      fr: "listes",
+    },
   },
 };
 
@@ -48,10 +68,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Метафизичното бълнуване на Лабатут из страховитите цветове",
       en: "Labatut's metaphysical delirium among the terrifying colours",
+      es: "El delirio metafísico de Labatut entre los colores terribles",
+      it: "Il delirio metafisico di Labatut fra i colori terribili",
+      fr: "Le délire métaphysique de Labatut parmi les couleurs terribles",
     },
     preview: {
       bg: "Лабатут не иска славата да го преследва и аз ще уважа това — ще говоря само за думите му. За пруското синьо, за отровените кладенци в Северна Африка и за страховитата зеленина, която един ден ще ни задуши.",
       en: "Labatut does not want fame chasing him, and I will respect that — so I will speak only of his words. Of Prussian blue, of the poisoned wells in North Africa, and of the terrifying greenery that will one day smother us all.",
+      es: "Labatut no quiere que la fama lo persiga, y lo respetaré: hablaré solo de sus palabras. Del azul de Prusia, de los pozos envenenados del norte de África y de la verdura terrible que un día nos asfixiará a todos.",
+      it: "Labatut non vuole che la fama lo insegua, e lo rispetterò: parlerò solo delle sue parole. Del blu di Prussia, dei pozzi avvelenati del Nordafrica e del verde terribile che un giorno ci soffocherà tutti.",
+      fr: "Labatut ne veut pas que la gloire le poursuive, et je le respecterai : je ne parlerai que de ses mots. Du bleu de Prusse, des puits empoisonnés d'Afrique du Nord et de la verdure terrible qui nous étouffera tous un jour.",
     },
     outlet: "litvestnik",
     date: "2025-04-30",
@@ -64,10 +90,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Опити за рекообразуване",
       en: "Attempts at river-forming",
+      es: "Intentos de formar un río",
+      it: "Tentativi di formare un fiume",
+      fr: "Tentatives de former un fleuve",
     },
     preview: {
       bg: "Животът на героите е белязан от ограничения, от неизбежна за аржентинския контекст рутинна жестокост.",
       en: "The lives of these characters are marked by limits, by a routine cruelty the Argentine setting makes unavoidable.",
+      es: "La vida de los personajes está marcada por los límites, por una crueldad rutinaria que el contexto argentino vuelve inevitable.",
+      it: "La vita dei personaggi è segnata dai limiti, da una crudeltà quotidiana che il contesto argentino rende inevitabile.",
+      fr: "La vie des personnages est marquée par les limites, par une cruauté ordinaire que le contexte argentin rend inévitable.",
     },
     outlet: "litvestnik",
     date: "2025-10-29",
@@ -80,10 +112,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Домът на краткия разказ",
       en: "The home of the short story",
+      es: "La casa del relato breve",
+      it: "La casa del racconto breve",
+      fr: "La maison de la nouvelle",
     },
     preview: {
       bg: "В няколко страници може да се побере цял свят, наситен с емоции, образи и идеи.",
       en: "A whole world can fit into a few pages — dense with feeling, images and ideas.",
+      es: "En unas pocas páginas cabe un mundo entero, cargado de emociones, imágenes e ideas.",
+      it: "In poche pagine può stare un mondo intero, denso di emozioni, immagini e idee.",
+      fr: "Un monde entier tient en quelques pages, chargé d'émotions, d'images et d'idées.",
     },
     outlet: "litvestnik",
     date: "2025-07-09",
@@ -95,10 +133,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "„Онази сила, дето през зелен фитил извлича цветето“",
       en: "“The force that through the green fuse drives the flower”",
+      es: "«La fuerza que por la verde mecha impulsa la flor»",
+      it: "«La forza che nella verde miccia spinge il fiore»",
+      fr: "« La force qui par la verte mèche pousse la fleur »",
     },
     preview: {
       bg: "Музиката като котва е мотив, който се разгръща в цялата книга, но музиката сама по себе си е и код.",
       en: "Music as an anchor is a motif that unfolds across the whole book — but music is also, in itself, a code.",
+      es: "La música como ancla es un motivo que recorre todo el libro, pero la música en sí misma es también un código.",
+      it: "La musica come àncora è un motivo che attraversa tutto il libro, ma la musica in sé è anche un codice.",
+      fr: "La musique comme ancre est un motif qui traverse tout le livre — mais la musique est aussi, en elle-même, un code.",
     },
     outlet: "litvestnik",
     date: "2025-06-04",
@@ -110,10 +154,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Между съня и реалността: литературният космос на Владимир Полеганов",
       en: "Between dream and reality: the literary cosmos of Vladimir Poleganov",
+      es: "Entre el sueño y la realidad: el cosmos literario de Vladimir Poleganov",
+      it: "Fra il sogno e la realtà: il cosmo letterario di Vladimir Poleganov",
+      fr: "Entre le rêve et la réalité : le cosmos littéraire de Vladimir Poleganov",
     },
     preview: {
       bg: "Разказите се усещат като части от по-голяма мозайка, която читателят сам трябва да подреди, но скоро усеща, че никога няма да успее.",
       en: "The stories feel like pieces of a larger mosaic the reader has to assemble alone — and soon senses they never will.",
+      es: "Los relatos se sienten como piezas de un mosaico mayor que el lector debe componer solo, y que pronto intuye que no logrará componer nunca.",
+      it: "I racconti si sentono come tessere di un mosaico più grande che il lettore deve comporre da solo, e che presto intuisce di non riuscire a comporre mai.",
+      fr: "Les récits se donnent comme les pièces d'une mosaïque plus vaste que le lecteur doit assembler seul, et dont il pressent vite qu'il n'y parviendra jamais.",
     },
     outlet: "litvestnik",
     date: "2025-03-05",
@@ -126,10 +176,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Нито лошият е толкова лош, нито добрите – толкова добри",
       en: "The villain is not so bad, nor the good ones so good",
+      es: "Ni el malo es tan malo, ni los buenos tan buenos",
+      it: "Né il cattivo è così cattivo, né i buoni così buoni",
+      fr: "Ni le méchant si méchant, ni les bons si bons",
     },
     preview: {
       bg: "Хуморът е изразен главно чрез репликите на бандита, който се оказва наивен и леко глуповат.",
       en: "The humour comes mostly through the bandit's lines — he turns out to be naive, and a little dim.",
+      es: "El humor llega sobre todo por las réplicas del bandido, que resulta ser ingenuo y un poco corto.",
+      it: "L'umorismo arriva soprattutto dalle battute del bandito, che si rivela ingenuo e un po' ottuso.",
+      fr: "L'humour vient surtout des répliques du bandit, qui se révèle naïf et un peu bête.",
     },
     outlet: "litvestnik",
     date: "2024-05-22",
@@ -141,10 +197,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Диалектите в адаптираното кино",
       en: "Dialects in adapted cinema",
+      es: "Los dialectos en el cine adaptado",
+      it: "I dialetti nel cinema d'adattamento",
+      fr: "Les dialectes dans le cinéma d'adaptation",
     },
     preview: {
       bg: "Диалектът е първото нещо, което се губи при превод и при редакция. Тръгнах по следите му при Феранте и при „Възвишение“ — и в двата случая киното го изяде.",
-      en: "Dialect is the first thing lost in translation, and the first thing lost in editing. I followed its trail through Ferrante and through Ruskov's „Elevation“ — and in both cases the film swallowed it.",
+      en: "Dialect is the first thing lost in translation, and the first thing lost in editing. I followed its trail through Ferrante and through Ruskov’s “Elevation” — and in both cases the film swallowed it.",
+      es: "El dialecto es lo primero que se pierde al traducir, y lo primero que se pierde al editar. Seguí su rastro en Ferrante y en «Elevación» de Ruskov: en ambos casos el cine se lo tragó.",
+      it: "Il dialetto è la prima cosa che si perde nella traduzione, e la prima che si perde nella redazione. Ne ho seguito le tracce in Ferrante e in «Elevazione» di Ruskov: in entrambi i casi il cinema se l'è mangiato.",
+      fr: "Le dialecte est la première chose que l'on perd en traduisant, et la première que l'on perd en éditant. J'ai suivi sa trace chez Ferrante et dans « Élévation » de Ruskov : dans les deux cas, le cinéma l'a avalé.",
     },
     outlet: "spisanievip",
     date: "2022-09-06",
@@ -157,10 +219,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Книгите, които няма да бъдат прочетени до 2113 г.",
       en: "The books nobody will read until 2113",
+      es: "Los libros que nadie leerá hasta 2113",
+      it: "I libri che nessuno leggerà fino al 2113",
+      fr: "Les livres que personne ne lira avant 2113",
     },
     preview: {
       bg: "Всяка година един писател предава ръкопис, който никой жив днес няма да прочете. През 2114 г. ще отсекат смърчовете в норвежката гора и сто истории ще излязат наведнъж.",
       en: "Every year one writer hands over a manuscript that nobody alive today will read. In 2114 they will fell the spruces in a Norwegian forest, and a hundred stories will be published all at once.",
+      es: "Cada año un escritor entrega un manuscrito que nadie vivo hoy leerá. En 2114 talarán los abetos de un bosque noruego y cien historias se publicarán de golpe.",
+      it: "Ogni anno uno scrittore consegna un manoscritto che nessuno oggi vivo leggerà. Nel 2114 abbatteranno gli abeti di un bosco norvegese e cento storie usciranno tutte insieme.",
+      fr: "Chaque année, un écrivain remet un manuscrit que personne de vivant aujourd'hui ne lira. En 2114, on abattra les épicéas d'une forêt norvégienne et cent histoires paraîtront d'un coup.",
     },
     outlet: "spisanievip",
     date: "2022-08-17",
@@ -173,10 +241,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Малко познатата Оахака и красивите ѝ костенурки",
       en: "Little-known Oaxaca and its beautiful turtles",
+      es: "La poco conocida Oaxaca y sus hermosas tortugas",
+      it: "La poco nota Oaxaca e le sue bellissime tartarughe",
+      fr: "Oaxaca, peu connue, et ses belles tortues",
     },
     preview: {
       bg: "Преди трийсет години пясъкът на Масунте е бил изцапан с кръв, а водите — червени. Днес същият плаж е едно от петте най-големи места за гнездене на костенурки в света и това не се е случило от само себе си.",
       en: "Thirty years ago the sand at Mazunte was stained with blood and the water ran red. Today that same beach is one of the five largest turtle nesting sites on earth — and that did not happen by itself.",
+      es: "Hace treinta años la arena de Mazunte estaba manchada de sangre y el agua corría roja. Hoy esa misma playa es uno de los cinco mayores lugares de anidación de tortugas del mundo, y eso no ocurrió solo.",
+      it: "Trent'anni fa la sabbia di Mazunte era macchiata di sangue e l'acqua correva rossa. Oggi quella stessa spiaggia è uno dei cinque maggiori siti di nidificazione delle tartarughe al mondo, e non è successo da sé.",
+      fr: "Il y a trente ans, le sable de Mazunte était taché de sang et l'eau coulait rouge. Aujourd'hui, cette même plage est l'un des cinq plus grands sites de ponte de tortues au monde — et cela ne s'est pas fait tout seul.",
     },
     outlet: "spisanievip",
     date: "2022-08-09",
@@ -189,10 +263,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 интересни факта за Латинска Америка",
       en: "10 interesting facts about Latin America",
+      es: "10 datos curiosos sobre América Latina",
+      it: "10 fatti curiosi sull'America Latina",
+      fr: "10 faits curieux sur l'Amérique latine",
     },
     preview: {
       bg: "Мексико Сити потъва с 25 сантиметра всяка година, а в Парагвай дуелът е легален, стига и двамата да сте кръводарители. Десет неща, които не знаех и вече не мога да забравя.",
       en: "Mexico City sinks twenty-five centimetres a year, and in Paraguay duelling is legal so long as both of you are registered blood donors. Ten things I did not know and can no longer forget.",
+      es: "Ciudad de México se hunde veinticinco centímetros al año y en Paraguay el duelo es legal siempre que ambos sean donantes de sangre registrados. Diez cosas que no sabía y que ya no puedo olvidar.",
+      it: "Città del Messico sprofonda di venticinque centimetri l'anno e in Paraguay il duello è legale, purché entrambi siate donatori di sangue registrati. Dieci cose che non sapevo e che non riesco più a dimenticare.",
+      fr: "Mexico s'enfonce de vingt-cinq centimètres par an, et au Paraguay le duel est légal à condition que les deux adversaires soient donneurs de sang inscrits. Dix choses que j'ignorais et que je ne peux plus oublier.",
     },
     outlet: "10te",
     date: "2024-10-21",
@@ -205,10 +285,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Интересни факти за годишния метеорен поток „Персеиди“",
       en: "Facts about the annual Perseid meteor shower",
+      es: "Datos sobre la lluvia anual de estrellas de las Perseidas",
+      it: "Curiosità sullo sciame meteorico annuale delle Perseidi",
+      fr: "Faits sur la pluie annuelle d'étoiles des Perséides",
     },
     preview: {
       bg: "Ядрото на кометата Суифт-Тътъл е около 26 километра — колкото онова, което свърши с динозаврите. Всеки август минаваме през праха ѝ с по 60 километра в секунда и наричаме това красиво.",
       en: "The nucleus of comet Swift-Tuttle is about twenty-six kilometres across, roughly the size of the one that finished the dinosaurs. Every August we pass through its dust at sixty kilometres a second and call it beautiful.",
+      es: "El núcleo del cometa Swift-Tuttle mide unos veintiséis kilómetros, más o menos el tamaño del que acabó con los dinosaurios. Cada agosto cruzamos su polvo a sesenta kilómetros por segundo y lo llamamos bonito.",
+      it: "Il nucleo della cometa Swift-Tuttle misura circa ventisei chilometri, più o meno quanto quello che ha chiuso la partita ai dinosauri. Ogni agosto attraversiamo la sua polvere a sessanta chilometri al secondo e lo chiamiamo bello.",
+      fr: "Le noyau de la comète Swift-Tuttle mesure environ vingt-six kilomètres, à peu près la taille de celui qui a achevé les dinosaures. Chaque mois d'août, nous traversons sa poussière à soixante kilomètres par seconde et nous appelons cela joli.",
     },
     outlet: "spisanievip",
     date: "2022-08-12",
@@ -220,10 +306,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Малка безплатна Хогуортс библиотека",
       en: "A small free Hogwarts library",
+      es: "Una pequeña biblioteca gratuita con forma de Hogwarts",
+      it: "Una piccola biblioteca gratuita a forma di Hogwarts",
+      fr: "Une petite bibliothèque gratuite en forme de Poudlard",
     },
     preview: {
       bg: "Шариса Бейтс от Минесота построи безплатна библиотека във формата на Хогуортс в годината, в която ѝ откриха агресивен рак на гърдата. Тази година празнува три години чиста, а свекър ѝ вече мери мястото за хижата на Хагрид.",
       en: "Charissa Bates from Minnesota built a free little library shaped like Hogwarts in the year she was diagnosed with aggressive breast cancer. This year she marks three years clear, and her father-in-law is already measuring the spot for Hagrid's hut.",
+      es: "Charissa Bates, de Minnesota, construyó una pequeña biblioteca gratuita con forma de Hogwarts el año en que le diagnosticaron un cáncer de mama agresivo. Este año cumple tres años libre de la enfermedad, y su suegro ya está midiendo el sitio para la cabaña de Hagrid.",
+      it: "Charissa Bates, del Minnesota, ha costruito una piccola biblioteca gratuita a forma di Hogwarts nell'anno in cui le hanno diagnosticato un tumore al seno aggressivo. Quest'anno festeggia tre anni liberi dalla malattia, e suo suocero sta già misurando lo spazio per la capanna di Hagrid.",
+      fr: "Charissa Bates, du Minnesota, a construit une petite bibliothèque gratuite en forme de Poudlard l'année où on lui a diagnostiqué un cancer du sein agressif. Cette année, elle fête trois ans de rémission, et son beau-père mesure déjà l'emplacement de la cabane de Hagrid.",
     },
     outlet: "spisanievip",
     date: "2022-08-06",
@@ -235,10 +327,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Сърфът и климатичните промени",
       en: "Surfing and climate change",
+      es: "El surf y el cambio climático",
+      it: "Il surf e il cambiamento climatico",
+      fr: "Le surf et le changement climatique",
     },
     preview: {
       bg: "През декември 2021 г. супертайфун изтри Cloud-9 в Сиаргао — вълната, заради която хората прелитат половината свят. До 2100 г. половината пясъчни плажове на планетата може да ги няма, а сърфът още се чуди дали да плати повече за по-чисти дъски.",
       en: "In December 2021 a super typhoon erased Cloud-9 in Siargao, the wave people fly half the world for. By 2100 half the planet's sandy beaches may be gone, and surfing is still deciding whether to pay more for cleaner boards.",
+      es: "En diciembre de 2021 un supertifón borró Cloud-9, en Siargao, la ola por la que la gente cruza medio mundo. Para 2100 puede que haya desaparecido la mitad de las playas de arena del planeta, y el surf todavía está decidiendo si paga más por tablas más limpias.",
+      it: "Nel dicembre 2021 un supertifone ha cancellato Cloud-9, a Siargao, l'onda per cui la gente attraversa mezzo mondo. Entro il 2100 potrebbe sparire metà delle spiagge sabbiose del pianeta, e il surf sta ancora decidendo se pagare di più per tavole più pulite.",
+      fr: "En décembre 2021, un super-typhon a effacé Cloud-9, à Siargao, la vague pour laquelle on traverse la moitié du monde. D'ici 2100, la moitié des plages de sable de la planète pourrait disparaître, et le surf hésite encore à payer plus cher des planches plus propres.",
     },
     outlet: "spisanievip",
     date: "2022-08-30",
@@ -250,10 +348,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Най-високата сърфирана вълна",
       en: "The highest wave ever surfed",
+      es: "La ola más alta jamás surfeada",
+      it: "L'onda più alta mai surfata",
+      fr: "La plus haute vague jamais surfée",
     },
     preview: {
       bg: "Назаре е било рибарско село с опасно море, докато Гарет Макнамара не подкара 78 фута от него през 2011 г. Днес рекордите се решават с 3D модели и геометрична корекция на снимки, защото окото вече не стига.",
       en: "Nazaré was a fishing village with a dangerous sea until Garrett McNamara rode seventy-eight feet of it in 2011. Records are now settled with 3D models and geometric correction of photographs, because the eye is no longer enough.",
+      es: "Nazaré era un pueblo de pescadores con un mar peligroso hasta que Garrett McNamara surfeó setenta y ocho pies de ese mar en 2011. Hoy los récords se dirimen con modelos 3D y corrección geométrica de fotografías, porque el ojo ya no basta.",
+      it: "Nazaré era un villaggio di pescatori con un mare pericoloso, finché nel 2011 Garrett McNamara non ne ha cavalcati settantotto piedi. Oggi i record si stabiliscono con modelli 3D e correzione geometrica delle fotografie, perché l'occhio non basta più.",
+      fr: "Nazaré était un village de pêcheurs à la mer dangereuse, jusqu'à ce que Garrett McNamara en surfe soixante-dix-huit pieds en 2011. Les records se tranchent désormais avec des modèles 3D et une correction géométrique des photographies, car l'œil ne suffit plus.",
     },
     outlet: "spisanievip",
     date: "2022-08-24",
@@ -265,10 +369,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Как „Yes Theory“ променя начина, по който мислим за страха",
       en: "How Yes Theory changes the way we think about fear",
+      es: "Cómo Yes Theory cambia nuestra manera de pensar el miedo",
+      it: "Come Yes Theory cambia il nostro modo di pensare la paura",
+      fr: "Comment Yes Theory change notre façon de penser la peur",
     },
     preview: {
       bg: "Четирима непознати се засичат в Монреал през 2015 г. и си дават 30 предизвикателства за 30 дни. Днес каналът им има 7,63 милиона абонати, а идеята зад него е проста: дискомфортът е цената на всичко, което си струва.",
       en: "Four strangers met in Montreal in 2015 and set themselves thirty challenges in thirty days. Their channel now has 7.63 million subscribers, and the idea behind it is simple: discomfort is the price of anything worth having.",
+      es: "Cuatro desconocidos se cruzaron en Montreal en 2015 y se impusieron treinta retos en treinta días. Su canal tiene hoy 7,63 millones de suscriptores, y la idea de fondo es sencilla: la incomodidad es el precio de todo lo que vale la pena.",
+      it: "Quattro sconosciuti si sono incontrati a Montreal nel 2015 e si sono dati trenta sfide in trenta giorni. Oggi il loro canale ha 7,63 milioni di iscritti, e l'idea di fondo è semplice: il disagio è il prezzo di tutto ciò che vale.",
+      fr: "Quatre inconnus se sont croisés à Montréal en 2015 et se sont donné trente défis en trente jours. Leur chaîne compte aujourd'hui 7,63 millions d'abonnés, et l'idée est simple : l'inconfort est le prix de tout ce qui en vaut la peine.",
     },
     outlet: "spisanievip",
     date: "2022-07-29",
@@ -280,10 +390,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Странното изкуство и дискурсът на Маурицио Кателан",
       en: "The strange art and discourse of Maurizio Cattelan",
+      es: "El arte extraño y el discurso de Maurizio Cattelan",
+      it: "L'arte strana e il discorso di Maurizio Cattelan",
+      fr: "L'art étrange et le discours de Maurizio Cattelan",
     },
     preview: {
       bg: "Трима колекционери платиха 120 000 евро за банан, залепен с тиксо за стена. Никой не получи оригиналния банан — дадоха им друг, който изгни и беше изхвърлен, което е може би най-точното изказване за пазара на изкуство досега.",
       en: "Three collectors paid a hundred and twenty thousand euros for a banana taped to a wall. None of them received the original banana — each was handed a different one, which rotted and was thrown out, possibly the most accurate statement anyone has made about the art market.",
+      es: "Tres coleccionistas pagaron ciento veinte mil euros por un plátano pegado a una pared con cinta. Ninguno recibió el plátano original: a cada uno le dieron otro, que se pudrió y acabó en la basura, quizá la declaración más exacta que se ha hecho nunca sobre el mercado del arte.",
+      it: "Tre collezionisti hanno pagato centoventimila euro per una banana attaccata al muro con il nastro adesivo. Nessuno ha avuto la banana originale: a ciascuno ne è stata data un'altra, che è marcita ed è finita nella spazzatura, forse la dichiarazione più esatta mai fatta sul mercato dell'arte.",
+      fr: "Trois collectionneurs ont payé cent vingt mille euros pour une banane scotchée à un mur. Aucun n'a reçu la banane d'origine : on leur en a donné une autre, qui a pourri et fini à la poubelle — sans doute la déclaration la plus exacte jamais faite sur le marché de l'art.",
     },
     outlet: "spisanievip",
     date: "2022-07-26",
@@ -295,10 +411,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Сан Марино и позабравеното изкуство на статуите",
       en: "San Marino and the half-forgotten art of statues",
+      es: "San Marino y el arte medio olvidado de las estatuas",
+      it: "San Marino e l'arte mezzo dimenticata delle statue",
+      fr: "Saint-Marin et l'art à demi oublié des statues",
     },
     preview: {
       bg: "Сан Марино има собствена Статуя на свободата — подарък от берлинска графиня през 1876 г. Между паметниците ѝ стои и един за Беслан, което е доста памет за държава с размерите на голям квартал.",
       en: "San Marino has a Statue of Liberty of its own, a gift from a Berlin countess in 1876. Among its monuments there is also one for Beslan — a great deal of remembering for a country the size of a large neighbourhood.",
+      es: "San Marino tiene su propia Estatua de la Libertad, regalo de una condesa berlinesa en 1876. Entre sus monumentos hay también uno dedicado a Beslán: mucha memoria para un país del tamaño de un barrio grande.",
+      it: "San Marino ha una sua Statua della Libertà, dono di una contessa berlinese nel 1876. Fra i suoi monumenti ce n'è anche uno per Beslan: molta memoria, per un paese grande quanto un quartiere.",
+      fr: "Saint-Marin a sa propre statue de la Liberté, offerte par une comtesse berlinoise en 1876. Parmi ses monuments, il y en a aussi un pour Beslan : beaucoup de mémoire pour un pays de la taille d'un grand quartier.",
     },
     outlet: "spisanievip",
     date: "2022-07-18",
@@ -307,10 +429,19 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "art-the-city-v-rimini",
-    title: { bg: "Art & the City в Римини", en: "Art & the City in Rimini" },
+    title: {
+      bg: "Art & the City в Римини",
+      en: "Art & the City in Rimini",
+      es: "Art & the City en Rímini",
+      it: "Art & the City a Rimini",
+      fr: "Art & the City à Rimini",
+    },
     preview: {
       bg: "Трябва ли графитът да се мери с модерното изкуство? В Борго Сан Джулиано, до моста на Тиберий, целият квартал е изрисуван с кадри от Фелини — и въпросът някак си отговаря сам.",
       en: "Should graffiti be measured against modern art? In Borgo San Giuliano, beside the bridge of Tiberius, the whole quarter is painted with scenes out of Fellini — and the question rather answers itself.",
+      es: "¿Hay que medir el grafiti con la vara del arte moderno? En Borgo San Giuliano, junto al puente de Tiberio, todo el barrio está pintado con escenas de Fellini, y la pregunta se responde sola.",
+      it: "Il graffito va misurato con il metro dell'arte moderna? A Borgo San Giuliano, accanto al ponte di Tiberio, l'intero quartiere è dipinto con scene felliniane, e la domanda si risponde da sola.",
+      fr: "Faut-il mesurer le graffiti à l'aune de l'art moderne ? À Borgo San Giuliano, près du pont de Tibère, tout le quartier est peint de scènes de Fellini — et la question se répond d'elle-même.",
     },
     outlet: "spisanievip",
     date: "2022-07-13",
@@ -322,10 +453,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Лятно кино, усмивки и гражданска отговорност",
       en: "Summer cinema, smiles and civic responsibility",
+      es: "Cine de verano, sonrisas y responsabilidad cívica",
+      it: "Cinema d'estate, sorrisi e responsabilità civica",
+      fr: "Cinéma d'été, sourires et responsabilité civique",
     },
     preview: {
       bg: "Безплатно лятно кино в парк „Гео Милев“: седем филма за една вечер. Сред тях е и „Wind2Win“ — 300 километра уиндсърф покрай брега, изкарани заради пластмасата във водата.",
       en: "Free open-air cinema in Geo Milev park: seven films in one evening. One of them, Wind2Win, follows a three-hundred-kilometre windsurf along the coast, done for the sake of the plastic in the water.",
+      es: "Cine de verano gratuito en el parque Geo Milev: siete películas en una noche. Una de ellas, «Wind2Win», sigue trescientos kilómetros de windsurf a lo largo de la costa, hechos por el plástico que hay en el agua.",
+      it: "Cinema all'aperto gratuito nel parco Geo Milev: sette film in una sera. Uno di questi, «Wind2Win», segue trecento chilometri di windsurf lungo la costa, fatti per via della plastica nell'acqua.",
+      fr: "Cinéma d'été gratuit dans le parc Geo Milev : sept films en une soirée. L'un d'eux, « Wind2Win », suit trois cents kilomètres de planche à voile le long de la côte, parcourus à cause du plastique dans l'eau.",
     },
     outlet: "spisanievip",
     date: "2022-07-08",
@@ -334,10 +471,19 @@ export const ARTICLES: Article[] = [
   },
   {
     slug: "isic-priklyucheniya",
-    title: { bg: "ISIC приключения", en: "ISIC adventures" },
+    title: {
+      bg: "ISIC приключения",
+      en: "ISIC adventures",
+      es: "Aventuras con la ISIC",
+      it: "Avventure con la ISIC",
+      fr: "Aventures avec la carte ISIC",
+    },
     preview: {
       bg: "Има карта, която пуска студенти в музеи в над 125 държави и на 1500 места само у нас. Разбрах за нея след Атина, тоест точно в момента, в който вече не помага.",
       en: "There is a card that gets students into museums in more than a hundred and twenty-five countries, and into fifteen hundred places in Bulgaria alone. I found out about it after Athens — precisely the moment at which it stops helping.",
+      es: "Existe una tarjeta que abre a los estudiantes los museos de más de ciento veinticinco países, y mil quinientos sitios solo en Bulgaria. Me enteré de ella después de Atenas: justo el momento en que deja de servir.",
+      it: "Esiste una tessera che apre agli studenti i musei di oltre centoventicinque paesi, e millecinquecento posti solo in Bulgaria. L'ho scoperta dopo Atene: esattamente il momento in cui smette di essere utile.",
+      fr: "Il existe une carte qui ouvre aux étudiants les musées de plus de cent vingt-cinq pays, et mille cinq cents lieux rien qu'en Bulgarie. Je l'ai découverte après Athènes — précisément le moment où elle ne sert plus.",
     },
     outlet: "spisanievip",
     date: "2022-07-07",
@@ -349,10 +495,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "Седем причини да губим мотивация и как да си я върнем",
       en: "Seven reasons we lose motivation, and how to get it back",
+      es: "Siete razones por las que perdemos la motivación, y cómo recuperarla",
+      it: "Sette ragioni per cui perdiamo la motivazione, e come ritrovarla",
+      fr: "Sept raisons pour lesquelles nous perdons la motivation, et comment la retrouver",
     },
     preview: {
       bg: "Забравяме наградата, поставяме си нереалистични цели, после се отказваме и наричаме това липса на воля. Седем причини да губим мотивация — и нито една от тях не е, че сме мързеливи.",
       en: "We forget the reward, set ourselves impossible goals, then give up and call it a lack of willpower. Seven reasons we lose motivation — and not one of them is laziness.",
+      es: "Olvidamos la recompensa, nos ponemos metas imposibles, luego abandonamos y lo llamamos falta de voluntad. Siete razones por las que perdemos la motivación, y ninguna de ellas es la pereza.",
+      it: "Dimentichiamo la ricompensa, ci diamo obiettivi impossibili, poi molliamo e lo chiamiamo mancanza di volontà. Sette ragioni per cui perdiamo la motivazione, e nessuna è la pigrizia.",
+      fr: "Nous oublions la récompense, nous nous fixons des objectifs impossibles, puis nous abandonnons et appelons cela un manque de volonté. Sept raisons pour lesquelles nous perdons la motivation — et pas une seule n'est la paresse.",
     },
     outlet: "spisanievip",
     date: "2022-07-02",
@@ -364,10 +516,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 причини да посетиш Италия",
       en: "10 reasons to visit Italy",
+      es: "10 razones para visitar Italia",
+      it: "10 motivi per visitare l'Italia",
+      fr: "10 raisons de visiter l'Italie",
     },
     preview: {
       bg: "Рим носи 2800 години история, Чинкуе Терре е пет села, вързани с пътеки и влак, а Сицилия побира гръцки храмове, нормански църкви и Етна на един остров. Десет причини, ако изобщо ви трябват причини.",
       en: "Rome carries two thousand eight hundred years of history, Cinque Terre is five villages tied together by footpaths and a train, and Sicily fits Greek temples, Norman churches and Etna onto a single island. Ten reasons, if you need reasons at all.",
+      es: "Roma carga con dos mil ochocientos años de historia, Cinque Terre son cinco pueblos unidos por senderos y un tren, y Sicilia mete templos griegos, iglesias normandas y el Etna en una sola isla. Diez razones, si es que hacen falta razones.",
+      it: "Roma porta duemilaottocento anni di storia, le Cinque Terre sono cinque paesi legati da sentieri e da un treno, e la Sicilia fa stare templi greci, chiese normanne e l'Etna in una sola isola. Dieci motivi, ammesso che servano motivi.",
+      fr: "Rome porte deux mille huit cents ans d'histoire, les Cinque Terre sont cinq villages reliés par des sentiers et un train, et la Sicile fait tenir des temples grecs, des églises normandes et l'Etna sur une seule île. Dix raisons, s'il faut des raisons.",
     },
     outlet: "10te",
     date: "2026-08-19",
@@ -379,10 +537,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 причини да преминем Камино де Сантяго",
       en: "10 reasons to walk the Camino de Santiago",
+      es: "10 razones para hacer el Camino de Santiago",
+      it: "10 motivi per percorrere il Cammino di Santiago",
+      fr: "10 raisons de faire le chemin de Saint-Jacques",
     },
     preview: {
       bg: "Седем маршрута, по 20–30 хиляди крачки на ден и още два-три дни, ако продължиш до Финистере. Хората тръгват по религиозни причини, по спортни или по никакви, които могат да обяснят — и това май е най-хубавото.",
       en: "Seven routes, twenty to thirty thousand steps a day, and another two or three days if you carry on to Finisterre. People set out for religious reasons, for athletic ones, or for none they can explain — which is probably the best part.",
+      es: "Siete rutas, entre veinte y treinta mil pasos al día, y dos o tres días más si sigues hasta Finisterre. La gente sale por motivos religiosos, deportivos o por ninguno que sepa explicar, que es probablemente lo mejor de todo.",
+      it: "Sette percorsi, dai venti ai trentamila passi al giorno, e altri due o tre giorni se prosegui fino a Finisterre. Si parte per motivi religiosi, sportivi o per nessuno che si sappia spiegare — che è probabilmente la parte migliore.",
+      fr: "Sept itinéraires, vingt à trente mille pas par jour, et deux ou trois jours de plus si l'on pousse jusqu'à Finisterre. On part pour des raisons religieuses, sportives, ou pour aucune que l'on sache expliquer — ce qui est sans doute le meilleur.",
     },
     outlet: "10te",
     date: "2026-07-26",
@@ -394,10 +558,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 места, на които да отидеш, ако си в Севиля",
       en: "10 places to go if you are in Seville",
+      es: "10 lugares a los que ir si estás en Sevilla",
+      it: "10 posti dove andare se sei a Siviglia",
+      fr: "10 endroits où aller si vous êtes à Séville",
     },
     preview: {
       bg: "Севиля пуска нещо върху посетителите си, което после трудно те напуска. Пласа де Еспаня, Санта Крус, Златната кула — десет места, заради които се връщаш.",
       en: "Seville casts something over its visitors that does not leave easily afterwards. Plaza de España, Santa Cruz, the Golden Tower — ten places that bring you back.",
+      es: "Sevilla echa sobre sus visitantes algo que después no se va con facilidad. Plaza de España, Santa Cruz, la Torre del Oro: diez lugares por los que se vuelve.",
+      it: "Siviglia getta sui suoi visitatori qualcosa che poi non se ne va facilmente. Plaza de España, Santa Cruz, la Torre dell'Oro: dieci posti per cui si torna.",
+      fr: "Séville jette sur ses visiteurs quelque chose qui ne s'en va pas facilement. Plaza de España, Santa Cruz, la Tour de l'Or : dix lieux pour lesquels on revient.",
     },
     outlet: "10te",
     date: "2026-07-25",
@@ -409,10 +579,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-добри места за гмуркане в Европа",
       en: "The 10 best diving spots in Europe",
+      es: "Los 10 mejores lugares para bucear en Europa",
+      it: "I 10 posti migliori per immergersi in Europa",
+      fr: "Les 10 meilleurs spots de plongée d'Europe",
     },
     preview: {
       bg: "Силфра в Исландия те пуска да плуваш между две тектонични плочи, Портофино пази средиземноморските си потъвания, а Лофотен предлага арктически студ. Десет места в Европа, за нито едно от които не е нужно да летиш до тропиците.",
       en: "Silfra in Iceland lets you swim between two tectonic plates, Portofino keeps its Mediterranean wrecks, and Lofoten offers Arctic cold. Ten places in Europe, not one of which requires a flight to the tropics.",
+      es: "Silfra, en Islandia, permite nadar entre dos placas tectónicas; Portofino guarda sus pecios mediterráneos y Lofoten ofrece frío ártico. Diez lugares en Europa, y ninguno exige volar al trópico.",
+      it: "Silfra, in Islanda, ti fa nuotare fra due placche tettoniche; Portofino custodisce i suoi relitti mediterranei e le Lofoten offrono freddo artico. Dieci posti in Europa, e nessuno richiede un volo ai tropici.",
+      fr: "Silfra, en Islande, permet de nager entre deux plaques tectoniques ; Portofino garde ses épaves méditerranéennes et les Lofoten offrent du froid arctique. Dix sites en Europe, dont aucun n'exige un vol vers les tropiques.",
     },
     outlet: "10te",
     date: "2026-07-19",
@@ -424,10 +600,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-красиви, но смъртоносни растения",
       en: "The 10 most beautiful, most deadly plants",
+      es: "Las 10 plantas más bellas y más mortales",
+      it: "Le 10 piante più belle e più letali",
+      fr: "Les 10 plantes les plus belles et les plus mortelles",
     },
     preview: {
       bg: "Външният вид заблуждава: момината сълза действа върху сърцето както дигоксинът, а олеандърът е отровен целият, до последния лист. Десет разкошни растения, които са се научили да се защитават.",
       en: "Looks deceive: lily of the valley acts on the heart the way digoxin does, and every part of an oleander is poisonous, down to the last leaf. Ten gorgeous plants that learned to defend themselves.",
+      es: "Las apariencias engañan: el muguete actúa sobre el corazón igual que la digoxina, y en la adelfa todo es venenoso, hasta la última hoja. Diez plantas espléndidas que aprendieron a defenderse.",
+      it: "L'apparenza inganna: il mughetto agisce sul cuore come la digossina, e dell'oleandro è velenosa ogni parte, fino all'ultima foglia. Dieci piante splendide che hanno imparato a difendersi.",
+      fr: "Les apparences trompent : le muguet agit sur le cœur comme la digoxine, et tout est vénéneux dans le laurier-rose, jusqu'à la dernière feuille. Dix plantes splendides qui ont appris à se défendre.",
     },
     outlet: "10te",
     date: "2026-06-30",
@@ -438,11 +620,17 @@ export const ARTICLES: Article[] = [
     slug: "10-zhivotni-sas-svrahestestveni-sili",
     title: {
       bg: "10 животни със „свръхестествени сили“",
-      en: "10 animals with „supernatural powers“",
+      en: "10 animals with “supernatural powers”",
+      es: "10 animales con «poderes sobrenaturales»",
+      it: "10 animali con «poteri sovrannaturali»",
+      fr: "10 animaux aux « pouvoirs surnaturels »",
     },
     preview: {
       bg: "Медузата Turritopsis натиска бутона за начало и се връща в по-ранна възраст. Октоподът имитатор се преструва на други животни дори когато няма кой да го гони — десет напълно истински суперсили.",
       en: "The Turritopsis jellyfish presses restart and reverts to an earlier stage of its own life. The mimic octopus impersonates other creatures even when nothing is hunting it — ten entirely real superpowers.",
+      es: "La medusa Turritopsis pulsa el botón de reinicio y vuelve a una etapa anterior de su propia vida. El pulpo mimético imita a otros animales incluso cuando nadie lo persigue: diez superpoderes completamente reales.",
+      it: "La medusa Turritopsis preme il tasto di riavvio e torna a una fase precedente della propria vita. Il polpo mimetico imita altri animali anche quando nessuno lo insegue: dieci superpoteri del tutto reali.",
+      fr: "La méduse Turritopsis appuie sur le bouton de redémarrage et revient à un stade antérieur de sa propre vie. Le poulpe mimétique imite d'autres animaux même quand rien ne le chasse : dix superpouvoirs tout à fait réels.",
     },
     outlet: "10te",
     date: "2026-06-15",
@@ -454,10 +642,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 препятствия, пред които се изправяме, когато започнем ново начинание",
       en: "10 obstacles we meet when we start something new",
+      es: "10 obstáculos que encontramos al empezar algo nuevo",
+      it: "10 ostacoli che incontriamo quando iniziamo qualcosa di nuovo",
+      fr: "10 obstacles que l'on rencontre en commençant quelque chose de nouveau",
     },
     preview: {
       bg: "Монотонията в началото, съмнението, когато резултатът закъснява, и парите, които всяко начало иска. Десет препятствия — изброени, за да се разпознават, а не за да плашат.",
       en: "The monotony of the early stage, the doubt when results are late, and the money every beginning asks for. Ten obstacles — listed so they can be recognised, not so they can frighten.",
+      es: "La monotonía de los comienzos, la duda cuando los resultados tardan y el dinero que todo inicio exige. Diez obstáculos, enumerados para reconocerlos, no para asustar.",
+      it: "La monotonia dell'inizio, il dubbio quando i risultati tardano e i soldi che ogni inizio richiede. Dieci ostacoli, elencati per riconoscerli, non per spaventare.",
+      fr: "La monotonie du début, le doute quand les résultats tardent, et l'argent que tout commencement réclame. Dix obstacles, énumérés pour être reconnus, non pour effrayer.",
     },
     outlet: "10te",
     date: "2026-05-27",
@@ -469,10 +663,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 истории за Антарктида",
       en: "10 stories about Antarctica",
+      es: "10 historias sobre la Antártida",
+      it: "10 storie sull'Antartide",
+      fr: "10 histoires sur l'Antarctique",
     },
     preview: {
       bg: "Слънцето изгрява на 21 септември и залязва на 22 март — една година, един ден. От ледника Тейлър тече кървав водопад, а метеоритите там се запазват по-добре, отколкото където и да е другаде.",
       en: "The sun rises on 21 September and sets on 22 March — one year, one day. A blood-red waterfall runs out of the Taylor Glacier, and meteorites keep better there than anywhere else on earth.",
+      es: "El sol sale el 21 de septiembre y se pone el 22 de marzo: un año, un día. Del glaciar Taylor brota una cascada roja como la sangre, y allí los meteoritos se conservan mejor que en ningún otro lugar de la Tierra.",
+      it: "Il sole sorge il 21 settembre e tramonta il 22 marzo: un anno, un giorno. Dal ghiacciaio Taylor esce una cascata rossa come il sangue, e lì i meteoriti si conservano meglio che in qualsiasi altro posto sulla Terra.",
+      fr: "Le soleil se lève le 21 septembre et se couche le 22 mars : une année, une journée. Du glacier Taylor sort une cascade rouge sang, et les météorites s'y conservent mieux que partout ailleurs sur Terre.",
     },
     outlet: "10te",
     date: "2026-04-18",
@@ -484,10 +684,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-приказни места в света",
       en: "The 10 most fairy-tale places in the world",
+      es: "Los 10 lugares más de cuento del mundo",
+      it: "I 10 posti più fiabeschi del mondo",
+      fr: "Les 10 endroits les plus féeriques du monde",
     },
     preview: {
       bg: "Светещи пещери в Нова Зеландия, замък в Бавария, езеро с остров в Словения. Десет места, които звучат като приказка и имат неудобния навик да съществуват.",
       en: "Glowing caves in New Zealand, a castle in Bavaria, a lake with an island in Slovenia. Ten places that sound like a fairy tale and have the inconvenient habit of existing.",
+      es: "Cuevas luminosas en Nueva Zelanda, un castillo en Baviera, un lago con una isla en Eslovenia. Diez lugares que suenan a cuento y tienen la incómoda costumbre de existir.",
+      it: "Grotte luminose in Nuova Zelanda, un castello in Baviera, un lago con un'isola in Slovenia. Dieci posti che sembrano una fiaba e hanno la scomoda abitudine di esistere.",
+      fr: "Des grottes lumineuses en Nouvelle-Zélande, un château en Bavière, un lac avec une île en Slovénie. Dix lieux qui sonnent comme un conte et ont la fâcheuse habitude d'exister.",
     },
     outlet: "10te",
     date: "2025-09-20",
@@ -499,10 +705,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-забележителни спортни игрища в света",
       en: "The 10 most remarkable sports grounds in the world",
+      es: "Los 10 campos deportivos más singulares del mundo",
+      it: "I 10 campi sportivi più straordinari del mondo",
+      fr: "Les 10 terrains de sport les plus remarquables du monde",
     },
     preview: {
       bg: "На езерото Санкт Мориц бягат коне по леда от 1907 г., а Федерер и Агаси играха тенис на 210 метра височина. Десет игрища, избрани заради мястото, а не заради престижа.",
       en: "Horses have raced on the ice of Lake St Moritz since 1907, and Federer and Agassi played tennis two hundred and ten metres up. Ten grounds chosen for where they are rather than for their prestige.",
+      es: "En el lago de Sankt Moritz corren caballos sobre el hielo desde 1907, y Federer y Agassi jugaron al tenis a doscientos diez metros de altura. Diez campos elegidos por dónde están, no por su prestigio.",
+      it: "Sul lago di Sankt Moritz i cavalli corrono sul ghiaccio dal 1907, e Federer e Agassi hanno giocato a tennis a duecentodieci metri d'altezza. Dieci campi scelti per dove si trovano, non per il loro prestigio.",
+      fr: "Sur le lac de Saint-Moritz, des chevaux courent sur la glace depuis 1907, et Federer et Agassi ont joué au tennis à deux cent dix mètres de hauteur. Dix terrains choisis pour l'endroit où ils sont, non pour leur prestige.",
     },
     outlet: "10te",
     date: "2024-08-25",
@@ -514,10 +726,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10-те най-големи мистерии в света",
       en: "The 10 greatest mysteries in the world",
+      es: "Los 10 mayores misterios del mundo",
+      it: "I 10 più grandi misteri del mondo",
+      fr: "Les 10 plus grands mystères du monde",
     },
     preview: {
       bg: "Подводен монумент край Йонагуни, ръкопис от 1420-те, който още никой не е разчел, и червен дъжд над Керала през 2001 г. Десет неща, чието обяснение все закъснява.",
       en: "An underwater monument off Yonaguni, a manuscript from the 1420s nobody has yet deciphered, and red rain over Kerala in 2001. Ten things whose explanation keeps running late.",
+      es: "Un monumento submarino frente a Yonaguni, un manuscrito de la década de 1420 que nadie ha descifrado todavía y una lluvia roja sobre Kerala en 2001. Diez cosas cuya explicación sigue llegando tarde.",
+      it: "Un monumento sommerso al largo di Yonaguni, un manoscritto degli anni Venti del Quattrocento che nessuno ha ancora decifrato e una pioggia rossa sul Kerala nel 2001. Dieci cose la cui spiegazione continua ad arrivare in ritardo.",
+      fr: "Un monument sous-marin au large de Yonaguni, un manuscrit des années 1420 que personne n'a encore déchiffré, et une pluie rouge sur le Kerala en 2001. Dix choses dont l'explication est toujours en retard.",
     },
     outlet: "10te",
     date: "2024-07-22",
@@ -529,10 +747,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 изчезнали и застрашаващо изчезващи животни",
       en: "10 extinct and critically endangered animals",
+      es: "10 animales extintos y en peligro crítico",
+      it: "10 animali estinti e in pericolo critico",
+      fr: "10 animaux disparus et en danger critique",
     },
     preview: {
       bg: "Стелеровата морска крава е открита през 1741 г. и е изчезнала до 1768 — двайсет и седем години от първата среща до последната. Каспийският тигър е видян за последно през 1970 г., а обявен за изчезнал чак през 2003.",
       en: "Steller's sea cow was discovered in 1741 and gone by 1768 — twenty-seven years from the first meeting to the last. The Caspian tiger was seen for the last time in 1970 and only declared extinct in 2003.",
+      es: "La vaca marina de Steller fue descubierta en 1741 y ya no existía en 1768: veintisiete años entre el primer encuentro y el último. Al tigre del Caspio se le vio por última vez en 1970 y no se le declaró extinto hasta 2003.",
+      it: "La ritina di Steller fu scoperta nel 1741 e già nel 1768 non c'era più: ventisette anni fra il primo incontro e l'ultimo. La tigre del Caspio è stata vista per l'ultima volta nel 1970 e dichiarata estinta solo nel 2003.",
+      fr: "La rhytine de Steller a été découverte en 1741 et avait disparu en 1768 : vingt-sept ans entre la première rencontre et la dernière. Le tigre de la Caspienne a été vu pour la dernière fois en 1970 et n'a été déclaré éteint qu'en 2003.",
     },
     outlet: "10te",
     date: "2024-02-29",
@@ -544,10 +768,16 @@ export const ARTICLES: Article[] = [
     title: {
       bg: "10 от най-големите природни бедствия в историята",
       en: "10 of the greatest natural disasters in history",
+      es: "10 de las mayores catástrofes naturales de la historia",
+      it: "10 fra le più grandi catastrofi naturali della storia",
+      fr: "10 des plus grandes catastrophes naturelles de l'histoire",
     },
     preview: {
       bg: "Циклонът Бхола отнася около 500 000 души през 1970 г. За наводненията в Китай през 1931 г. оценките се движат между 150 000 и два милиона — разлика, която сама по себе си казва нещо.",
       en: "The Bhola cyclone took around five hundred thousand lives in 1970. For the Chinese floods of 1931 the estimates run from a hundred and fifty thousand to two million — a gap that says something on its own.",
+      es: "El ciclón Bhola se llevó unas quinientas mil vidas en 1970. Para las inundaciones de China de 1931 las estimaciones van de ciento cincuenta mil a dos millones: una diferencia que ya dice algo por sí sola.",
+      it: "Il ciclone Bhola si portò via circa cinquecentomila vite nel 1970. Per le alluvioni cinesi del 1931 le stime vanno da centocinquantamila a due milioni: uno scarto che da solo dice qualcosa.",
+      fr: "Le cyclone de Bhola a emporté environ cinq cent mille vies en 1970. Pour les inondations chinoises de 1931, les estimations vont de cent cinquante mille à deux millions — un écart qui dit déjà quelque chose.",
     },
     outlet: "10te",
     date: "2024-02-21",
@@ -567,9 +797,9 @@ const sortKey = (title: string) => title.replace(/^[^\p{L}\p{N}]+/u, "");
  *  Uses the locale's own collation — Cyrillic does not sort correctly under
  *  a plain string comparison. */
 export const byTitleDesc =
-  (locale: "bg" | "en") => (a: Article, b: Article) =>
+  (locale: Locale) => (a: Article, b: Article) =>
     sortKey(b.title[locale]).localeCompare(
       sortKey(a.title[locale]),
-      locale === "bg" ? "bg-BG" : "en-GB",
+      LOCALE_TAG[locale],
       { sensitivity: "base", numeric: true },
     );

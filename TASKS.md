@@ -131,6 +131,21 @@ across sessions. Mark items `[x]` when done; keep the notes.
 - [x] M3. `min-h-screen` -> `min-h-dvh` in SiteLayout and the root error
       boundary, the only two full-height containers.
 
+### Languages
+- [x] **Five languages.** Bulgarian (default, bare paths) plus English,
+      Spanish, Italian and French, each on localised slugs — /es/libros,
+      /it/chi-sono, /fr/a-propos. 25 pages prerendered, plus the 404.
+      Every translatable string is `L10n = Record<Locale, string>`, so adding
+      a sixth language is a compile error in every file that has not been
+      translated rather than a silent fallback to Bulgarian. Adding these
+      four surfaced exactly 118 holes and each was filled by hand.
+- [ ] **L1. Val proofreads ES / IT / FR.** She reads all three. These are
+      careful translations, not native copy, and this is a translator's
+      portfolio — stilted Spanish here undercuts the whole point of the site.
+      This is the one item that should block showing the site to a client.
+- [ ] L2. `hreflang` alternates now matter much more with five languages;
+      still blocked on the real domain.
+
 ### Health
 - [ ] **H1. Efficiency pass.** Measure before changing anything: Lighthouse on
       the live site, then real numbers for JS shipped, font bytes actually
@@ -237,6 +252,16 @@ across sessions. Mark items `[x]` when done; keep the notes.
   („Нормата ни интегрира…" and „…не са свобода, а свободия").
 
 ### Settled
+- **Book spines outside Bulgarian show the ORIGINAL title, not a local
+  translation.** She made the Bulgarian editions; she had nothing to do with
+  the Spanish or French ones. A reader on /fr/livres sees "Cain's Jawbone"
+  and, in the detail panel, the Bulgarian edition she actually produced.
+- **The film is named by its release title per language**: Hacia rutas
+  salvajes (ES), Into the Wild – Nelle terre selvagge (IT), Into the Wild
+  (FR — France kept the English title; "Vers l'inconnu" is the Québec dub).
+  Bulgarian is the deliberate exception and uses the book's title.
+- **Quotation marks follow each language**: bg „ “, en “ ”, es/it/fr « ».
+  Audited; do not normalise them to one style.
 - **Seven languages** is current. Her 2022 bio said five; that bio is four
   years old and is quoted on the site as a 2022 document, not as today's fact.
 - ***Бандитът и близначките Матакин*** — she reviewed the Spanish original for

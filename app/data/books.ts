@@ -1,3 +1,5 @@
+import type { L10n, Locale } from "~/lib/locale";
+
 export type BookRole = "translation" | "editing" | "unconfirmed";
 
 export type Book = {
@@ -30,7 +32,7 @@ export type Book = {
   /** Optional cover art. Every book renders fine without one — the spine
    *  opens to a typeset cover instead. */
   cover?: string;
-  note?: { bg: string; en: string };
+  note?: L10n;
 };
 
 // Source: https://www.goodreads.com/author/show/47942503._
@@ -58,7 +60,7 @@ export function spineWidth(pages: number): number {
  *  actually made — the Bulgarian edition. An English reader knows the book by
  *  the name it was written under, so showing them only Cyrillic tells them
  *  nothing. The other title is always still shown in the detail panel. */
-export function displayTitle(book: Book, locale: "bg" | "en"): string {
+export function displayTitle(book: Book, locale: Locale): string {
   return locale === "bg" ? book.title : book.originalTitle;
 }
 
@@ -67,7 +69,7 @@ export function displayTitle(book: Book, locale: "bg" | "en"): string {
  *  "Brain Power: Everything You Need to Know..." becomes "Brain Power" and
  *  "The Labyrinth of Lost and Found (The Whisperwicks, #1)" loses the series.
  *  Bulgarian titles here carry neither, so they pass through untouched. */
-export function spineTitle(book: Book, locale: "bg" | "en"): string {
+export function spineTitle(book: Book, locale: Locale): string {
   return displayTitle(book, locale)
     .replace(/\s*\([^)]*\)\s*$/, "")
     .split(":")[0]
@@ -184,6 +186,9 @@ export const BOOKS: Book[] = [
     note: {
       bg: "Прочетох я на испански и я рецензирах за „Литературен вестник“ през 2024 г. После преведох българското издание.",
       en: "I read it in Spanish and reviewed it for Literaturen Vestnik in 2024. The Bulgarian edition is my translation.",
+      es: "La leí en español y la reseñé para Literaturen Vestnik en 2024. La edición búlgara es traducción mía.",
+      it: "L'ho letto in spagnolo e l'ho recensito per Literaturen Vestnik nel 2024. L'edizione bulgara è una mia traduzione.",
+      fr: "Je l'ai lu en espagnol et je l'ai chroniqué pour Literaturen Vestnik en 2024. L'édition bulgare est ma traduction.",
     },
   },
 ];

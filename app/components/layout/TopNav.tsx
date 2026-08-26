@@ -1,7 +1,14 @@
 import { useEffect, useId, useRef, useState } from "react";
 import { Link, NavLink, useLocation } from "react-router";
 import { useT } from "~/lib/i18n";
-import { PATHS, otherLocaleHref, useLocale } from "~/lib/locale";
+import {
+  LOCALES,
+  LOCALE_NAMES,
+  LOCALE_SHORT,
+  PATHS,
+  hrefInLocale,
+  useLocale,
+} from "~/lib/locale";
 
 const ITEMS = [
   { key: "home", label: "navHome" },
@@ -10,6 +17,101 @@ const ITEMS = [
   { key: "about", label: "navAbout" },
   { key: "contact", label: "navContact" },
 ] as const;
+
+/** Closes a popover on Escape and on a tap outside it, and hands focus back
+ *  to the trigger. Both the language menu and the burger need exactly this. */
+function useDismiss(
+  open: boolean,
+  close: () => void,
+  boxRef: React.RefObject<HTMLElement | null>,
+  triggerRef: React.RefObject<HTMLElement | null>,
+) {
+  useEffect(() => {
+    if (!open) return;
+    const onKey = (e: KeyboardEvent) => {
+      if (e.key !== "Escape") return;
+      close();
+      triggerRef.current?.focus();
+    };
+    const onPointer = (e: PointerEvent) => {
+      if (!boxRef.current?.contains(e.target as Node)) close();
+    };
+    document.addEventListener("keydown", onKey);
+    document.addEventListener("pointerdown", onPointer);
+    return () => {
+      document.removeEventListener("keydown", onKey);
+      document.removeEventListener("pointerdown", onPointer);
+    };
+  }, [open, close, boxRef, triggerRef]);
+}
+
+/** Five languages is too many for a toggle, so this is a menu. Each language
+ *  is listed under its own name — a French speaker looks for "Français", not
+ *  for whatever the current page calls French — and each entry links to the
+ *  SAME page in that language rather than to the homepage. */
+function LanguageMenu() {
+  const t = useT();
+  const locale = useLocale();
+  const { pathname } = useLocation();
+  const [open, setOpen] = useState(false);
+  const boxRef = useRef<HTMLDivElement>(null);
+  const btnRef = useRef<HTMLButtonElement>(null);
+  const listId = useId();
+
+  useEffect(() => setOpen(false), [pathname]);
+  useDismiss(open, () => setOpen(false), boxRef, btnRef);
+
+  return (
+    <div ref={boxRef} className="relative shrink-0">
+      <button
+        ref={btnRef}
+        type="button"
+        onClick={() => setOpen((v) => !v)}
+        aria-expanded={open}
+        aria-controls={listId}
+        aria-haspopup="menu"
+        aria-label={t("languageMenu")}
+        className="font-pixel y2k-bevel y2k-press flex h-11 items-center gap-1 bg-lilac px-3 text-base text-ink sm:h-auto sm:py-1"
+      >
+        {LOCALE_SHORT[locale]}
+        <span aria-hidden className="text-xs">
+          ▾
+        </span>
+      </button>
+
+      {open && (
+        <ul
+          id={listId}
+          role="menu"
+          className="y2k-bevel absolute right-0 top-[calc(100%+0.35rem)] z-10 min-w-[9rem] bg-cream py-1"
+        >
+          {LOCALES.map((l) => {
+            const current = l === locale;
+            return (
+              <li key={l} role="none">
+                <Link
+                  role="menuitem"
+                  to={hrefInLocale(pathname, l)}
+                  lang={l}
+                  aria-current={current ? "true" : undefined}
+                  className={[
+                    "font-pixel flex h-11 items-center gap-2 px-3 text-base sm:h-9",
+                    current ? "bg-lime text-forest" : "text-ink hover:bg-blush",
+                  ].join(" ")}
+                >
+                  <span aria-hidden className="w-7 shrink-0">
+                    {LOCALE_SHORT[l]}
+                  </span>
+                  {LOCALE_NAMES[l]}
+                </Link>
+              </li>
+            );
+          })}
+        </ul>
+      )}
+    </div>
+  );
+}
 
 export function TopNav() {
   const t = useT();
@@ -23,25 +125,7 @@ export function TopNav() {
   // Close on navigation. Without this the panel stays open over the page you
   // just asked for.
   useEffect(() => setOpen(false), [pathname]);
-
-  useEffect(() => {
-    if (!open) return;
-    const onKey = (e: KeyboardEvent) => {
-      if (e.key === "Escape") {
-        setOpen(false);
-        burgerRef.current?.focus(); // put focus back where it came from
-      }
-    };
-    const onPointer = (e: PointerEvent) => {
-      if (!headerRef.current?.contains(e.target as Node)) setOpen(false);
-    };
-    document.addEventListener("keydown", onKey);
-    document.addEventListener("pointerdown", onPointer);
-    return () => {
-      document.removeEventListener("keydown", onKey);
-      document.removeEventListener("pointerdown", onPointer);
-    };
-  }, [open]);
+  useDismiss(open, () => setOpen(false), headerRef, burgerRef);
 
   const linkClass = ({ isActive }: { isActive: boolean }) =>
     [
@@ -55,7 +139,7 @@ export function TopNav() {
       className="sticky top-0 z-50 border-b-2 border-ink bg-cream/95 backdrop-blur"
     >
       <nav
-        aria-label={locale === "bg" ? "Основна навигация" : "Main navigation"}
+        aria-label={t("navLabel")}
         className="u-page flex items-center gap-2 py-2"
       >
         <Link
@@ -73,24 +157,23 @@ export function TopNav() {
         >
           {ITEMS.map(({ key, label }) => (
             <li key={key} className="shrink-0">
-              <NavLink to={PATHS[key][locale]} end={key === "home"} className={linkClass}>
+              <NavLink
+                to={PATHS[key][locale]}
+                end={key === "home"}
+                className={linkClass}
+              >
                 {t(label)}
               </NavLink>
             </li>
           ))}
         </ul>
 
-        {/* Language toggle sits immediately left of the burger on a phone, and
-            at the far right on desktop. One element, one position in the DOM —
-            ml-auto only does anything when the link list is hidden. */}
-        <Link
-          to={otherLocaleHref(pathname)}
-          lang={locale === "bg" ? "en" : "bg"}
-          aria-label={t("langSwitchLabel")}
-          className="font-pixel y2k-bevel y2k-press ml-auto flex h-11 shrink-0 items-center bg-lilac px-3 text-base text-ink sm:ml-0 sm:h-auto sm:py-1"
-        >
-          {t("langSwitch")}
-        </Link>
+        {/* Sits immediately left of the burger on a phone, and at the far
+            right on desktop. ml-auto only does anything when the link list is
+            hidden. */}
+        <div className="ml-auto sm:ml-0">
+          <LanguageMenu />
+        </div>
 
         <button
           ref={burgerRef}

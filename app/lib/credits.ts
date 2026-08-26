@@ -13,6 +13,14 @@
 
 import type { Locale } from "./locale";
 
+const ET_AL: Record<Locale, string> = {
+  bg: "и др.",
+  en: "et al.",
+  es: "y otros",
+  it: "e altri",
+  fr: "et al.",
+};
+
 function initials(name: string) {
   return (
     name
@@ -28,5 +36,5 @@ export function creditLine(names: string[], locale: Locale): string {
   if (clean.length === 0) return "";
   if (clean.length === 1) return clean[0];
   if (clean.length === 2) return `${initials(clean[0])} & ${initials(clean[1])}`;
-  return `${clean[0]} ${locale === "bg" ? "и др." : "et al."}`;
+  return `${clean[0]} ${ET_AL[locale]}`;
 }

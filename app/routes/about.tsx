@@ -43,11 +43,11 @@ export default function About() {
                   <span aria-hidden className="font-display text-ink-soft">
                     “
                   </span>
-                  {pick(section.quote, locale)}
+                  {pick(section.quote.text, locale)}
                 </p>
                 <footer className="font-pixel mt-3 text-base text-ink-soft">
                   — {pick(section.quote.source, locale)}
-                  {locale === "en" && <> · {t("translatedQuote")}</>}
+                  {locale !== "bg" && <> · {t("translatedQuote")}</>}
                 </footer>
               </blockquote>
             )}
