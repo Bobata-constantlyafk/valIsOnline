@@ -113,11 +113,24 @@ across sessions. Mark items `[x]` when done; keep the notes.
 - [x] 7.1b Canonical, hreflang, Open Graph, sitemap and robots — all keyed
       off `SITE_ORIGIN` in `app/lib/locale.ts`. Change that one string and
       every URL on the site follows.
-- [ ] 7.7b **www.val-is.online still returns 522.** The apex is a custom
-      domain on the Pages project; www is not, so Cloudflare has a proxied
-      CNAME with nothing behind it. Either add www as a second custom domain
-      and 301 it to the apex, or delete the www DNS record so it stops
-      resolving. Canonical already points at the apex either way.
+- [x] 7.7 **Live at https://val-is.online**, apex and www both custom domains
+      on the Pages project. Verified all 25 pages: correct lang and title, 6
+      hreflang links each, self-referencing canonical, og:url and og:image;
+      sitemap 25 urls; 404 returns a real 404 and is noindexed;
+      valisonline.pages.dev canonicalises to the apex.
+- [ ] 7.7c Optional: 301 www to the apex (Rules > Redirect Rules). Both hosts
+      serve the site today and canonical already names the apex, so this is
+      tidiness rather than a fix.
+- [ ] **S1. Submit to Google Search Console** — add val-is.online, verify via
+      Cloudflare DNS, submit sitemap.xml. Nothing on the site can do this;
+      until it happens the tags only answer questions Google asks after it
+      finds the site on its own. Bing Webmaster Tools is worth the same five
+      minutes.
+- [ ] S2. Decide on Cloudflare's managed robots.txt block. It is injected
+      above our own file and disallows GPTBot, ClaudeBot, CCBot,
+      Google-Extended, Bytespider, Amazonbot, Meta and Applebot-Extended, and
+      sets ai-train=no. Search indexing is unaffected. Probably right for a
+      writer's portfolio, but it was Cloudflare's choice, not ours.
 
 ### Mobile
 - [ ] **M1. Full mobile pass on a real phone**, not just a resized viewport:
@@ -233,6 +246,16 @@ across sessions. Mark items `[x]` when done; keep the notes.
       the source, then verify it.**
 
 ---
+
+### Deploy gotcha, learned the hard way
+- **A green GitHub Actions run does not prove the site updated.** After
+  f0ae0d3 the workflow reported success and the upload was fine, but the
+  production alias never moved: the new deployment served correctly at its own
+  URL while both valisonline.pages.dev and val-is.online still served a build
+  from three commits earlier, with cf-cache-status DYNAMIC so it was not
+  caching. `npx wrangler pages deploy` promoted it. If a change does not
+  appear, fetch the deployment URL directly first — if that is correct, the
+  alias is stuck and a redeploy fixes it.
 
 ## Open questions
 
