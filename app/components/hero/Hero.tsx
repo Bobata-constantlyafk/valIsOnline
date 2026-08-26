@@ -141,13 +141,16 @@ export function Hero() {
                     title={`${pick(l.name, locale)} — ${pick(l.level, locale)}`}
                     className={[
                       "font-pixel y2k-bevel px-2 py-0.5 text-base",
-                      // Three states, not two: pink is her mother tongue,
-                      // lime the two she translates published books from,
-                      // cream the ones she reads and speaks.
+                      // Three tiers inside one hue rather than three hues.
+                      // Green is Val's colour, so her mother tongue gets the
+                      // loudest green, the two she translates from get the
+                      // deeper one, and the rest stay neutral. Bubblegum is
+                      // deliberately not used here — it is the CTA colour,
+                      // and a badge wearing it would read as a button.
                       l.native
-                        ? "bg-bubblegum text-ink"
+                        ? "bg-lime text-forest"
                         : l.worksFrom
-                          ? "bg-lime text-forest"
+                          ? "bg-grass text-forest"
                           : "bg-cream text-ink",
                     ].join(" ")}
                   >
