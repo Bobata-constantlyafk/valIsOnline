@@ -141,7 +141,14 @@ export function Hero() {
                     title={`${pick(l.name, locale)} — ${pick(l.level, locale)}`}
                     className={[
                       "font-pixel y2k-bevel px-2 py-0.5 text-base",
-                      l.worksFrom ? "bg-lime text-forest" : "bg-cream text-ink",
+                      // Three states, not two: pink is her mother tongue,
+                      // lime the two she translates published books from,
+                      // cream the ones she reads and speaks.
+                      l.native
+                        ? "bg-bubblegum text-ink"
+                        : l.worksFrom
+                          ? "bg-lime text-forest"
+                          : "bg-cream text-ink",
                     ].join(" ")}
                   >
                     {l.code}

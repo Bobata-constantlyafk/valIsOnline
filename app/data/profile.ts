@@ -9,6 +9,9 @@ export type Language = {
   level: L10n;
   /** Set when she has actually translated a published book out of it. */
   worksFrom?: boolean;
+  /** Her mother tongue. The hero colours it differently from the two she
+   *  works from, so the badges read as three states rather than two. */
+  native?: boolean;
 };
 
 const NATIVE: L10n = {
@@ -51,6 +54,7 @@ export const LANGUAGES: Language[] = [
       fr: "bulgare",
     },
     level: NATIVE,
+    native: true,
   },
   {
     code: "EN",
