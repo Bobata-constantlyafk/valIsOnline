@@ -59,7 +59,7 @@ export const TICKER: { bg: string; en: string }[] = [
   { bg: "родена и останала в София", en: "born in Sofia, still in Sofia" },
   { bg: "седем езика, два от които работни", en: "seven languages, two of them working" },
   { bg: "любимо цвете: лантана", en: "favourite flower: lantana" },
-  { bg: "любим филм: Сред дивата природа", en: "favourite film: Into the Wild" },
+  { bg: "любим филм: Сред дивата пустош", en: "favourite film: Into the Wild" },
   { bg: "дева, което обяснява редакторската част", en: "virgo, which explains the editing" },
   { bg: "някой ден Мексико", en: "one day, Mexico" },
 ];

@@ -116,7 +116,7 @@ export const ABOUT: AboutSection[] = [
     heading: { bg: "Дребни неща", en: "Small things" },
     paragraphs: [
       {
-        bg: "Любимият ми филм е „Сред дивата природа“ — заради живота в съгласие с природата, заради уюта на това да си сам и заради смелостта, която е нужна, за да го направиш.",
+        bg: "Любимият ми филм е „Сред дивата пустош“ — заради живота в съгласие с природата, заради уюта на това да си сам и заради смелостта, която е нужна, за да го направиш.",
         en: "My favourite film is Into the Wild — for the life lived in tune with nature, for the comfort of being on your own, and for the courage it takes to actually do it.",
       },
       {
