@@ -9,7 +9,7 @@ import { PATHS, useLocale } from "~/lib/locale";
 function TitleBar() {
   return (
     <div className="y2k-chrome flex items-center gap-2 border-b-2 border-ink px-3 py-1.5">
-      <span className="font-pixel text-base text-ink">val_is_online.exe</span>
+      <span className="font-pixel text-base text-ink">val-is-online.exe</span>
       <span aria-hidden className="ml-auto flex gap-1">
         {["_", "□", "×"].map((g) => (
           <span
