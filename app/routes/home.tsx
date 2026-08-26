@@ -1,7 +1,7 @@
 import { Link } from "react-router";
 import { ArticleCard } from "~/components/articles/ArticleCard";
 import { Hero } from "~/components/hero/Hero";
-import { ARTICLES, byDateDesc } from "~/data/articles";
+import { ARTICLES, byTitleDesc } from "~/data/articles";
 import { useT } from "~/lib/i18n";
 import { PATHS, useLocale } from "~/lib/locale";
 import { metaFor } from "~/lib/meta";
@@ -13,7 +13,7 @@ export function meta({ location }: { location: { pathname: string } }) {
 export default function Home() {
   const t = useT();
   const locale = useLocale();
-  const featured = ARTICLES.filter((a) => a.featured).sort(byDateDesc);
+  const featured = ARTICLES.filter((a) => a.featured).sort(byTitleDesc(locale));
 
   return (
     <>
@@ -32,7 +32,7 @@ export default function Home() {
           </Link>
         </div>
 
-        <ul className="u-collage">
+        <ul className="u-cards">
           {featured.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}

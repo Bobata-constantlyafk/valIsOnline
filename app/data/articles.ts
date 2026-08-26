@@ -556,5 +556,20 @@ export const ARTICLES: Article[] = [
   },
 ];
 
-export const byDateDesc = (a: Article, b: Article) =>
-  b.date.localeCompare(a.date);
+/** Sorts by the first character that a reader would actually alphabetise by.
+ *  Two titles start with a typographic quote — „Онази сила…" and “The force…"
+ *  — and sorting on the raw string files them under the punctuation instead
+ *  of under О and T, which buries them at one end of the list. */
+const sortKey = (title: string) => title.replace(/^[^\p{L}\p{N}]+/u, "");
+
+/** Reverse alphabetical by the title the reader is actually looking at, so
+ *  the order follows the language rather than being fixed to Bulgarian.
+ *  Uses the locale's own collation — Cyrillic does not sort correctly under
+ *  a plain string comparison. */
+export const byTitleDesc =
+  (locale: "bg" | "en") => (a: Article, b: Article) =>
+    sortKey(b.title[locale]).localeCompare(
+      sortKey(a.title[locale]),
+      locale === "bg" ? "bg-BG" : "en-GB",
+      { sensitivity: "base", numeric: true },
+    );

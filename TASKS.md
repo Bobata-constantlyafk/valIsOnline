@@ -15,8 +15,12 @@ across sessions. Mark items `[x]` when done; keep the notes.
   ship their own media query.
 - **Never mix a custom breakpoint with a built-in one on the same element.**
   Use a single combined range variant instead of two competing variants.
-- **Broken grids go through `.u-collage`** — one utility that stacks to a
-  single column and zeroes its offsets on a phone.
+- **Card grids go through `.u-cards`** — one utility, 1/2/3 columns with
+  `grid-auto-rows: 1fr` so every card is the same size. It replaced a
+  deliberately staggered "collage" grid: the stagger looked more like 2001 but
+  made a 34-item list hard to scan, and uneven tiles read as broken rather
+  than as styled. Card text that can run long is clamped, so one article
+  cannot set the height of every tile.
 - **Typography lives in `app/components/chrome/Page.tsx`.** Page headings are
   a one-file change, never an eight-file hunt.
 - **Credit lines follow `app/lib/credits.ts`**: 1 person full name, 2 people

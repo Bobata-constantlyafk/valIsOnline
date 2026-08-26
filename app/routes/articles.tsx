@@ -3,8 +3,9 @@ import { useMemo, useState } from "react";
 import { Page, PageHeader } from "~/components/chrome/Page";
 import { ArticleCard } from "~/components/articles/ArticleCard";
 import type { Outlet, Tag } from "~/data/articles";
-import { ARTICLES, OUTLETS, byDateDesc } from "~/data/articles";
+import { ARTICLES, OUTLETS, byTitleDesc } from "~/data/articles";
 import { useT } from "~/lib/i18n";
+import { useLocale } from "~/lib/locale";
 
 export function meta({ location }: { location: { pathname: string } }) {
   return metaFor("articles", location.pathname);
@@ -24,6 +25,7 @@ const ALL_OUTLETS = Object.keys(OUTLETS) as Outlet[];
 
 export default function Articles() {
   const t = useT();
+  const locale = useLocale();
   const [outlet, setOutlet] = useState<Outlet | null>(null);
   const [tag, setTag] = useState<Tag | null>(null);
 
@@ -32,8 +34,8 @@ export default function Articles() {
       ARTICLES.filter(
         (a) =>
           (!outlet || a.outlet === outlet) && (!tag || a.tags.includes(tag)),
-      ).sort(byDateDesc),
-    [outlet, tag],
+      ).sort(byTitleDesc(locale)),
+    [outlet, tag, locale],
   );
 
   return (
@@ -79,7 +81,7 @@ export default function Articles() {
       {shown.length === 0 ? (
         <p className="font-pixel text-xl">{t("noMatches")}</p>
       ) : (
-        <ul className="u-collage">
+        <ul className="u-cards">
           {shown.map((article) => (
             <ArticleCard key={article.slug} article={article} />
           ))}

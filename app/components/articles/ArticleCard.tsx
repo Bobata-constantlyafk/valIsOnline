@@ -9,7 +9,7 @@ export function ArticleCard({ article }: { article: Article }) {
   const outlet = OUTLETS[article.outlet];
 
   return (
-    <li className="y2k-sticker flex flex-col bg-cream transition-transform hover:-translate-y-0.5">
+    <li className="y2k-sticker flex h-full flex-col bg-cream transition-transform hover:-translate-y-0.5">
       <div className="flex items-center gap-2 border-b-2 border-ink bg-blush px-3 py-1.5">
         <span className="font-pixel text-base text-ink">{outlet.name}</span>
         <span className="font-pixel ml-auto text-sm text-ink-soft">
@@ -23,7 +23,9 @@ export function ArticleCard({ article }: { article: Article }) {
         </h3>
 
         {article.preview && (
-          <p className="text-pretty text-base leading-relaxed text-ink-soft">
+          /* Clamped so one long preview cannot set the height of every card
+             in the grid. Three lines fits every preview written so far. */
+          <p className="line-clamp-3 text-pretty text-base leading-relaxed text-ink-soft">
             {pick(article.preview, locale)}
           </p>
         )}

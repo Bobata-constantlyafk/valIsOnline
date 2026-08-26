@@ -59,7 +59,6 @@
   --pad-panel: clamp(1rem, 0.482rem + 2.21vw, 2rem);
   --pad-card: clamp(0.75rem, 0.492rem + 1.1vw, 1rem);
   --gap-grid: clamp(0.875rem, 0.616rem + 1.1vw, 1.5rem);
-  --collage-offset: clamp(0rem, -1.5rem + 6.4vw, 1.75rem);
 }
 
 /* ---------------------------------------------------------------------
@@ -119,35 +118,28 @@ body {
   padding: var(--pad-card);
 }
 
-/* Broken collage grid: tiles in the second and third column hang lower,
-   the way a Y2K page pasted things down. --collage-offset clamps to 0rem
-   below ~400px, so the same class stacks to one clean column on a phone
-   with no per-page fixing and no second variant to keep in sync. */
-.u-collage {
+/* Card grid. Every card is the same size: `grid-auto-rows: 1fr` makes all
+   rows equal to the tallest, and the cards stretch to fill their cell, so a
+   short preview and a long one produce identical tiles. One column on a
+   phone, two from 40rem, three from 64rem — no per-page overrides.
+
+   This replaced a deliberately staggered "collage" grid, where every second
+   and third tile hung lower. It looked more like 2001 but made the list hard
+   to scan, and uneven tiles read as broken rather than as styled. */
+.u-cards {
   display: grid;
   gap: var(--gap-grid);
   grid-template-columns: 1fr;
+  grid-auto-rows: 1fr;
 }
 @media (min-width: 40rem) {
-  .u-collage {
+  .u-cards {
     grid-template-columns: repeat(2, minmax(0, 1fr));
-  }
-  .u-collage > *:nth-child(2n) {
-    margin-top: var(--collage-offset);
   }
 }
 @media (min-width: 64rem) {
-  .u-collage {
+  .u-cards {
     grid-template-columns: repeat(3, minmax(0, 1fr));
-  }
-  .u-collage > *:nth-child(2n) {
-    margin-top: 0;
-  }
-  .u-collage > *:nth-child(3n + 2) {
-    margin-top: var(--collage-offset);
-  }
-  .u-collage > *:nth-child(3n) {
-    margin-top: calc(var(--collage-offset) * 2);
   }
 }
 
