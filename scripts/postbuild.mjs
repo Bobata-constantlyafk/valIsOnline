@@ -16,3 +16,7 @@ try {
 
 await copyFile(from, to);
 console.log(`postbuild: ${from} -> ${to}`);
+
+// Written after the build rather than kept in public/, so it always lists
+// exactly the pages that were just generated.
+await import("./sitemap.mjs");

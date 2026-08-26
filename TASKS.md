@@ -110,10 +110,14 @@ across sessions. Mark items `[x]` when done; keep the notes.
       (strict), and a 301 from www to the apex.
       NOTE: `valisonline.pages.dev` can never be switched off, so the
       duplicate-content fix is canonical tags, not a redirect.
-- [ ] 7.1b Once the domain is Active, all in one push, keyed off a single
-      `SITE_ORIGIN`: `hreflang` alternates (bg / en / x-default), a
-      `<link rel="canonical">` per page, absolute `og:url`, `sitemap.xml` and
-      `robots.txt`.
+- [x] 7.1b Canonical, hreflang, Open Graph, sitemap and robots — all keyed
+      off `SITE_ORIGIN` in `app/lib/locale.ts`. Change that one string and
+      every URL on the site follows.
+- [ ] 7.7b **www.val-is.online still returns 522.** The apex is a custom
+      domain on the Pages project; www is not, so Cloudflare has a proxied
+      CNAME with nothing behind it. Either add www as a second custom domain
+      and 301 it to the apex, or delete the www DNS record so it stops
+      resolving. Canonical already points at the apex either way.
 
 ### Mobile
 - [ ] **M1. Full mobile pass on a real phone**, not just a resized viewport:

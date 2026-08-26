@@ -1,9 +1,18 @@
 import {
+  DEFAULT_LOCALE,
+  LOCALES,
   LOCALE_TAG,
+  PATHS,
+  absolute,
   localeFromPath,
+  pageKeyFromPath,
   type L10n,
   type Locale,
 } from "./locale";
+
+/** Link preview card. 1200x630 is what Facebook, LinkedIn, WhatsApp, Slack
+ *  and X all crop to; a portrait-shaped image gets cropped to a sliver. */
+const OG_IMAGE = "/og.jpg";
 
 /** Titles and descriptions follow the language of the page, and all five
  *  versions share one route module — so meta reads the locale off the path
@@ -95,12 +104,48 @@ export function metaFor(page: keyof typeof PAGE_META, pathname: string) {
   const locale: Locale = localeFromPath(pathname);
   const title = PAGE_META[page].title[locale];
   const description = PAGE_META[page].description[locale];
+  const key = pageKeyFromPath(pathname);
+  const canonical = absolute(PATHS[key][locale]);
+
   return [
     { title },
     { name: "description", content: description },
+
+    // This exact page is also served from valisonline.pages.dev and from a
+    // per-deployment subdomain. Without this, search engines treat those as
+    // competing copies and pick a winner themselves.
+    { tagName: "link", rel: "canonical", href: canonical },
+
+    // The five language versions are the SAME page, not five similar ones.
+    // Each version lists all five plus itself, which is what the spec
+    // requires — a page that omits itself is ignored.
+    ...LOCALES.map((l) => ({
+      tagName: "link",
+      rel: "alternate",
+      hreflang: l,
+      href: absolute(PATHS[key][l]),
+    })),
+    // Shown to anyone whose language is none of the five.
+    {
+      tagName: "link",
+      rel: "alternate",
+      hreflang: "x-default",
+      href: absolute(PATHS[key][DEFAULT_LOCALE]),
+    },
+
     { property: "og:title", content: title },
     { property: "og:description", content: description },
     { property: "og:type", content: "website" },
+    { property: "og:url", content: canonical },
+    { property: "og:site_name", content: "valIsOnline" },
+    { property: "og:image", content: absolute(OG_IMAGE) },
+    { property: "og:image:width", content: "1200" },
+    { property: "og:image:height", content: "630" },
     { property: "og:locale", content: LOCALE_TAG[locale].replace("-", "_") },
+    ...LOCALES.filter((l) => l !== locale).map((l) => ({
+      property: "og:locale:alternate",
+      content: LOCALE_TAG[l].replace("-", "_"),
+    })),
+    { name: "twitter:card", content: "summary_large_image" },
   ];
 }

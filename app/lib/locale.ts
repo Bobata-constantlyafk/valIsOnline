@@ -1,5 +1,15 @@
 import { useLocation } from "react-router";
 
+/** The site's real home. Everything canonical derives from this one string:
+ *  the same pages are also served at valisonline.pages.dev and at a
+ *  per-deployment subdomain that never goes away, and without a canonical
+ *  pointing here search engines have to guess which copy is the real one. */
+export const SITE_ORIGIN = "https://val-is.online";
+
+/** Absolute URL for a path, for canonical, hreflang, og:url and the sitemap. */
+export const absolute = (path: string) =>
+  SITE_ORIGIN + (path === "/" ? "/" : path);
+
 /** Bulgarian is the default and owns the bare paths. The other four sit under
  *  a prefix. Order here is the order the language menu lists them in. */
 export const LOCALES = ["bg", "en", "es", "it", "fr"] as const;
