@@ -116,7 +116,11 @@ export function Hero() {
               </p>
 
               <h1 className="font-display y2k-glitter mt-1 text-5xl font-black leading-[1.05] tracking-tight">
-                {t("nameFull")}
+                {/* The space matters: two block spans with nothing between
+                    them read out and copy as "ValentinaIstatkova". It
+                    collapses visually because the spans are blocks. */}
+                <span className="block">{t("nameFirst")}</span>{" "}
+                <span className="block">{t("nameLast")}</span>
               </h1>
 
               <p className="font-pixel mt-2 text-xl text-lime">

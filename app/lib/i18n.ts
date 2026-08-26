@@ -25,6 +25,25 @@ const DICT = {
     fr: "Valentina Istatkova",
   },
   nameShort: { bg: "Вал", en: "Val", es: "Val", it: "Val", fr: "Val" },
+  /** The hero stacks the two names on separate lines in every language.
+   *  Bulgarian happened to wrap on its own because it is longer; the Latin
+   *  spellings fit on one line and did not, so the layout changed language to
+   *  language. Splitting the name makes the break deliberate rather than a
+   *  side effect of how wide the word is. */
+  nameFirst: {
+    bg: "Валентина",
+    en: "Valentina",
+    es: "Valentina",
+    it: "Valentina",
+    fr: "Valentina",
+  },
+  nameLast: {
+    bg: "Истаткова",
+    en: "Istatkova",
+    es: "Istatkova",
+    it: "Istatkova",
+    fr: "Istatkova",
+  },
   roleLine: {
     bg: "редактор на книги · преводач",
     en: "book editor · translator",
