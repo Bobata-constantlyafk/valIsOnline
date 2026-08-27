@@ -178,7 +178,7 @@ const DICT = {
     fr: "Livres",
   },
   booksLead: {
-    bg: "Седем заглавия минаха през ръцете ми — от неразрешима загадка от 1934 г. до испанска детска книжка. Дръпни едно от рафта.",
+    bg: "Седем заглавия минаха през ръцете ми — от неразрешима загадка от 1934 г. до испанска детска книжка. Дръпни една от рафта.",
     en: "Seven titles have gone through my hands, from an unsolved 1934 puzzle to a Spanish picture book. Pull one off the shelf.",
     es: "Siete títulos han pasado por mis manos, desde un enigma sin resolver de 1934 hasta un álbum ilustrado español. Saca uno del estante.",
     it: "Sette titoli mi sono passati per le mani, da un enigma irrisolto del 1934 a un albo illustrato spagnolo. Tira fuori un libro dallo scaffale.",
