@@ -1,0 +1,44 @@
+# Cloudflare Pages reads this file and applies these headers to matching
+# paths. A static site's real attack surface is what the browser is allowed to
+# do with the page, so this is where most of the hardening lives.
+
+/*
+  # Stop the browser guessing a file's type from its bytes. Without it, a
+  # .jpg that happens to start like HTML can be executed as HTML.
+  X-Content-Type-Options: nosniff
+
+  # Send the full URL to ourselves, only the origin to other sites. Her
+  # article links go out to publishers who do not need the full path.
+  Referrer-Policy: strict-origin-when-cross-origin
+
+  # Nothing here uses any of these, so refuse them outright rather than
+  # leaving them available to injected code.
+  Permissions-Policy: accelerometer=(), camera=(), geolocation=(), gyroscope=(), magnetometer=(), microphone=(), payment=(), usb=()
+
+  # No one may frame this site. Belt and braces with frame-ancestors below,
+  # which is the modern equivalent but not honoured by every older browser.
+  X-Frame-Options: DENY
+
+  # One year of HTTPS-only for this hostname. Deliberately without
+  # includeSubDomains or preload: both are effectively irreversible, and a
+  # future subdomain that is not on HTTPS would become unreachable rather
+  # than merely insecure. Turn those on from the Cloudflare dashboard if
+  # they are ever wanted.
+  Strict-Transport-Security: max-age=31536000
+
+  # 'unsafe-inline' for scripts is not laziness, it is forced. React Router
+  # hydrates from five inline <script> blocks whose contents differ on every
+  # page and change on every build, so hashes cannot be pinned, and a static
+  # host has no server to mint a per-request nonce. What the rest of the
+  # policy still buys is real: no third-party script may load, no plugin may
+  # run, no <base> tag may be injected to rewrite every relative URL, no form
+  # may post anywhere, and nothing may frame the page.
+  Content-Security-Policy: default-src 'self'; script-src 'self' 'unsafe-inline'; style-src 'self' 'unsafe-inline'; img-src 'self' data:; font-src 'self'; connect-src 'self'; object-src 'none'; base-uri 'none'; form-action 'none'; frame-ancestors 'none'; upgrade-insecure-requests
+
+# Vite fingerprints these filenames, so a changed file is a new URL and the
+# old one can be cached forever.
+/assets/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable

@@ -164,15 +164,24 @@ across sessions. Mark items `[x]` when done; keep the notes.
       still blocked on the real domain.
 
 ### Health
-- [ ] **H1. Efficiency pass.** Measure before changing anything: Lighthouse on
+- [x] **H1. Efficiency pass — measured, and deliberately NOT refactored.** Measure before changing anything: Lighthouse on
       the live site, then real numbers for JS shipped, font bytes actually
       used per page, and image weight. Current baseline: 1.0MB build,
       entry.client 184KB and jsx-runtime 84KB uncompressed. The site is fully
       prerendered, so ask the sharper question — how much of that JS is needed
       at all, given only the hero, the shelf, the filters and the nav are
-      interactive. Consider whether the whole thing could hydrate as islands
-      rather than a full client bundle.
-- [ ] **H2. Structure / SOLID pass.** Honest review of the code, not a
+      interactive.
+      MEASURED, gzipped, per page: React + React Router 102.2KB, all of our
+      own code including all five languages 15.5KB, the article data 23.3KB.
+      A contact page is 118.5KB total, an articles page 141KB. So 86% of a
+      page is the framework and the multilingual content is nearly free.
+      Splitting the data per language would save about 18KB against a 102KB
+      floor — roughly 10%, in exchange for hydration-mismatch risk on a
+      prerendered site. Not worth it. Islands would mean leaving React Router,
+      which is a rewrite, not an optimisation.
+      What actually helped: immutable cache headers on /assets/* and /fonts/*,
+      so a repeat visit re-downloads none of it.
+- [x] **H2. Structure pass — one split made, the rest deliberately left.** Honest review of the code, not a
       rubber stamp. Known smells to look at: `useT()` returns an overloaded
       function whose types are fiddly; data files mix schema, content and
       provenance comments; `ArticleCard` reaches into `OUTLETS` itself instead
@@ -180,7 +189,16 @@ across sessions. Mark items `[x]` when done; keep the notes.
       handling and layout in one component. Split only where it removes real
       duplication — this is a small site and premature abstraction would cost
       more than it saves.
-- [ ] **H3. Vulnerability pass, then fix.** `npm audit --omit=dev` reports 0
+      DONE: `Detail` moved out of Shelf.tsx into BookDetail.tsx. Shelf went
+      from 240 lines doing two unrelated jobs to 149 owning the scrollable
+      strip and its arrows, with the presentation of a single book beside it.
+      LEFT ALONE, with reasons: `useT()`'s overloads are awkward to read but
+      they are what makes a missing translation a compile error, and that is
+      worth more than tidier types. `ArticleCard` importing OUTLETS is a data
+      lookup, not a dependency violation. `TopNav` holds the language menu
+      inline because both panels share one open-state; extracting it would
+      mean prop-drilling that state back in, which is churn, not structure.
+- [x] **H3. Security headers shipped.** `npm audit --omit=dev` reports 0
       today, so this is not about the lockfile alone. Check: outbound links
       all carry `rel="noreferrer"`, nothing renders untrusted HTML, no
       `dangerouslySetInnerHTML` anywhere, the Actions workflow cannot leak its
@@ -189,6 +207,17 @@ across sessions. Mark items `[x]` when done; keep the notes.
       (Content-Security-Policy, X-Content-Type-Options, Referrer-Policy,
       Permissions-Policy). A static site's real attack surface is the deploy
       pipeline and the headers, not the runtime.
+      DONE in `public/_headers`: CSP, nosniff, Referrer-Policy,
+      Permissions-Policy, X-Frame-Options, and HSTS at one year without
+      includeSubDomains or preload, since both are effectively irreversible.
+      CSP keeps 'unsafe-inline' for scripts because React Router hydrates from
+      five inline blocks whose contents differ per page and per build, so
+      hashes cannot be pinned and a static host has no server to mint a nonce.
+      What it still buys is real: no third-party script, no plugin, no
+      injected <base>, no form posting anywhere, no framing.
+      Verified live on val-is.online: headers present, and hydration, fonts,
+      portrait and the sparkle cursor all work with zero console errors, so
+      the policy is not silently blocking anything.
 - [ ] **H4. Dependency freshness.** Currently behind: wrangler 4.124 -> 4.126,
       @cloudflare/workers-types, @types/react-dom. Deliberately NOT bumping
       TypeScript 5.9 -> 7.0 or @types/node 22 -> 26 without a reason; both are
