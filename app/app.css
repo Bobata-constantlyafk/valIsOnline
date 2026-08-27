@@ -243,7 +243,7 @@ body {
   background-size: 320% 100%;
   -webkit-background-clip: text;
   background-clip: text;
-  animation: y2k-sheen 9s linear infinite;
+  animation: y2k-sheen 7s ease-in-out infinite alternate;
 }
 @supports (-webkit-background-clip: text) or (background-clip: text) {
   .y2k-glitter {
@@ -251,6 +251,10 @@ body {
   }
 }
 
+/* `alternate` matters more than the duration. Looping in one direction means
+   the gradient restarts at the seam every cycle and the eye catches the jump;
+   sweeping out and back never has a seam. `ease-in-out` slows it at both ends,
+   so it reads as light moving over the letters rather than a conveyor belt. */
 @keyframes y2k-sheen {
   to {
     background-position: 320% 0;
@@ -271,12 +275,26 @@ body {
   animation: y2k-blink 1.1s steps(1, end) infinite;
 }
 
+/* A marquee you cannot stop is a marquee you cannot read. It holds still
+   while the pointer is over it or while anything inside it has keyboard
+   focus, and resumes when you leave. */
+.y2k-ticker-track {
+  animation: y2k-ticker 38s linear infinite;
+}
+.y2k-ticker:hover .y2k-ticker-track,
+.y2k-ticker:focus-within .y2k-ticker-track {
+  animation-play-state: paused;
+}
+
+/* Shifts by exactly one of the three copies, so the strip is back where it
+   started and the restart is invisible. Change this if COPIES in Hero.tsx
+   changes: the value is always -100/COPIES percent. */
 @keyframes y2k-ticker {
   from {
     transform: translateX(0);
   }
   to {
-    transform: translateX(-50%);
+    transform: translateX(-33.3333%);
   }
 }
 

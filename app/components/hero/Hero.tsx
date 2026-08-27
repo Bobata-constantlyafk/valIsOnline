@@ -185,20 +185,25 @@ export function Hero() {
 
 function Ticker() {
   const locale = useLocale();
-  // Doubled so the strip loops seamlessly; the second copy is aria-hidden so
-  // a screen reader hears each fact once.
+  // Repeated so the strip loops seamlessly; every copy after the first is
+  // aria-hidden so a screen reader hears each fact once.
   const items = TICKER.map((x) => pick(x, locale));
 
+  // Three copies, not two. The track scrolls by exactly one copy and then
+  // restarts, so the loop is only seamless while the copies still on screen
+  // cover the viewport. With two copies that needs ONE copy to be wider than
+  // the window, which the Bulgarian strip clears by 96px at 2545 and would
+  // fail outright on an ultrawide. With three it needs two copies, so the
+  // strip stays seamless past 5000px in every language.
+  const COPIES = 3;
+
   return (
-    <div className="relative overflow-hidden border-t-2 border-ink bg-lime">
-      <div
-        className="flex w-max gap-8 py-1.5"
-        style={{ animation: "y2k-ticker 38s linear infinite" }}
-      >
-        {[0, 1].map((copy) => (
+    <div className="y2k-ticker relative overflow-hidden border-t-2 border-ink bg-lime">
+      <div className="y2k-ticker-track flex w-max gap-8 py-1.5">
+        {Array.from({ length: COPIES }, (_, copy) => (
           <ul
             key={copy}
-            aria-hidden={copy === 1}
+            aria-hidden={copy !== 0}
             className="flex shrink-0 gap-8"
           >
             {items.map((text) => (
