@@ -283,12 +283,14 @@ const DICT = {
     it: "Testi",
     fr: "Textes",
   },
+  /** Ends in the same [to be continued] marker the About page uses: the
+   *  second sentence is Val's to write. Do not finish it for her. */
   articlesLead: {
-    bg: "Книги, езици, пътувания и по някой път неща, за които не мога да мълча. Всяка статия отваря там, където е излязла.",
-    en: "Books, languages, travel, and now and then something I cannot keep quiet about. Every piece opens where it was published.",
-    es: "Libros, idiomas, viajes y, de vez en cuando, algo sobre lo que no puedo callarme. Cada texto se abre donde se publicó.",
-    it: "Libri, lingue, viaggi e ogni tanto qualcosa su cui non riesco a tacere. Ogni testo si apre dove è uscito.",
-    fr: "Des livres, des langues, des voyages et, de temps en temps, quelque chose que je ne peux pas taire. Chaque texte s'ouvre là où il a paru.",
+    bg: "Книги, езици, пътувания и по някой път неща, за които не мога да мълча. [to be continued]",
+    en: "Books, languages, travel, and now and then something I cannot keep quiet about. [to be continued]",
+    es: "Libros, idiomas, viajes y, de vez en cuando, algo sobre lo que no puedo callarme. [to be continued]",
+    it: "Libri, lingue, viaggi e ogni tanto qualcosa su cui non riesco a tacere. [to be continued]",
+    fr: "Des livres, des langues, des voyages et, de temps en temps, quelque chose que je ne peux pas taire. [to be continued]",
   },
   readAt: {
     bg: "чети в",

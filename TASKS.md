@@ -288,6 +288,9 @@ across sessions. Mark items `[x]` when done; keep the notes.
 
 ## Open questions
 
+- `[to be continued]` markers are now in FOUR places, not three: София,
+  Мексико and Дребни неща on the About page, and the lead on the Articles
+  page. All are Val's to finish. Do not write those endings for her.
 - Val should read the About page and rewrite anything that is not how she
   would put it. Three sections end in `[to be continued]` and are hers to
   finish; the rest carry `// SOURCE:` notes in `app/data/about.ts` saying
